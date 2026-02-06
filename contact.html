@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | YamaStudio.net</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+        }
+        h1 {
+            color: #f8fafc;
+            border-bottom: 2px solid #06b6d4;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        /* Googleフォームをレスポンシブにする魔法の箱 */
+        .form-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #1e293b; /* 読み込み中に見える背景色 */
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            min-height: 800px; /* フォームの長さに合わせて調整してください */
+        }
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        a {
+            color: #22d3ee;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>お問い合わせ</h1>
+    <p>当サイトや制作物に関するご意見・ご質問は、以下のフォームよりお送りください。<br>
+    内容を確認次第、担当者より折り返しご連絡させていただきます。</p>
+
+    <div class="form-wrapper">
+        <p style="text-align:center; padding: 40px; color: #64748b;">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe6k0uAuvEXHKiGqcHGWmRaWjZF49HULKh4I9NSpJBqyiwOdw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+        </p>
+
+        </div>
+</div>
+
+<div class="footer">
+    <p><a href="/">トップページに戻る</a></p>
+    <p>&copy; 2026 YamaStudio.net</p>
+</div>
+
+</body>
+</html>
