@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YamaStudio.net</title>
+    <meta name="description" content="FPS/VRゲームの攻略情報、ツール開発、コミュニティ運営のハブ拠点">
+    <style>
+        /* ベーススタイル */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a; /* ダークネイビー */
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* コンテナ */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* ヘッダー */
+        header {
+            padding: 64px 0 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 16px;
+            background: linear-gradient(to right, #22d3ee, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background-color: #06b6d4;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* メインコンテンツ */
+        main {
+            flex: 1;
+            padding-bottom: 64px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            border-left: 4px solid #06b6d4;
+            padding-left: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* カードデザイン */
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border-color: #22d3ee;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: rgba(34, 211, 238, 0.1);
+            color: #22d3ee;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            font-size: 1.25rem;
+            color: #f1f5f9;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* フッター */
+        footer {
+            border-top: 1px solid #334155;
+            padding: 40px 0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <h1>YamaStudio.net</h1>
+        <p class="subtitle">FPS/VRゲームの攻略情報、便利ツール開発、コミュニティ運営のハブ拠点</p>
+        <div class="divider"></div>
+    </header>
+
+    <main class="container">
+        <h2>Projects & Contents</h2>
+        
+        <div class="grid">
+            <a href="https://the-midnight-walkers.yamastudio.net" target="_blank" class="card">
+                <div class="card-header">
+                    <span class="tag">WIKI / GUIDE</span>
+                    <span>↗</span>
+                </div>
+                <h3>The Midnight Walkers 攻略</h3>
+                <p>ダンジョン探索型FPSの徹底攻略サイト。マップ情報、アイテムデータ、クラス解説など。</p>
+            </a>
+
+            <a href="https://highguard.yamastudio.net" target="_blank" class="card">
+                <div class="card-header">
+                    <span class="tag" style="color: #60a5fa; background: rgba(59, 130, 246, 0.1);">OFFICIAL SITE</span>
+                    <span>↗</span>
+                </div>
+                <h3>Highguard 公式サイト</h3>
+                <p>現在開発・運営中のプロジェクト「Highguard」の公式ポータル。最新ニュースやアップデート情報。</p>
+            </a>
+
+            <a href="https://highguard-board.yamastudio.net/" target="_blank" class="card">
+                <div class="card-header">
+                    <span class="tag" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">COMMUNITY</span>
+                    <span>↗</span>
+                </div>
+                <h3>Highguardマルチプレイ募集掲示板</h3>
+                <p>Highguard のパーティ募集、クラン勧誘などのコミュニティ掲示板。</p>
+            </a>
+
+            <a href="https://the-midnightwalkers-board.yamastudio.net" target="_blank" class="card">
+                <div class="card-header">
+                    <span class="tag" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">COMMUNITY</span>
+                    <span>↗</span>
+                </div>
+                <h3>The Midnight Walkersマルチプレイ募集掲示板</h3>
+                <p>The Midnight Walkers のパーティ募集、クラン勧誘などのコミュニティ掲示板。</p>
+            </a>
+
+            <div class="card" style="border-style: dashed; background: transparent; cursor: default;">
+                <h3>Desktop Tools</h3>
+                <p>PC作業効率化ツール・スリープ防止アプリなどを開発中...</p>
+                <div style="margin-top: 10px; text-align: center;">
+                    <span style="font-size: 12px; background: #334155; padding: 2px 8px; border-radius: 10px;">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container">
+        <div class="footer-links">
+            <a href="/privacy.html">プライバシーポリシー</a>
+            <a href="/contact.html">お問い合わせ</a>
+        </div>
+        <div>
+            &copy; 2026 YamaStudio.net All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
