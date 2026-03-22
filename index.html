@@ -3,257 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YamaStudio.net</title>
-    <meta name="description" content="FPS/VRゲームの攻略情報、ツール開発、コミュニティ運営のハブ拠点">
+    <title>YamaStudio.net - FPS/VRゲーム攻略・ツール開発ブログ</title>
+    <meta name="description" content="FPS・VRゲーム、レースシム、サバゲー（ガスガン）を中心としたゲーマーのための情報発信と、より快適なゲーム環境を提供するPCツール開発の記録をお届けします。">
+    <style>
+        body { font-family: sans-serif; line-height: 1.8; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+        .container { display: flex; gap: 30px; }
+        main { flex: 3; }
+        aside { flex: 1; background: #f4f4f4; padding: 15px; border-radius: 5px; height: fit-content; }
+        article { margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px dashed #ccc; }
+        article h3 { color: #2c3e50; font-size: 1.4em; border-left: 5px solid #3498db; padding-left: 10px; }
+        article h4 { color: #34495e; font-size: 1.2em; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+        .date { color: #7f8c8d; font-size: 0.9em; }
+        footer { margin-top: 50px; text-align: center; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 20px; }
+        .nav-links { display: flex; gap: 15px; list-style: none; padding: 0; }
+        .nav-links a, aside a { color: #3498db; text-decoration: none; }
+        .nav-links a:hover, aside a:hover { text-decoration: underline; }
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630"
         crossorigin="anonymous"></script>
-    <style>
-        /* ベーススタイル */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #0f172a; /* ダークネイビー */
-            color: #e2e8f0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* コンテナ */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* ヘッダー */
-        header {
-            padding: 64px 0 40px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin: 0 0 16px;
-            background: linear-gradient(to right, #22d3ee, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .subtitle {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            margin-bottom: 32px;
-        }
-
-        .divider {
-            width: 80px;
-            height: 4px;
-            background-color: #06b6d4;
-            margin: 0 auto;
-            border-radius: 2px;
-        }
-
-        /* メインコンテンツ */
-        main {
-            flex: 1;
-            padding-bottom: 64px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 32px;
-            border-left: 4px solid #06b6d4;
-            padding-left: 16px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        /* カードデザイン */
-        .card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: block;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border-color: #22d3ee;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background-color: rgba(34, 211, 238, 0.1);
-            color: #22d3ee;
-        }
-
-        .card h3 {
-            margin: 0 0 8px;
-            font-size: 1.25rem;
-            color: #f1f5f9;
-        }
-
-        .card p {
-            margin: 0;
-            font-size: 0.875rem;
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-
-        /* フッター */
-        footer {
-            border-top: 1px solid #334155;
-            padding: 40px 0;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.875rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 16px;
-        }
-
-        .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: #f1f5f9;
-        }
-    </style>
 </head>
 <body>
 
-    <header class="container">
+    <header>
         <h1>YamaStudio.net</h1>
-        <p class="subtitle">FPS/VRゲームの攻略情報、便利ツール開発、コミュニティ運営のハブ拠点</p>
-        <div class="divider"></div>
+        <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">ホーム</a></li>
+                <li><a href="#about">YamaStudioについて</a></li>
+                <li><a href="#projects">プロジェクト</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="container">
-        <h2>Projects & Contents</h2>
-        
-        <div class="grid">
-            <a href="https://the-midnight-walkers.yamastudio.net" target="_blank" class="card">
-                <div class="card-header">
-                    <span class="tag">WIKI / GUIDE</span>
-                    <span>↗</span>
-                </div>
-                <h3>The Midnight Walkers 攻略</h3>
-                <p>ダンジョン探索型FPSの徹底攻略サイト。マップ情報、アイテムデータ、クラス解説など。</p>
-            </a>
+    <div class="container">
+        <main>
+            <h2>最新の記事</h2>
 
-            <a href="https://highguard.yamastudio.net" target="_blank" class="card">
-                <div class="card-header">
-                    <span class="tag" style="color: #60a5fa; background: rgba(59, 130, 246, 0.1);">OFFICIAL SITE</span>
-                    <span>↗</span>
-                </div>
-                <h3>Highguard 公式サイト</h3>
-                <p>現在開発・運営中のプロジェクト「Highguard」の公式ポータル。最新ニュースやアップデート情報。</p>
-            </a>
-
-            <a href="https://highguard-board.yamastudio.net/" target="_blank" class="card">
-                <div class="card-header">
-                    <span class="tag" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">COMMUNITY</span>
-                    <span>↗</span>
-                </div>
-                <h3>Highguardマルチプレイ募集掲示板</h3>
-                <p>Highguard のパーティ募集、クラン勧誘などのコミュニティ掲示板。</p>
-            </a>
-
-            <a href="https://the-midnightwalkers-board.yamastudio.net" target="_blank" class="card">
-                <div class="card-header">
-                    <span class="tag" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);">COMMUNITY</span>
-                    <span>↗</span>
-                </div>
-                <h3>The Midnight Walkersマルチプレイ募集掲示板</h3>
-                <p>The Midnight Walkers のパーティ募集、クラン勧誘などのコミュニティ掲示板。</p>
-            </a>
-
-            <div class="card" style="border-style: dashed; background: transparent; cursor: default;">
-                <h3>Desktop Tools</h3>
-                <p>PC作業効率化ツール・スリープ防止アプリなどを開発中...</p>
-                <div style="margin-top: 10px; text-align: center;">
-                    <span style="font-size: 12px; background: #334155; padding: 2px 8px; border-radius: 10px;">Coming Soon</span>
-                </div>
-            </div>
-        </div>
-        <section style="margin-top: 64px; border-top: 1px solid #334155; padding-top: 40px;">
-            <h2>YamaStudioについて</h2>
-            <div style="line-height: 1.8; color: #cbd5e1;">
-                <p>YamaStudioは、FPS・VRゲームを中心としたゲーマーのための情報を発信し、より快適なゲーム環境を提供するツール開発を行っている個人スタジオです。</p>
+            <article>
+                <h3>VRで激変するレースシムの世界：Assetto Corsaにおける強烈なVR酔いと「アネロン」による克服法</h3>
+                <p class="date">公開日: 2026年3月23日 | カテゴリ: VR / レースシム</p>
                 
-                <h3 style="font-size: 1.2rem; color: #f1f5f9; margin-top: 30px;">活動理念</h3>
-                <p>「ゲーム攻略のその先へ」をテーマに、単なるデータ集積だけでなく、プレイヤー同士がつながれるコミュニティの形成や、痒い所に手が届くデスクトップツールの開発を通じて、ゲーム体験全体を向上させることを目指しています。</p>
+                <h4>平面モニターからVRへのパラダイムシフト</h4>
+                <p>PCゲームの進化において、VR（仮想現実）デバイスの普及は多くのジャンルに革命をもたらしましたが、中でも「レースシム（レーシングシミュレーター）」との相性は群を抜いています。VRヘッドセットを装着してプレイする『Assetto Corsa』は、単なるゲームプレイを超えた「本物の運転体験」へと昇華されます。</p>
 
-                <h3 style="font-size: 1.2rem; color: #f1f5f9; margin-top: 30px;">主なプロジェクト</h3>
-                <p>現在、ハードコアFPS『The Midnight Walkers』の攻略Wiki運営や、パーティ募集掲示板の開発に注力しています。特に攻略情報に関しては、常に最新のパッチノートを分析し、正確かつ迅速な情報提供を心がけています。</p>
-                <p>また、長時間プレイのゲーマーのために、PCのスリープを防止する常駐型アプリなどの開発も進行中です。</p>
+                <h4>立ちはだかる「VR酔い」の壁と最強の解決策</h4>
+                <p>しかし、私が初めてVRでAssetto Corsaをプレイした時、平面モニターとの圧倒的な立体感の違いに感動したのも束の間、すぐに強烈な「VR酔い」に襲われました。コースを数周しただけで気分が悪くなり、とてもレースどころではない状態に陥ってしまったのです。<br>
+                それでもVR空間でのリアルなドライブを諦めきれず、色々と対策を調べて行き着いたのが、乗り物酔い薬の定番『アネロン』でした。半信半疑でアネロンを飲んでからプレイしてみたところ、これが劇的に効きました。先ほどまでの強烈な吐き気が嘘のように消え、完全に酔いを克服できたのです。</p>
+                <p>今では薬に頼らなくてもある程度慣れましたが、長時間の耐久レースなどでも快適にエイペックスを見極める「首の動き」ができるようになったのは、間違いなく最初のアネロンのおかげです。VRレースシムで酔いに悩んでいる方は、ぜひ一度試してみてください。</p>
+            </article>
 
-                <h3 style="font-size: 1.2rem; color: #f1f5f9; margin-top: 30px;">今後の展望</h3>
-                <p>今後は対応タイトルを増やしていくと共に、ユーザーからのフィードバックを元にしたWebサービスの機能拡充を行っていく予定です。</p>
-            </div>
-        </section>
-        <section style="margin-top: 10px; border-top: 1px solid #334155; padding-top: 10px; padding-bottom: 30px;">
-            <h2>Social & Links</h2>
-            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                
-                <a href="https://www.youtube.com/@konnitiwasx" target="_blank" style="text-decoration: none; background: #1e293b; padding: 12px 24px; border-radius: 8px; border: 1px solid #334155; color: #fff; font-weight: bold; display: inline-flex; align-items: center; width: 250px;">
-                    <span style="color: #ef4444; margin-right: 8px;">▶</span> Youtube シムチャンネル
-                </a>
+            <article>
+                <h3>言語の壁は超えられる：『Squad』で英語が苦手でも分隊長（SL）ができた理由</h3>
+                <p class="date">公開日: 2026年3月20日 | カテゴリ: PCゲーム / FPS</p>
 
-                <a href="https://www.youtube.com/@Yamamura_0000" target="_blank" style="text-decoration: none; background: #1e293b; padding: 12px 24px; border-radius: 8px; border: 1px solid #334155; color: #fff; font-weight: bold; display: inline-flex; align-items: center; width: 250px;">
-                    <span style="color: #ef4444; margin-right: 8px;">▶</span> YouTube FPS/VRチャンネル
-                </a>
+                <h4>大規模タクティカルFPSにおける「指揮」のハードル</h4>
+                <p>50vs50の大規模な連携と無線の飛び交う戦場が魅力のハードコアFPS『Squad』。このゲームの醍醐味は、なんといっても分隊長（Squad Leader / SL）同士の連携と、分隊員への的確な指示です。しかし、いざ自分が分隊長をやろうとすると、「多国籍なチームで英語が話せないと指揮なんて無理だ」という巨大な言語の壁を感じて萎縮してしまう人が多いのではないでしょうか。私も最初はそうでした。</p>
 
-                <a href="https://www.tiktok.com/@konnitiwasx" target="_blank" style="text-decoration: none; background: #1e293b; padding: 12px 24px; border-radius: 8px; border: 1px solid #334155; color: #fff; font-weight: bold; display: inline-flex; align-items: center; width: 250px;">
-                            <span style="color: #22d3ee; margin-right: 8px;">🎵</span> TikTok シムチャンネル
-                        </a>
+                <h4>決まった単語の使い回しで戦場は回る</h4>
+                <p>しかし、思い切って分隊長を何度かプレイし、経験を重ねていくうちに一つの事実に気づきました。それは、戦場で飛び交う報告や指示のほとんどが、決まった単語やフレーズを使い回しているだけだということです。<br>
+                「Enemy infantry, bearing 120（敵歩兵、方角120）」「Move to defend mark（防衛マークへ移動せよ）」「Need rally point（ラリーポイントが必要）」など、状況を伝えるためのセリフは非常にシンプルです。ネイティブのように流暢な英語で世間話をする必要は全くなく、ゲーム内のセオリーと基本的な単語さえ押さえておけば、分隊長として十分に立ち回ることができました。<br>
+                英語力よりも、「どこにスポーンポイントを置くか」「どのタイミングで攻めるか」といったゲームへの理解度の方が遥かに重要です。言語の壁を恐れず、ぜひ一度分隊長にチャレンジして、Squadの本当の面白さを味わってほしいと思います。</p>
+            </article>
 
-                <a href="https://www.tiktok.com/@y4m4mur4" target="_blank" style="text-decoration: none; background: #1e293b; padding: 12px 24px; border-radius: 8px; border: 1px solid #334155; color: #fff; font-weight: bold; display: inline-flex; align-items: center; width: 250px;">
-                            <span style="color: #22d3ee; margin-right: 8px;">🎵</span> TikTok FPS/VRチャンネル
-                        </a>
+            <article>
+                <h3>GBBは手入れで化ける：東京マルイ製 M4のメンテナンスと初速の劇的変化</h3>
+                <p class="date">公開日: 2026年3月15日 | カテゴリ: サバゲー / エアガン</p>
 
-            </div>
-        </section>
-    </main>
+                <h4>電動ガンにはない「操作し、育てる喜び」</h4>
+                <p>サバイバルゲームにおいて、実用性や装弾数を重視するのであれば電動ガンが最適解です。しかし、トリガーを引いた瞬間に鋭く後退するボルトや、肩に伝わる強烈なリコイルショックなど、ガスブローバック（GBB）には実用性を凌駕する圧倒的なロマンがあります。そしてもう一つ、GBBならではの大きな魅力が「メンテナンスによる性能の変化」です。</p>
 
-    <footer class="container">
-        <div class="footer-links">
+                <h4>シリコンスプレー一本で初速が「88」から「95」へ</h4>
+                <p>先日、愛用している東京マルイ製のM4ガスブローバックのメンテナンスを行っていた時のことです。ボルトキャリアを取り出し、各部の古いグリスや汚れを丁寧に落としました。その後、可動域や適切な箇所にシリコンスプレーを吹き付け、動きを滑らかにして組み直しました。<br>
+                驚いたのはその直後です。メンテナンス前に弾速計で計測した時は初速が『88m/s』程度だったのですが、メンテナンス後にもう一度計測してみると、なんと初速が『95m/s』まで跳ね上がっていたのです。<br>
+                電動ガンとは異なり、GBBはこうした日々のメンテナンスが各パーツの気密性や作動効率にダイレクトに反映されます。自分で手をかけ、ベストな状態に仕上げた分だけ銃が性能で応えてくれる。この感覚こそが、私がガスガンを手放せない最大の理由です。</p>
+            </article>
+
+            <article>
+                <h3>【C#開発】PCゲーマー必携ツール「スリープさせない！デスクトップ警備員」をMicrosoft Storeに公開するまでの道のり</h3>
+                <p class="date">公開日: 2026年3月10日 | カテゴリ: ツール開発 / C#</p>
+
+                <h4>「自分が欲しいもの」から始まったアプリ開発</h4>
+                <p>ゲームのダウンロード中や、ちょっとした離席の間にPCがスリープしてしまい、作業が中断される煩わしさ。これを解決するために開発したのが、PCの強制スリープをブロックする常駐型アプリ「スリープさせない！デスクトップ警備員」です。<br>
+                私自身がC#やJavaなどを扱えることもあり、「無いなら自分で作ってしまおう」と思い立ったのがプロジェクトの始まりでした。Windowsの電源管理APIを叩いてスリープを阻害するというシンプルな仕組みですが、ゲームのパフォーマンス（FPS）に一切影響を与えないよう、徹底的に軽量なバックグラウンド処理を目指してコーディングを行いました。</p>
+
+                <h4>Microsoft Store公開への高いハードルとデバッグの壁</h4>
+                <p>開発自体は順調に進みましたが、最大の難関は「Microsoft Storeへの公開審査」でした。ユーザーに安心してダウンロードしてもらうためには公式ストアを経由するのがベストだと考えたのですが、パッケージングの要件や、予期せぬ環境でのデバッグ作業など、個人開発者にとってはクリアすべき課題が山積みでした。<br>
+                リジェクト（審査落ち）と修正を繰り返し、コードを見直しては申請し直す日々。しかし、最終的に審査を通過し、ストア上に自分のアプリが並んだ瞬間の達成感は、ゲームの難関ボスを倒した時以上のものがありました。今後も、ゲーマーの痒い所に手が届くようなツールの開発を続けていきたいと思います。</p>
+            </article>
+
+            <article>
+                <h3>攻略情報を「届ける」難しさ：『The Midnight Walkers』＆『Highguard』攻略サイト構築の裏側</h3>
+                <p class="date">公開日: 2026年3月5日 | カテゴリ: Web制作 / コミュニティ運営</p>
+
+                <h4>ただのデータ集積所ではなく、プレイヤーの「ハブ」を作る</h4>
+                <p>現在、YamaStudioではダンジョン探索型FPS『The Midnight Walkers』や、開発中の『Highguard』の攻略サイト・マルチプレイ募集掲示板の運営を行っています。<br>
+                サイトの構築にあたっては、単なるWikiシステムの流用ではなく、HTMLを一から組んで見やすさと軽量さを両立させることにこだわりました。特にハードコアFPSはパッチごとに武器の威力やアイテムの湧き位置が激しく変動するため、「いかに早く、正確な最新情報をプレイヤーに届けるか」がサイトの価値に直結します。</p>
+
+                <h4>開発とプレイの両立が生み出すシナジー</h4>
+                <p>攻略サイトを運営していると、ただゲームをプレイしている時とは全く違う視点を持つようになります。マップの構造を頭に叩き込み、クラスの相性を分析し、それをどうすれば初心者にも分かりやすくWeb上で表現できるかを常に考えるようになりました。<br>
+                Angularなどを使ったより高度なWebアプリ化も視野に入れつつ、まずは「プレイヤー同士が繋がり、一緒にゲームを楽しむためのハブ拠点」として、マルチプレイ募集掲示板の活性化などに注力しています。自分でコードを書き、自分でプレイして検証する。この泥臭いプロセスこそが、YamaStudioのサイトの最大の強みだと自負しています。</p>
+            </article>
+
+            <article>
+                <h3>【自作PC】RTX 3060 Tiで挑む！WQHD環境でのハードコアFPS動作パフォーマンス実測レビュー</h3>
+                <p class="date">公開日: 2026年3月1日 | カテゴリ: 自作PC / ハードウェアレビュー</p>
+
+                <h4>「ミドルハイクラス」がFPSゲーマーの最適解か？</h4>
+                <p>PCゲーム、特にコンマ数秒の反応が勝敗を分けるFPSにおいて、ハードウェアの性能は「実力」の一部と言っても過言ではありません。<br>
+                私が現在メインで使用しているPCは、NVIDIA GeForce RTX 3060 Tiを搭載した、いわゆるミドルハイクラスの構成です。モニターは144HzのWQHD（2560x1440）解像度を使用しています。最高峰のスペックではありませんが、コストパフォーマンスと性能のバランスが最も取れた構成だと自負しています。</p>
+
+                <h4>『Tarkov』『Squad』『The Midnight Walkers』での実測値</h4>
+                <p>実際に、当スタジオが攻略情報を発信している主要タイトルでのパフォーマンス（FPS値）を、WQHD解像度、画質設定は「中〜高」のミックスで計測しました。</p>
+                <ul>
+                    <li><strong>Escape from Tarkov (EFT):</strong> Infamous（悪名高い）ほど重いとされる『Street of Tarkov』マップにおいて、DLSS（Quality設定）を使用することで、平均70〜90 FPSを維持できました。他のマップでは100 FPS超えも安定しており、十分に戦えるレベルです。</li>
+                    <li><strong>Squad:</strong> 大規模な50vs50の戦闘中でも、100 FPSを下回ることはほとんどなく、非常に滑らかな映像でプレイできています。144Hzモニターの性能を活かせていると感じます。</li>
+                    <li><strong>The Midnight Walkers:</strong> Unreal Engineベースの美しいグラフィックですが、最適化が進んでおり、平均120 FPS以上で安定しています。ダンジョン内の暗がりでもカクつきがなく、没入感は最高です。</li>
+                </ul>
+
+                <h4>WQHD環境がもたらす視覚的優位性</h4>
+                <p>フルHD（1920x1080）からWQHDに環境を移行して最も感じたのは、「遠くの敵の視認性」の劇的な向上です。解像度が上がったことでピクセルが細かくなり、遠景にいる敵のシルエットや動きを、より鮮明に捉えられるようになりました。<br>
+                RTX 3060 Tiは、WQHD環境において「高画質」と「高フレームレート」を両立できる、FPSゲーマーにとって非常に強力な選択肢であることを、改めて実感しました。もし、これからPCの新調やアップグレードを考えているなら、このクラスの構成を強くおすすめします。</p>
+            </article>
+
+        </main>
+
+        <aside>
+            <h3 id="projects">Projects & Contents</h3>
+            <ul>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/">The Midnight Walkers 攻略 ↗</a></li>
+                <li><a href="https://highguard.yamastudio.net/">Highguard 公式サイト ↗</a></li>
+                <li><a href="https://the-midnightwalkers-board.yamastudio.net/">マルチプレイ募集掲示板 ↗</a></li>
+            </ul>
+
+            <h3 id="about">プロフィール</h3>
+            <p><strong>YamaStudio</strong><br>FPS・VRゲームを中心としたゲーマーのための情報を発信し、より快適なゲーム環境を提供するツール開発を行っている個人スタジオです。</p>
+        </aside>
+    </div>
+
+    <footer>
+        <p>
             <a href="/privacy.html">プライバシーポリシー</a>
             <a href="/contact.html">お問い合わせ</a>
-        </div>
-        <div>
-            &copy; 2026 YamaStudio.net All Rights Reserved.
-        </div>
+        </p>
+        <p>&copy; 2026 YamaStudio.net All Rights Reserved.</p>
     </footer>
 
 </body>
