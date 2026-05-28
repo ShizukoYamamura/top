@@ -11,17 +11,23 @@
         .container { display: flex; gap: 30px; }
         main { flex: 3; }
         aside { flex: 1; background: #f4f4f4; padding: 15px; border-radius: 5px; height: fit-content; }
-        article { margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px dashed #ccc; }
-        article h3 { color: #2c3e50; font-size: 1.4em; border-left: 5px solid #3498db; padding-left: 10px; }
-        article h4 { color: #34495e; font-size: 1.2em; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
-        .date { color: #7f8c8d; font-size: 0.9em; }
+        
+        /* 記事一覧用のスタイル */
+        .post-list-item { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
+        .post-list-item h3 { margin-bottom: 5px; font-size: 1.4em; }
+        .post-list-item h3 a { color: #2c3e50; text-decoration: none; }
+        .post-list-item h3 a:hover { color: #3498db; text-decoration: underline; }
+        .date { color: #7f8c8d; font-size: 0.9em; margin-top: 0; }
+        .summary { margin-top: 10px; color: #555; }
+        .read-more { display: inline-block; margin-top: 5px; color: #3498db; text-decoration: none; font-weight: bold; }
+        .read-more:hover { text-decoration: underline; }
+
         footer { margin-top: 50px; text-align: center; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 20px; }
         .nav-links { display: flex; gap: 15px; list-style: none; padding: 0; }
         .nav-links a, aside a { color: #3498db; text-decoration: none; }
         .nav-links a:hover, aside a:hover { text-decoration: underline; }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630"
-        crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -30,161 +36,54 @@
         <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
         <nav>
             <ul class="nav-links">
-                <li><a href="#">ホーム</a></li>
-                <li><a href="#about">YamaStudioについて</a></li>
-                <li><a href="#projects">プロジェクト</a></li>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="index.html#about">YamaStudioについて</a></li>
+                <li><a href="index.html#projects">プロジェクト</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
         <main>
-            <h2>最新の記事</h2>
+            <h2>最新の記事一覧</h2>
 
-            <!-- 新規追加記事 1 -->
-            <article>
-                <h3>『Escape from Tarkov』で生存率を劇的に上げる！勝敗を分ける「音」の最適化とおすすめデバイス</h3>
+            <div class="post-list-item">
+                <h3><a href="article-tarkov-audio.html">『Escape from Tarkov』で生存率を劇的に上げる！勝敗を分ける「音」の最適化とおすすめデバイス</a></h3>
                 <p class="date">公開日: 2026年5月28日 | カテゴリ: PCゲーム / FPS</p>
+                <p class="summary">EFTにおいて「視覚」と同じかそれ以上に重要なのが「聴覚」です。生存率を上げるためのオーディオ設定の最適解とおすすめのデバイス環境について解説します。</p>
+                <a href="article-tarkov-audio.html" class="read-more">この記事を読む →</a>
+            </div>
 
-                <h4>タルコフにおける「音」の絶対的な重要性</h4>
-                <p>ハードコアFPSにおいて「視覚」と同じかそれ以上に重要なのが「聴覚」です。特に『Escape from Tarkov（EFT）』では、足音ひとつ、草の擦れる音ひとつが命取りになります。例えば、新しく追加されたエリアでブラックキーカードが使える部屋を漁っている時など、かすかな接近音を正確に聞き分けることが撃ち合いの勝率を直接的に引き上げます。</p>
-
-                <h4>ゲーム内オーディオ設定の最適解</h4>
-                <p>現在のEFTで絶対にオンにしておくべき設定が「Binaural Audio（バイノーラルオーディオ）」です。<br>
-                上下左右の音の定位が圧倒的に分かりやすくなります。また、ゲーム内で装備するヘッドセット（ComTac 4やSordinなど）によっても高音・低音の聞こえ方が変わるため、自分のリアルなオーディオ環境に合わせて選ぶのがコツです。</p>
-
-                <h4>リアル環境でのヘッドセット・イヤホンの選び方</h4>
-                <p>FPSゲーマーによくある悩みが「ヘッドセットか、イヤホンか」という問題です。密閉型ヘッドセットは没入感が高く、ゲーミングイヤホン（IEM）は軽量で疲れにくいという特徴があります。<br>
-                Ryzen 7 5700XとRTX 3060 Tiの構成で240Hzモニターへ出力するような、高リフレッシュレートで視覚情報を極限まで高めた環境であっても、「音の解像度」が低ければ宝の持ち腐れになってしまいます。まずはオーディオデバイスへの投資を検討してみてください。</p>
-            </article>
-
-            <!-- 新規追加記事 2 -->
-            <article>
-                <h3>PCVRをもっと快適に！『Assetto Corsa』の没入感を極限まで高める必須Modと設定ガイド</h3>
+            <div class="post-list-item">
+                <h3><a href="article-assettocorsa-mod.html">PCVRをもっと快適に！『Assetto Corsa』の没入感を極限まで高める必須Modと設定ガイド</a></h3>
                 <p class="date">公開日: 2026年5月25日 | カテゴリ: VR / レースシム</p>
+                <p class="summary">VR酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すこと。没入感を劇的に高める必須Mod「Content Manager」やCSPの設定を解説します。</p>
+                <a href="article-assettocorsa-mod.html" class="read-more">この記事を読む →</a>
+            </div>
 
-                <h4>すべてはここから：「Content Manager」の導入</h4>
-                <p>前回の記事で、VRレースシムにおける「VR酔い」の克服について触れました。酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すことです。『Assetto Corsa』をバニラのまま遊ぶのは非常にもったいないです。PCVRユーザーにとって必須なのが「Content Manager（CM）」です。軽量で動作が速く、VR起動モードの切り替えもワンクリックで行えます。</p>
-
-                <h4>グラフィックを次世代機レベルに：「Custom Shaders Patch (CSP)」</h4>
-                <p>CMを導入したら、次に入れるべきなのがCSPです。これを導入することで、昼夜の概念、天候の変化、そして何よりも「光の反射」が信じられないほどリアルになります。<br>
-                10Nmクラスの強力なトルクを発揮するダイレクトドライブのホイールベースから伝わる路面情報と、VRヘッドセット越しに見るリアルな光の反射が合わさることで、現実のドライブそのものの体験が得られます。</p>
-
-                <h4>VR環境でフレームレート(FPS)を安定させる設定のコツ</h4>
-                <p>VRにおいてフレームレートの低下は「VR酔い」に直結します。最もGPUリソースを消費する「影の設定（Shadows）」は一段階下げ、不自然に見えがちな過度なPost-Processing（ポストプロセス）は最低限に抑えましょう。これにより、高画質と安定したFPSの両立が十分に可能です。</p>
-            </article>
-
-            <!-- 新規追加記事 3 -->
-            <article>
-                <h3>【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック</h3>
+            <div class="post-list-item">
+                <h3><a href="article-csharp-optimization.html">【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック</a></h3>
                 <p class="date">公開日: 2026年5月20日 | カテゴリ: ツール開発 / C#</p>
+                <p class="summary">「スリープさせない！デスクトップ警備員」の開発をベースに、ゲームのパフォーマンス（FPS）に影響を与えない軽量な常駐アプリを作るプログラミングのコツをご紹介。</p>
+                <a href="article-csharp-optimization.html" class="read-more">この記事を読む →</a>
+            </div>
 
-                <h4>バックグラウンド処理がゲームに与える影響を考える</h4>
-                <p>以前Microsoft Storeに公開した「スリープさせない！デスクトップ警備員」。このPCゲーマー向け常駐アプリの開発時に最も気を配ったのが「ゲームのパフォーマンスに一切の悪影響を与えないこと」でした。FPSゲームはCPUとメモリのリソースを極限まで消費するため、常駐アプリが重い処理を行うとマイクロスタッター（カクつき）の原因になります。</p>
-
-                <h4>C#でのメモリ消費を抑える工夫</h4>
-                <p>C#には不要なメモリを自動で解放するガベージコレクション（GC）がありますが、ゲーム中に発生すると処理落ちの原因になります。ループ処理の中で毎回 <code>new</code> でインスタンスを生成するのを避け、一度作ったものを再利用（プーリング）する設計にしました。また、システムトレイ常駐時はUIの描画処理を完全に停止させ、リソース消費をカットしています。</p>
-
-                <h4>Windows APIの効率的な呼び出し</h4>
-                <p>スリープを阻害するためには、<code>SetThreadExecutionState</code> などのネイティブAPIをC#から呼び出す（P/Invoke）必要があります。過剰な頻度で呼び出さないようタイマーのインターバルを最適化し、「処理していることをOSに気づかせない」レベルの軽量さを目指しました。他人のPC環境でも邪魔にならないように最適化するプロセスこそが、開発の醍醐味です。</p>
-            </article>
-
-            <!-- 既存の記事ここから -->
-            <article>
-                <h3>VRで激変するレースシムの世界：Assetto Corsaにおける強烈なVR酔いと経験による克服法</h3>
+            <div class="post-list-item">
+                <h3><a href="article-vr-sickness.html">VRで激変するレースシムの世界：Assetto Corsaにおける強烈なVR酔いと経験による克服法</a></h3>
                 <p class="date">公開日: 2026年3月23日 | カテゴリ: VR / レースシム</p>
-                
-                <h4>平面モニターからVRへのパラダイムシフト</h4>
-                <p>PCゲームの進化において、VR（仮想現実）デバイスの普及は多くのジャンルに革命をもたらしましたが、中でも「レースシム（レーシングシミュレーター）」との相性は群を抜いています。VRヘッドセットを装着してプレイする『Assetto Corsa』は、単なるゲームプレイを超えた「本物の運転体験」へと昇華されます。</p>
+                <p class="summary">VRヘッドセットを装着してプレイする『Assetto Corsa』の魅力と、誰もが直面する「VR酔い」をひたすらプレイして克服した体験談をお届けします。</p>
+                <a href="article-vr-sickness.html" class="read-more">この記事を読む →</a>
+            </div>
 
-                <h4>立ちはだかる「VR酔い」の壁と最強の解決策</h4>
-                <p>しかし、私が初めてVRでAssetto Corsaをプレイした時、平面モニターとの圧倒的な立体感の違いに感動したのも束の間、すぐに強烈な「VR酔い」に襲われました。コースを数周しただけで気分が悪くなり、とてもレースどころではない状態に陥ってしまったのです。<br>
-                それでもVR空間でのリアルなドライブを諦めきれず、色々と対策を調べて行き着いたのが、ひたすらプレイをして慣れることです。</p>
-                <p>一週間毎日1時間ほどプレイすることで酔いはなくなりました。VRレースシムで酔いに悩んでいる方は、ぜひ一度試してみてください。</p>
-            </article>
-
-            <article>
-                <h3>言語の壁は超えられる：『Squad』で英語が苦手でも分隊長（SL）ができた理由</h3>
-                <p class="date">公開日: 2026年3月20日 | カテゴリ: PCゲーム / FPS</p>
-
-                <h4>大規模タクティカルFPSにおける「指揮」のハードル</h4>
-                <p>50vs50の大規模な連携と無線の飛び交う戦場が魅力のハードコアFPS『Squad』。このゲームの醍醐味は、なんといっても分隊長（Squad Leader / SL）同士の連携と、分隊員への的確な指示です。しかし、いざ自分が分隊長をやろうとすると、「多国籍なチームで英語が話せないと指揮なんて無理だ」という巨大な言語の壁を感じて萎縮してしまう人が多いのではないでしょうか。私も最初はそうでした。</p>
-
-                <h4>決まった単語の使い回しで戦場は回る</h4>
-                <p>しかし、思い切って分隊長を何度かプレイし、経験を重ねていくうちに一つの事実に気づきました。それは、戦場で飛び交う報告や指示のほとんどが、決まった単語やフレーズを使い回しているだけだということです。<br>
-                「Enemy infantry, bearing 120（敵歩兵、方角120）」「Move to defend mark（防衛マークへ移動せよ）」「Need rally point（ラリーポイントが必要）」など、状況を伝えるためのセリフは非常にシンプルです。ネイティブのように流暢な英語で世間話をする必要は全くなく、ゲーム内のセオリーと基本的な単語さえ押さえておけば、分隊長として十分に立ち回ることができました。<br>
-                英語力よりも、「どこにスポーンポイントを置くか」「どのタイミングで攻めるか」といったゲームへの理解度の方が遥かに重要です。言語の壁を恐れず、ぜひ一度分隊長にチャレンジして、Squadの本当の面白さを味わってほしいと思います。</p>
-            </article>
-
-            <article>
-                <h3>GBBは手入れで化ける：東京マルイ製 M4のメンテナンスと初速の劇的変化</h3>
-                <p class="date">公開日: 2026年3月15日 | カテゴリ: サバゲー / エアガン</p>
-
-                <h4>電動ガンにはない「操作し、育てる喜び」</h4>
-                <p>サバイバルゲームにおいて、実用性や装弾数を重視するのであれば電動ガンが最適解です。しかし、トリガーを引いた瞬間に鋭く後退するボルトや、肩に伝わる強烈なリコイルショックなど、ガスブローバック（GBB）には実用性を凌駕する圧倒的なロマンがあります。そしてもう一つ、GBBならではの大きな魅力が「メンテナンスによる性能の変化」です。</p>
-
-                <h4>シリコンスプレー一本で初速が「88」から「95」へ</h4>
-                <p>先日、愛用している東京マルイ製のM4ガスブローバックのメンテナンスを行っていた時のことです。ボルトキャリアを取り出し、各部の古いグリスや汚れを丁寧に落としました。その後、可動域や適切な箇所にシリコンスプレーを吹き付け、動きを滑らかにして組み直しました。<br>
-                驚いたのはその直後です。メンテナンス前に弾速計で計測した時は初速が『88m/s』程度だったのですが、メンテナンス後にもう一度計測してみると、なんと初速が『95m/s』まで跳ね上がっていたのです。<br>
-                電動ガンとは異なり、GBBはこうした日々のメンテナンスが各パーツの気密性や作動効率にダイレクトに反映されます。自分で手をかけ、ベストな状態に仕上げた分だけ銃が性能で応えてくれる。この感覚こそが、私がガスガンを手放せない最大の理由です。</p>
-            </article>
-
-            <article>
-                <h3>【C#開発】PCゲーマー必携ツール「スリープさせない！デスクトップ警備員」をMicrosoft Storeに公開するまでの道のり</h3>
-                <p class="date">公開日: 2026年3月10日 | カテゴリ: ツール開発 / C#</p>
-
-                <h4>「自分が欲しいもの」から始まったアプリ開発</h4>
-                <p>ゲームのダウンロード中や、ちょっとした離席の間にPCがスリープしてしまい、作業が中断される煩わしさ。これを解決するために開発したのが、PCの強制スリープをブロックする常駐型アプリ「スリープさせない！デスクトップ警備員」です。<br>
-                私自身がC#やJavaなどを扱えることもあり、「無いなら自分で作ってしまおう」と思い立ったのがプロジェクトの始まりでした。Windowsの電源管理APIを叩いてスリープを阻害するというシンプルな仕組みですが、ゲームのパフォーマンス（FPS）に一切影響を与えないよう、徹底的に軽量なバックグラウンド処理を目指してコーディングを行いました。</p>
-
-                <h4>Microsoft Store公開への高いハードルとデバッグの壁</h4>
-                <p>開発自体は順調に進みましたが、最大の難関は「Microsoft Storeへの公開審査」でした。ユーザーに安心してダウンロードしてもらうためには公式ストアを経由するのがベストだと考えたのですが、パッケージングの要件や、予期せぬ環境でのデバッグ作業など、個人開発者にとってはクリアすべき課題が山積みでした。<br>
-                リジェクト（審査落ち）と修正を繰り返し、コードを見直しては申請し直す日々。しかし、最終的に審査を通過し、ストア上に自分のアプリが並んだ瞬間の達成感は、ゲームの難関ボスを倒した時以上のものがありました。今後も、ゲーマーの痒い所に手が届くようなツールの開発を続けていきたいと思います。</p>
-            </article>
-
-            <article>
-                <h3>攻略情報を「届ける」難しさ：『The Midnight Walkers』＆『Highguard』攻略サイト構築の裏側</h3>
-                <p class="date">公開日: 2026年3月5日 | カテゴリ: Web制作 / コミュニティ運営</p>
-
-                <h4>ただのデータ集積所ではなく、プレイヤーの「ハブ」を作る</h4>
-                <p>現在、YamaStudioではダンジョン探索型FPS『The Midnight Walkers』や、開発中の『Highguard』の攻略サイト・マルチプレイ募集掲示板の運営を行っています。<br>
-                サイトの構築にあたっては、単なるWikiシステムの流用ではなく、HTMLを一から組んで見やすさと軽量さを両立させることにこだわりました。特にハードコアFPSはパッチごとに武器の威力やアイテムの湧き位置が激しく変動するため、「いかに早く、正確な最新情報をプレイヤーに届けるか」がサイトの価値に直結します。</p>
-
-                <h4>開発とプレイの両立が生み出すシナジー</h4>
-                <p>攻略サイトを運営していると、ただゲームをプレイしている時とは全く違う視点を持つようになります。マップの構造を頭に叩き込み、クラスの相性を分析し、それをどうすれば初心者にも分かりやすくWeb上で表現できるかを常に考えるようになりました。<br>
-                Angularなどを使ったより高度なWebアプリ化も視野に入れつつ、まずは「プレイヤー同士が繋がり、一緒にゲームを楽しむためのハブ拠点」として、マルチプレイ募集掲示板の活性化などに注力しています。自分でコードを書き、自分でプレイして検証する。この泥臭いプロセスこそが、YamaStudioのサイトの最大の強みだと自負しています。</p>
-            </article>
-
-            <article>
-                <h3>【自作PC】RTX 3060 Tiで挑む！WQHD環境でのハードコアFPS動作パフォーマンス実測レビュー</h3>
-                <p class="date">公開日: 2026年3月1日 | カテゴリ: 自作PC / ハードウェアレビュー</p>
-
-                <h4>「ミドルハイクラス」がFPSゲーマーの最適解か？</h4>
-                <p>PCゲーム、特にコンマ数秒の反応が勝敗を分けるFPSにおいて、ハードウェアの性能は「実力」の一部と言っても過言ではありません。<br>
-                私が現在メインで使用しているPCは、NVIDIA GeForce RTX 3060 Tiを搭載した、いわゆるミドルハイクラスの構成です。モニターは144HzのWQHD（2560x1440）解像度を使用しています。最高峰のスペックではありませんが、コストパフォーマンスと性能のバランスが最も取れた構成だと自負しています。</p>
-
-                <h4>『Tarkov』『Squad』『The Midnight Walkers』での実測値</h4>
-                <p>実際に、当スタジオが攻略情報を発信している主要タイトルでのパフォーマンス（FPS値）を、WQHD解像度、画質設定は「中〜高」のミックスで計測しました。</p>
-                <ul>
-                    <li><strong>Escape from Tarkov (EFT):</strong> Infamous（悪名高い）ほど重いとされる『Street of Tarkov』マップにおいて、DLSS（Quality設定）を使用することで、平均70〜90 FPSを維持できました。他のマップでは100 FPS超えも安定しており、十分に戦えるレベルです。</li>
-                    <li><strong>Squad:</strong> 大規模な50vs50の戦闘中でも、100 FPSを下回ることはほとんどなく、非常に滑らかな映像でプレイできています。144Hzモニターの性能を活かせていると感じます。</li>
-                    <li><strong>The Midnight Walkers:</strong> Unreal Engineベースの美しいグラフィックですが、最適化が進んでおり、平均120 FPS以上で安定しています。ダンジョン内の暗がりでもカクつきがなく、没入感は最高です。</li>
-                </ul>
-
-                <h4>WQHD環境がもたらす視覚的優位性</h4>
-                <p>フルHD（1920x1080）からWQHDに環境を移行して最も感じたのは、「遠くの敵の視認性」の劇的な向上です。解像度が上がったことでピクセルが細かくなり、遠景にいる敵のシルエットや動きを、より鮮明に捉えられるようになりました。<br>
-                RTX 3060 Tiは、WQHD環境において「高画質」と「高フレームレート」を両立できる、FPSゲーマーにとって非常に強力な選択肢であることを、改めて実感しました。もし、これからPCの新調やアップグレードを考えているなら、このクラスの構成を強くおすすめします。</p>
-            </article>
-
-        </main>
+            </main>
 
         <aside>
             <h3 id="projects">Projects & Contents</h3>
             <ul>
-                <li><a href="https://the-midnight-walkers.yamastudio.net/">The Midnight Walkers 攻略 ↗</a></li>
-                <li><a href="https://highguard.yamastudio.net/">Highguard 公式サイト ↗</a></li>
-                <li><a href="https://the-midnightwalkers-board.yamastudio.net/">マルチプレイ募集掲示板 ↗</a></li>
-                <li><a href="https://eft-calculator.yamastudio.net/">EFT 弾薬＆アーマーシミュレーター ↗</a></li>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank">The Midnight Walkers 攻略 ↗</a></li>
+                <li><a href="https://highguard.yamastudio.net/" target="_blank">Highguard 公式サイト ↗</a></li>
+                <li><a href="https://the-midnightwalkers-board.yamastudio.net/" target="_blank">マルチプレイ募集掲示板 ↗</a></li>
+                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank">EFT 弾薬＆アーマーシミュレーター ↗</a></li>
             </ul>
 
             <h3 id="about">プロフィール</h3>
