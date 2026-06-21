@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【Unity・NGO】マルチプレイFPS開発の泥沼から脱出せよ！アニメーションIK・UIの罠・大量の敵を捌く通信最適化のリアルドキュメント - YamaStudio.net</title>
+    <meta name="description" content="UnityのNetcode for GameObjects(NGO)を使用したマルチプレイFPS開発における、MixamoアニメーションのIn-Place化、Animation RiggingのIKウェイト制御、UI表示のバグ、敵のInterest Management最適化を徹底解説。">
+    <style>body{font-family:sans-serif;line-height:1.8;color:#333;max-width:1000px;margin:0 auto;padding:20px}header{border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:20px}.container{display:flex;gap:30px}main{flex:3}aside{flex:1;background:#f4f4f4;padding:15px;border-radius:5px;height:fit-content}.article-content h1{font-size:1.5em}.article-content h2{color:#2c3e50;font-size:1.3em;border-left:5px solid #3498db;padding-left:10px;margin-top:30px}.article-content h3{color:#34495e;font-size:1.1em;margin-top:20px;border-bottom:1px dashed #ccc;padding-bottom:5px}.date{color:#7f8c8d;font-size:0.9em}.back-home{display:inline-block;margin-top:40px;padding:10px 15px;background:#2c3e50;color:#fff;text-decoration:none;border-radius:3px}.back-home:hover{background:#34495e}footer{margin-top:50px;text-align:center;font-size:0.9em;border-top:1px solid #ccc;padding-top:20px}.nav-links{display:flex;gap:15px;list-style:none;padding:0}.nav-links a,aside a{color:#3498db;text-decoration:none}.nav-links a:hover,aside a:hover{text-decoration:underline}code{background:#f8f9fa;padding:2px 5px;border-radius:3px;font-family:monospace;border:1px solid #eaeded}pre{background:#f8f9fa;padding:15px;border-radius:5px;overflow-x:auto;border:1px solid #eaeded;font-family:monospace;line-height:1.5}</style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>YamaStudio.net</h1>
+        <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
+        <nav><ul class="nav-links"><li><a href="index.html">ホーム</a></li><li><a href="index.html#about">YamaStudioについて</a></li><li><a href="index.html#projects">プロジェクト</a></li></ul></nav>
+    </header>
+    <div class="container">
+        <main>
+            <article class="article-content">
+                <h1>【Unity・NGO】マルチプレイFPS開発の泥沼から脱出せよ！アニメーションIK・UIの罠・大量の敵を捌く通信最適化のリアルドキュメント</h1>
+                <p class="date">公開日: 2026年6月22日 | カテゴリ: ゲーム開発 / Unity / C#</p>
+
+                <h2>はじめに：個人開発マルチプレイFPS『VALOPEX STRIKE 2』の挑戦</h2>
+                <p>個人で3Dマルチプレイゲーム、それも一瞬の同期ズレが命取りになるインディーズFPSを開発するというのは、文字通り「終わりなき泥沼との戦い」です。現在、スタジオで開発を進めている期待の超新作FPS『VALOPEX STRIKE 2』では、Unityの標準ネットワーク機能である「Netcode for GameObjects（NGO）」をベースに、Cowsins（FPS Engine）を統合した独自のマルチプレイ環境を構築しています。</p>
+                <p>開発初期は順調に見えるものの、複数プレイヤーを接続した瞬間に牙を剥くのが「アニメーションの同期ズレ」「三人称視点（他プレイヤー）のIK（逆運動学）の破綻」、そして「敵が大量に発生した際の大規模なネットワーク負荷（ラバーバンディング）」です。本記事では、筆者が実際に何日も頭を抱え、AIアシスタント（Cursor）と共に一つひとつの罠を解き明かし、最終的にプロ品質の最適化にまで到達したリアルな開発プロセスのすべてをドキュメントとして残します。同じようにUnityでマルチプレイやFPS開発に挑み、絶望している開発者の道標となれば幸いです。</p>
+
+                <h2>第1章：MixamoアニメーションとUnityの「In-Place」の罠</h2>
+                <h3>移動を伴うモーションが引き起こすラバーバンディング</h3>
+                <p>ゲーム内でプレイヤーが走る、歩く、しゃがむ、あるいは激しくスライディングする。これらのモーションデータを、多くのインディー開発者はアセットサイト「Mixamo」などから調達します。しかし、ここに最初の巨大な罠が隠されています。</p>
+                <p>Mixamoからダウンロードした「スライディング」や「前転」のようなアニメーションの多くには、その場で動くための「In-Place」チェックボックスがサイト上に用意されていません。これをそのままUnityにインポートすると、キャラクターの肉体（メッシュ）がアニメーションの再生と同時に物理的に前方へ数メートル滑り出していきます。これをマルチプレイで同期しようとすると、同期の基準となるシミュレーションカプセル（当たり判定の筒）はその場に留まっているのに、見た目の体（Hipsボーン）だけが遥か彼方へ走っていき、アニメーションの終了やループの瞬間に元のカプセル位置へ「ガクッ」とワープして戻るという、不気味で激しいラバーバンディング（引き戻し現象）が発生します。</p>
+
+                <h3>Unityの「Bake Into Pose」では解決しなかった根本原因</h3>
+                <p>多くのUnity開発者は、この現象をUnityのインスペクター設定で解決しようと試みます。FBXのアニメーション設定を開き、<code>Root Transform Position (XZ)</code> の <code>Bake Into Pose</code> にチェックを入れるアプローチです。筆者もこれを最初に適用していました。</p>
+                <p>Unityの <code>Bake Into Pose</code> は、確かに「キャラクターのルート座標（カプセル）がアニメーションの移動力によって勝手に前進するのを止める」という役割を果たします。しかし、アニメーションデータそのものに含まれている「骨の移動情報」までは消し去ってくれません。基準点であるカプセルは固定されているものの、キャラクターの最親ボーンである腰（<code>mixamorig:Hips</code>）だけが空間を前方へと突き進んでいってしまうのです。</p>
+                <p>これにより、後述するAnimation RiggingのIK（Inverse Kinematics）ターゲット（武器のグリップ位置など）がカプセル中心に取り残され、キャラクターの体だけが前方に進むため、「左腕がゴムのように後ろへビヨーンと不自然に伸びてしまう」という致命的なホラー映像が完成してしまいました。Unityの機能で無理やり動きを抑え込むのと、アニメーションデータ自体が最初から「その場（0, 0, 0）」で動いているのとでは、データ構造上、全く意味が異なるのです。</p>
+
+                <h3>Blenderを駆使したFBXデータの物理的改造アプローチ</h3>
+                <p>Mixamoが「In-Place」を提供してくれないなら、自分でアニメーションデータの骨の動きを書き換えるしかありません。筆者は無料の3Dモデリングソフト「Blender」を立ち上げ、スライディングのFBXファイルを直接改造する以下の手順を確立しました。</p>
+                <ol>
+                    <li>BlenderへMixamoからダウンロードしたスライディングFBXをインポートします（<code>ファイル</code> ＞ `インポート` ＞ `FBX`）。</li>
+                    <li>読み込んだキャラクターの骨格（アーマチュア）を選択し、オブジェクトモードから<strong>「ポーズモード」</strong>に切り替えます。</li>
+                    <li>キャラクターのすべての親である中心のボーン、<code>mixamorig:Hips</code>（腰ボーン）をクリックして選択します。</li>
+                    <li>画面下部のタイムラインを<strong>「グラフエディター（Graph Editor）」</strong>に切り替え、左側パネルの展開ツリーから <code>mixamorig:Hips</code> の <code>位置 (Location)</code> を開きます。</li>
+                    <li>グラフを見ると、前進している軸（UnityとBlenderの座標軸の変換により、通常はY位置またはZ位置）のカーブが斜めに大きく右肩上がり、あるいは右肩下がりにズレているのを確認できます。これこそが、体を前方に引っ張っていた犯人です。</li>
+                    <li>この前進している軸（例：<code>Y位置</code>）の文字をクリックして選択し、右側のグラフエリアにマウスを置いた状態で <code>A</code> キーを押してすべてのキーフレームを全選択、<code>X</code> キーを押して<strong>「キーフレームを削除」</strong>を実行します。これで、前に進む力が完全に消滅します。</li>
+                    <li>キーフレームを消去しただけでは初期位置がズレることがあるため、画面右側の「トランスフォーム」パネルで、該当する軸の位置を <code>0 m</code> に手入力で書き換えます。</li>
+                    <li><code>0 m</code> と入力した欄の上にマウスを乗せたまま右クリックし、「キーフレームを挿入（単一）」を選択（または <code>I</code> キー）して、常に原点に留まるように上書き固定します。</li>
+                </ol>
+                <p>スペースキーで再生すると、キャラクターが1ミリも前進せず、その場で綺麗にスライディングのポーズをとるだけの「真のIn-Placeアニメーション」に生まれ変わりました。これを再びFBXとしてエクスポートし、Unityへと連れ戻します。</p>
+
+                <h2>第2章：呪いの補正コードの大掃除とNGO標準機能の再発見</h2>
+                <h3>複雑怪奇な「CoopVisualFollower」という負の遺産</h3>
+                <p>真のIn-Placeアニメーションを手に入れる前のプロジェクトコードには、骨格が勝手に移動するバグをプログラム側で無理やりねじ伏せるための、複雑怪奇なスクリプトが存在していました。それが <code>CoopVisualFollower</code> です。</p>
+                <p>このスクリプトは、毎フレームLateUpdateの中で <code>compensateRootMotion</code> や <code>hipsBoneNameContains</code> といった処理を走らせ、前方に逃げていくHipsボーンの座標を計算し、無理やり引き戻すという涙ぐましい補正を行っていました。しかし、この強引な引き戻し計算こそが、マルチプレイ時に他プレイヤーの腕のIKをバグらせ、カクつき（スタッター）を生み出し、ネットワーク同期と激しく衝突する「諸悪の根源」「呪いのコード」と化していたのです。</p>
+
+                <h3>Cursor AIのエージェント機能による「89個のタスク」一括処理</h3>
+                <p>In-Place版のFBXが揃った今、この呪いのコードは1行たりとも残す必要がありません。筆者は最新のAIコードエディタ「Cursor」を起動し、プロジェクト全体の「大掃除」を命じました。Cursorのエージェント機能はプロジェクトの全ファイルを解析し、実に見事なリファクタリングを自動で実行しました。</p>
+                <p>Cursorが自動で遂行したタスクは実に<strong>89個</strong>。新しく用意した5つのIn-Place対応FBXを正しく <code>Humanoid</code> アニメーションに変換し、Animatorのブレンドツリー（Forward, Backward, Strafe Left, Strafe Right, Slide）へと精密に再ワイヤリング。そして、不要になった <code>CoopVisualFollower</code> 内の <code>_hips</code> 検索ブロック、フレームごとのプルバックロジック、不要なヘルパー関数、古いコメントアウトを跡形もなく、かつ完璧な依存関係の整合性を保ったまま完全に削除したのです。コンソールエラーは「0」。手動で行えば数時間はかかり、必ずどこかで参照エラーを起こすレベルの大工事が、一瞬で完了しました。</p>
+
+                <h3>「実は最初から滑らかだった」というネットワーク同期のオチ</h3>
+                <p>この大掃除の過程で、Cursorがソースコードの深部から衝撃的な事実を掘り起こしました。
+                Unity標準のネットワークライブラリである「Netcode for GameObjects（NGO）」のコンポーネント <code>ClientNetworkTransform</code> の <code>OnNetworkSpawn()</code> 内を調査したところ、最初から <code>Interpolate = true</code>（位置・回転の補間機能）が有効化されていたのです。</p>
+                <p>つまり、他プレイヤーのシミュレーションカプセルは、NGOの標準機能によってすでにネットワーク越しにヌルヌルと滑らかに動いていました。私たちが重い処理を書いて必死に実装していた <code>CoopVisualFollower</code> は、**「すでに滑らかに動いているものを、二重に滑らかにしようとして座標を狂わせ、バグを引き起こしていただけの完全な超冗長スクリプト」**だったというオチでした。システムをシンプルに保つことの重要性を、改めて痛感させられた瞬間です。</p>
+
+                <h2>第3章：スライディング中の「真横を向いて滑る」向きのバグ</h2>
+                <h3>進行方向に対して体が常に90度横を向く現象</h3>
+                <p>アニメーションをクリーンにし、無駄なコードをすべて消去して他プレイヤーを走らせたところ、移動の滑らかさと左手の張り付きは完璧になりました。しかし、ここで新たな問題が浮上します。「スライディングを発動した瞬間、キャラクターの体が進行方向に対して常に真横（90度）を向いたまま、氷の上を滑るように進んでいく」という極めて不自然な挙動になったのです。</p>
+                <p>FPSゲームでは、スライディングや特定の特殊アクション中、プレイヤーのエイム（視点）は自由に動かせますが、キャラクターのカプセル（当たり判定の正面）は進行方向に固定されるか、あるいは独自の回転制御に移行します。先ほど、何でもかんでも視点の向き（<code>LookYaw</code>）に体を無理やりねじ曲げていた <code>CoopVisualFollower</code> を消し去ったため、アニメーションデータ本来の「正面」がそのまま画面に露出した形になります。</p>
+
+                <h3>Unityインスペクターの「Root Transform Rotation」でノーコード解決</h3>
+                <p>これはプログラムの不具合ではなく、Mixamoのアニメーション、あるいはBlenderで加工したデータの「正面の軸」が、Unityの世界の基準軸（Z軸フォワード）に対して最初から90度ズレて作られているという、3Dアセット特有の定番の罠でした。解決のためにコードを書く必要は一切ありません。Unityのインスペクター上で以下の設定を施すだけで解決します。</p>
+                <ol>
+                    <li>UnityのProjectビューで、該当するスライディングの**アニメーションファイル（FBX）**を選択します。</li>
+                    <li>右側のInspectorウィンドウで **`Animation`** タブを選択し、下部へスクロールします。</li>
+                    <li>**`Root Transform Rotation`** セクションを見つけます。</li>
+                    <li>`Bake Into Pose` にチェックが入っていることを確認します。</li>
+                    <li>そのすぐ下にある **`Offset`** という入力欄（初期値は0）の数値を **`90`** （あるいはアニメーションの向きに応じて **`-90`** や **`180`**）に変更します。</li>
+                    <li>インスペクター右下の **`Apply`** ボタンを押して適用します。</li>
+                </ol>
+                <p>ゲームを再生してスライディングを行うと、先ほどまで真横を向いていたキャラクターが、完璧に進行方向の正面を向いて鋭く滑り出していくようになりました。3D開発において、なんでもコードで解決しようとする前に、アセット自体のインポート設定（トランスフォームオフセット）を見直すことの大切さを物語る事例です。</p>
+
+                <h2>第4章：IK（逆運動学）が効きすぎる悪夢と、動的ウェイト制御への挑戦</h2>
+                <h3>「左手が武器のグリップにガチガチに接着される」問題</h3>
+                <p>次の課題は、Animation Riggingの「IK（Inverse Kinematics）」が強力に効きすぎていることによるモーションの破綻でした。他プレイヤーの左手は、Cowsinsのシステムによって「三人称用武器のフォアグリップ位置（Targetオブジェクト）」に完璧に吸い付くようになりました。位置ズレはゼロです。しかし、これが新たな悪夢の始まりでした。</p>
+                <p>IKの適用度（Weight）が常に <code>1.0</code>（100%強制固定）のままであるため、キャラクターが「リロード」を行って左手でマガジンを抜こうとした時も、IKが「何が何でもグリップから手を離すな！」と命令し続けます。結果、左手が銃の先っぽに接着されたまま、肘や肩の関節だけが不気味にグニャグニャと動くというホラーなリロードモーションになってしまいました。スライディング時や、ナイフで敵を切りつける「メレー（近接攻撃）」の時も同様に、左手が銃に固定されたまま腕を振り回そうとするため、見た目が完全に破綻してしまったのです。</p>
+
+                <h3>Animatorの「アニメーションカーブ」を用いた動的ウェイト制御</h3>
+                <p>プロのゲーム開発において、この「ガチガチIK問題」は、アニメーションの状況に応じてIKの力（Weight）を <code>1.0（完全固定）</code> から <code>0.0（完全自由）</code> まで動的にブレンドすることで解決されています。筆者はAnimatorの**「アニメーションカーブ（Animation Curves）」**機能を使用して、C#コードからIKの強さを完全にコントロールする仕組みを構築しました。</p>
+
+                <p>まず、UnityのAnimator Controllerのパラメータタブに、新しいFloat型のパラメータ <strong>`LeftHandIKWeight`</strong> を作成します。そして、リロード、スライディング、メレー攻撃の各アニメーションクリップをインスペクターで開き、<code>Curves</code> セクションに同じ <code>LeftHandIKWeight</code> という名前のカーブを追加して、以下のようにグラフのキーフレーム（点を打つ）を設定します。</p>
+                <ul>
+                    <li><strong>リロード通常時：</strong> 数値は <code>1.0</code>（左手はしっかり銃を握る）</li>
+                    <li><strong>マガジンに手を伸ばす瞬間：** <code>1.0</code> から <code>0.0</code> へ滑らかに下降（IKをオフにして手をアニメーション通り自由に動かす）</li>
+                    <li><strong>リロード中（マガジン交換）：** <code>0.0</code> をキープ（手が自由にマガジンを扱う）</li>
+                    <li><strong>新しいマガジンを装填し、銃を構え直す瞬間：** <code>0.0</code> から <code>1.0</code> へ滑らかに上昇（再び左手が銃のグリップに吸い付く）</li>
+                </ul>
+                <p>メレー攻撃（ナイフを振る）時も同様に、ナイフを取り出して振っている間はカーブの数値を <code>0.0</code> に、構え直したら <code>1.0</code> に戻す設定を施します。次に、Cursorに指示を出し、このAnimatorのカーブ数値を毎フレーム読み取ってIKコンポーネントのWeightに代入するC#コードを実装させました。</p>
+
+                <pre><code>// 毎フレームのアニメーション評価後（LateUpdate）に実行
+void LateUpdate()
+{
+    if (animator != null && leftHandIKConstraint != null)
+    {
+        // Animatorのカーブから現在のウェイト値を取得
+        float targetWeight = animator.GetFloat("LeftHandIKWeight");
+        
+        // 直に代入するとカクつくため、Mathf.Lerpで滑らかにブレンド
+        leftHandIKConstraint.weight = Mathf.Lerp(leftHandIKConstraint.weight, targetWeight, Time.deltaTime * 15f);
+    }
+}</code></pre>
+
+                <p>ただ数値を代入するだけでなく、アニメーションが切り替わった瞬間にウェイトが「ガクッ」と瞬間移動して手がワープするのを防ぐため、<code>Mathf.Lerp</code> を挟んで数フレームかけて「スーーッ」と滑らかにウェイトを移行させるのがプロ品質に仕上げるための極意です。これにより、走る時は適度に銃を保持し、リロードやメレーの瞬間だけスッと手が銃から離れて自然に動き、終わるとまた吸い付くようにグリップを握り直す、極めてリアルな挙動が完成しました。</p>
+
+                <h3>「Targetを右手の子にするだけ」という神ひらめきによる大逆転</h3>
+                <p>しかし、ウェイト制御を実装しても、まだ小さな違和感が残っていました。プレイヤーが左右移動（ストレイフ）した際、上半身がアニメーションでわずかに揺れる（スウェイする）のですが、左腕だけががっちり空間に固定されているように見えたり、しゃがんだりスライディングして体の高さ（重心）が急激に下がった時に、左手だけが元の「立った状態の高さ」の空中にとり残されて上に引っ張られるような不自然さ（タイプAの違和感）が発生したのです。</p>
+                <p>原因は、左手のIKが目指している目標地点（Targetオブジェクト）が、キャラクターのアニメーションする肉体から切り離され、静的なカプセル座標やLookPivot（視点軸）の直下に配置されていたためでした。体（メッシュ）はしゃがんで下に落ちているのに、ターゲットは「立ったままの高さ」に残り続けていたのです。</p>
+                <p>ここで筆者は、コードをこれ以上増やすのをやめ、根本的な「親子関係（階層構造）」の変更による解決をひらめきました。**「左手のTargetオブジェクトを、アニメーションでダイナミックに動く『右手の骨（RightHand）』、あるいは右手が持っている『武器オブジェクト』の直下の子オブジェクトにしてしまえばいいのではないか？」**というアプローチです。</p>
+                <p>両手で武器を持つFPSにおいて、最も維持されるべきは「右手と左手の相対的な位置関係（グリップ間の距離）」です。ターゲットを右手（武器）の子階層にドラッグ＆ドロップした結果、完璧な連鎖が起きました。</p>
+                <ol>
+                    <li>キャラクターがしゃがむ、あるいは走って体が揺れる。</li>
+                    <li>Mixamoのアニメーションに従って胸（Chest）ボーンが下がり、連動して<strong>「右手の骨」が下がる</strong>。</li>
+                    <li>右手の完全な子階層である<strong>「左手のIK Target」も一緒に下がる（揺れる）</strong>。</li>
+                    <li>そのTargetを必死に追いかける<strong>「左手」も、体の動きに合わせて完璧にスッと下がる</strong>。</li>
+                </ol>
+                <p>プログラムによる複雑な座標補正計算を一切行うことなく、ただUnityのヒエラルキーの親子関係を1階層変えただけで、しゃがみ、スライディング、カニ歩き時のすべての腕の取り残され現象が完全消滅しました。「優れた設計は、無駄なコードを書かずに構造だけでバグを解決する」という、ゲーム開発における最高の成功体験となりました。</p>
+
+                <h2>第5章：Unity UI開発の地味で深い罠たち</h2>
+                <h3>「チェックを入れても表示されない！」子Canvasの罠</h3>
+                <p>アニメーション周りが完璧に片付き、次に取り掛かったのがゲームのメニュー画面（<code>MainMenuCanvas</code>）の構築です。しかし、ここでUnityのUIシステム（UGUI）の地味ながら強烈な罠に直面しました。ヒエラルキー上で <code>MainMenuCanvas</code> のアクティブチェックを入れ、その中の <code>TitlePanel</code> にも確実にチェックが入っているのに、ゲーム画面（Gameビュー）には「START GAME」や「EXIT TO DESKTOP」といった一部の文字しか表示されず、メインのメニュー背景や枠線が一切描画されないのです。</p>
+                <p>インスペクターをパニックになりながら精査したところ、決定的な原因が見つかりました。親オブジェクトである <code>MainMenuCanvas</code> の <code>Rect Transform</code> の <code>幅 (Width)</code> と <code>高さ (Height)</code> が <code>0</code> になっており、さらにその下の <code>スケール (Scale)</code> までもが <code>X:0, Y:0, Z:0</code> と、完全にペカンコに潰れてサイズがゼロになっていたのです。これでは、子要素のパネルがどれだけ表示を主張しても、画面上には1ドットも描画されません。</p>
+
+                <h3>Non-root canvases will not be scaledの警告を解き明かす</h3>
+                <p>なぜサイズが勝手に0になってしまうのか。インスペクターの <code>Canvas Scaler</code> コンポーネントに表示されていた黄色い警告マーク⚠️が、その答えを指し示していました。そこには **「Non-root Canvases will not be scaled」** と書かれていました。</p>
+                <p>UnityのUI構造において、一番大元にあるCanvasを「ルートキャンバス」と呼び、その中に別のCanvasを配置したものを「非ルートキャンバス（子キャンバス）」と呼びます。今回の <code>MainMenuCanvas</code> は、大元の <code>PlayerUI</code> や <code>PauseMenuCanvas</code> の中にネスト（内包）された子分のCanvasだったのです。この警告は、「私は子分のCanvasなので、ここにアタッチされている Canvas Scaler（画面解像度に合わせてUIサイズを自動調整する機能）は完全にシステムから無視されます！すべてのサイズ決定権は親玉（ルートキャンバス）にあります！」というUnityからの通知でした。</p>
+                <p>ルートキャンバスは画面サイズに合わせて自動でスケールがロックされますが、子分であるCanvasはただのUIパーツ扱いになるため、何かの拍子に手動やアセットの影響でScaleやサイズが <code>0</code> に書き換わってしまうと、そのままフリーズして画面から消滅してしまうのです。正しい修正手順は以下の通りです。</p>
+                <ol>
+                    <li>子分のCanvasには意味のない <code>Canvas Scaler</code> コンポーネントの右上メニュー（縦の︙）をクリックし、**「Remove Component」** で削除してお掃除します。</li>
+                    <li><code>Rect Transform</code> の左上にある四角いアンカープリセットアイコンをクリックします。</li>
+                    <li><strong>キーボードの `Alt` キー（Macは `Option` キー）をしっかりと長押ししながら</strong>、一番右下にある「上下左右にストレッチするアイコン（青い矢印が四方に広がっているマーク）」をクリックします。これにより、サイズが親キャンバスの画面全体（100%）に自動で引き伸ばされます。</li>
+                    <li>ペチャンコになっていた <code>スケール (Scale)</code> の数値を手入力で <strong>`X: 1, Y: 1, Z: 1`</strong> に綺麗に直します。</li>
+                </ol>
+                <p>この手順を踏んだ瞬間、潰れていたCanvasが画面いっぱいに広がり、中に入っていた <code>TitlePanel</code> の美麗なグラフィックがバシッと画面に表示されました。</p>
+
+                <h3>Panelの全画面ストレッチと重なり順の絶対ルール</h3>
+                <p>メニュー画面を表示する際、ゲームの世界を少し見えにくくするために「背景をうっすらと黒く透明に暗く（オーバーレイ）したい」という要件があります。しかし、Canvasの中に <code>Panel</code> を作成して色をいじっても、画面が全く暗くならない現象が起きました。これもUIの基本仕様によるものです。原因は2つありました。</p>
+                <p>1つ目は、先ほどと同様にPanelのサイズが画面全体に広がっていないこと。これも <strong>`Alt` キーを押しながらアンカープリセットの「全画面ストレッチ」</strong> を押すことで、<code>Left, Top, Right, Bottom</code> がすべて <code>0</code> になり、一発で画面全体を覆うサイズになります。<br>
+                2つ目は、Panelの初期設定の「色（Color）」です。UnityのPanelは初期状態で「不透明度が低い白色」に設定されています。白ベースのまま透明度を上げ下げしても画面は白っぽくなるだけです。Colorの四角をクリックしてカラーパレットを開き、色を完全に **「黒（Black）」** に変更した上で、アルファ値（<code>A</code> の数値）を <code>100〜150</code>（うっすら透ける暗さ）に調整することで、理想の薄暗い背景が作れます。</p>
+                <p>また、UnityのUIには**「ヒエラルキーの下（階層の後ろ）にあるものほど画面の手前に描画される」**という絶対的な重なり順ルールがあります。背景を暗くするPanelが、ボタンや文字よりも下に配置されていると、メニューの文字まで一緒に黒く塗りつぶされて見えなくなってしまいます。背景Panelは必ずCanvasの直下の「一番上（奥）」にドラッグして並び替える必要があります。</p>
+
+                <h3>「OnClick()」の活用と型検索「t:TextMeshProUGUI」による爆速フォント変更</h3>
+                <p>メニューの「START GAME」ボタンを押した際、他のタイトルメニューの項目をパッと非表示にしてゲームへ移行させる処理。これはスクリプトを書かなくても、ボタンの <strong>`On Click ()`</strong> イベントを使ってインスペクターだけでノーコード実装できます。ボタンの `On Click ()` の `+` マークを押し、非表示にしたいオブジェクト（<code>TitlePanel</code> など）を登録し、関数プルダウンから <code>GameObject ＞ SetActive (bool)</code> を選択、**チェックボックスを「空（チェックなし）」**にしておけば、ボタンクリックと同時にパネルがスッと消え去ります。</p>
+                <p>さらに、ゲーム全体のUIフォントを一新したい時、何十個もあるボタンやテキストのフォントを一つずつ変更していくのは気が遠くなる作業です。筆者はUnityのエディタ検索コマンドを使った「爆速一括変更テクニック」を使用しました。
+                ヒエラルキーウィンドウの右上にある検索バーに、型指定コマンドである **`t:TextMeshProUGUI`** （古い標準Textなら <code>t:Text</code>）と打ち込みます。すると、プロジェクト内のテキストコンポーネントだけが綺麗に抽出されて一覧表示されます。ここでヒエラルキー内をどれか一つクリックし、<strong>`Ctrl + A`（全選択）</strong> を実行。そのまま右側のインスペクターに目を移すと、すべてのテキストの <code>Font Asset</code> が一画面に表示されているため、そこへ新しいフォントアセットをドラッグ＆ドロップするだけで、一瞬にしてゲーム内のすべてのボタンとテキストのフォントが一括で切り替わりました。このテクニックは今後のUI制作の効率を劇的に高めてくれるはずです。</p>
+
+                <h2>第6章：ゾンビ大量発生に耐える！NGO（Netcode for GameObjects）の極限最適化</h2>
+                <h3>60Hzの滑らかさと引き換えに逼迫するネットワーク帯域</h3>
+                <p>『VALOPEX STRIKE 2』のマルチプレイにおいて、他プレイヤーのIKやUI、アニメーションが完璧に動作するようになった後、開発は最大の難所である「ネットワーク通信の最適化」へと突入しました。他プレイヤーの動きのラグを極限まで減らすために通信頻度（TickRate）を物理演算の同期に合わせた「60Hz（1秒間に60回通信）」に引き上げたため、ゲームの滑らかさは抜群になりました。しかし、その代償としてネットワークの帯域（Bandwidth）がパンパンに逼迫し、サーバー・クライアント間のパケット詰まりによる深刻なラバーバンディング（キャラクターがカクカクとワープする現象）が発生し始めたのです。特に、Co-opモードでゾンビや敵prefabが数十体、数百体と画面に湧き出した瞬間に、通信負荷は限界を突破しました。大量の敵が全員、毎秒60回フル精度で座標と回転の通信を行っていたのが原因です。</p>
+
+                <h3>手軽で効果絶大！3つのNGO帯域削減設定（対策A）</h3>
+                <p>筆者はCursorのネットワーク最適化提案を採用し、まずはネットワークトランスフォーム（<code>NetworkTransform</code>）のコンポーネント設定を根本から見直す「高価値・低リスク」な設定変更を、プレイヤーおよびすべての敵プレハブ（Wolf, Zombie1, ZombieGirlなど）に一斉適用しました。</p>
+                <table border="1" cellpadding="8" style="border-collapse:collapse; width:100%; margin:20px 0; background:#fff; border:1px solid #ccc;">
+                    <tr style="background:#f4f4f4;">
+                        <th>設定項目（インスペクター）</th>
+                        <th>変更前</th>
+                        <th>変更後</th>
+                        <th>もたらされる最適化効果</th>
+                    </tr>
+                    <tr>
+                        <td><strong>UseHalfFloatPrecision</strong></td>
+                        <td>off</td>
+                        <td><strong style="color:#27ae60;">on</strong></td>
+                        <td>各座標の軸データを32bit浮動小数点から16bitの半精度に丸める。見た目の精度を損なわずに位置データのペイロード（通信量）を**半分（50%カット）**にする。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UseUnreliableDeltas</strong></td>
+                        <td>off</td>
+                        <td><strong style="color:#27ae60;">on</strong></td>
+                        <td>毎フレームの差分データを「Unreliable（到達保証なし）」パケットとして送信。ネットワークでパケットロスが発生した際、古いデータの再送を待つための「ヘッドオブラインブロッキング（詰まり）」を完全に排除し、常に最新の座標だけで上書きし続ける。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PositionThreshold</strong></td>
+                        <td>0.001 m</td>
+                        <td><strong style="color:#2980b9;">0.01 m</strong></td>
+                        <td>通信を発生させる移動の閾値を「1ミリ」から「1センチ」へと緩和。キャラクターが静止している際の上半身の微小なブレ（アイドルジッター）による、無駄な通信パケットの発行を完全にシャットアウトする。</td>
+                    </tr>
+                </table>
+
+                <h3>距離ベースの敵通信カット「Interest Management」の実装（対策B）</h3>
+                <p>設定の最適化（対策A）だけで通信量は激減しましたが、敵の数がさらに増えた場合の根本治療として、Cursorに頼み込んで距離ベースの敵通信制御スクリプト <code>CoopEnemyInterestManager.cs</code> （Interest Management：関心管理システム）を新規実装し、すべての敵プレハブへアタッチしました。</p>
+                <p>このシステムは、サーバー主導（Server-only）で動作し、各プレイヤーから遠く離れていて「見る必要のない敵」のネットワーク同期を、NGOの標準APIである <code>NetworkObject.NetworkHide(clientId)</code> を使ってクライアントごとに動的に切断。視界内や近くに戻ってきた時に <code>NetworkShow</code> で復帰させる仕組みです。このスクリプトには、プロの現場でも使われる3つの高度な安全設計が組み込まれています。</p>
+                <ol>
+                    <li><strong>`cullDistance = 60m`（淘汰距離のシリアル化）：** プレイヤーから60メートル以上離れたゾンビの通信をカットします。インスペクターから変数として簡単に距離を調整できるように設計されています。</li>
+                    <li><strong>`hysteresis = 8m`（境界のチラつき防止）：** 60mの境界線上にプレイヤーがいる時、ゾンビが猛スピードで出現と消失を繰り返して（チャタリングを起こして）逆に通信負荷が跳ね上がるのを防ぐため、8メートルの「遊び（バッファ領域）」を持たせています。一度消えた敵は、52mまで近づかないと再出現しません。</li>
+                    <li><strong>`checkInterval = 0.4s`（計算負荷の分散）：** 「距離の計算」を毎フレーム行うとCPUが悲鳴を上げます。そのため、0.4秒に1回だけ計算を行うようにインターバルを設定。さらに、すべてのゾンビの計算タイミングが同じフレームに集中して「スパイク（一瞬の処理落ち）」を起こさないよう、ゾンビごとに計算開始時間をランダムにわずかにズラす（スタッガリング）工夫が施されています。</li>
+                </ol>
+                <p>このシステムのおかげで、サーバー上ではゾンビのAI（NavMeshAgentの移動計算など）を100%正確に走らせたままで、遠くのプレイヤーの画面からだけ「通信と描画」を完璧に隠すことが可能になりました。プレイヤーが近づけば正しい位置にスッと現れるため、位置のワープも起きません。この極限の最適化を施した結果、2人プレイでのテスト中、100体以上のゾンビの群れをマップに投入しても、ネットワークのラバーバンディングは一切発生せず、60HzのヌルヌルとしたFPS本来の快適なゲームプレイ環境を維持することに完全成功しました。</p>
+
+                <h2>総括：シンプルさへの回帰とこれからの『VALOPEX STRIKE 2』</h2>
+                <p>今回の一連の開発プロセスを通じて得た最大の教訓は、**「バグを直すためにさらに複雑なコードを重ねるな。構造をシンプルにし、エンジン本来の機能に語りかけろ」**ということです。ラバーバンディングを直そうと <code>CoopVisualFollower</code> のような難解な補正計算を書いていた時は泥沼にはまる一方でしたが、アニメーションをBlenderでIn-Place化し、IKターゲットを右手の子階層にし、NGO標準の補間機能や最適化設定を正しくONにしただけで、すべての問題が嘘のように、かつ極めて軽量に解決しました。</p>
+                <p>マルチプレイFPS開発という険しい道のりにおいて、Animation Riggingの動的ウェイト制御やUGUIのCanvas仕様、そしてNGOのパケット削減とInterest Managementの導入は、ゲームのクオリティをインディーズレベルから商業プロ品質へと引き上げるための必須のステップです。足元が完璧に固まった『VALOPEX STRIKE 2』は、これからさらに新しい武器の実装、より大規模なゾンビウェーブの構築へと開発を加速させていきます。ゲーム攻略のその先へ。快適なゲーム環境と最高のゲーム体験を届けるためのYamaStudioの挑戦は、これからも続きます。</p>
+            </article>
+            <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
+        </main>
+        <aside>
+            <h3 id="projects">Projects & Contents</h3>
+            <ul>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank">The Midnight Walkers 攻略 ↗</a></li>
+                <li><a href="https://highguard.yamastudio.net/" target="_blank">Highguard 公式サイト ↗</a></li>
+                <li><a href="https://the-midnightwalkers-board.yamastudio.net/" target="_blank">マルチプレイ募集掲示板 ↗</a></li>
+                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank">EFT 弾薬＆アーマーシミュレーター ↗</a></li>
+                <li><a href="https://valopex-strike.yamastudio.net/" target="_blank">期待の超新作FPS ↗</a></li>
+                <li><a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank">タスクバーヒーロー攻略wiki ↗</a></li>
+                <li><a href="https://tbh-calculator.yamastudio.net/" target="_blank">タスクバーヒーロー計算機 ↗</a></li>
+            </ul>
+
+            <h3 id="about">プロフィール</h3>
+            <p><strong>YamaStudio</strong><br>FPS・VRゲームを中心としたゲーマーのための情報を発信し、より快適なゲーム環境を提供するツール開発を行っている個人スタジオです。</p>
+        </aside>
+    </div>
+    <footer>
+        <p><a href="/privacy.html">プライバシーポリシー</a> <a href="/contact.html">お問い合わせ</a></p>
+        <p>&copy; 2026 YamaStudio.net All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
