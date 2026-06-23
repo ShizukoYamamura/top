@@ -273,6 +273,22 @@ aside img {
     border-radius: 8px;
     border: 1px solid var(--border-color);
     margin: 12px 0;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.article-content figure {
+    margin: 24px 0;
+}
+.article-content figure img {
+    margin: 0;
+}
+.article-content figcaption {
+    color: var(--text-muted);
+    font-size: 0.82em;
+    text-align: center;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
 }
 code {
     background: var(--bg-tertiary);
