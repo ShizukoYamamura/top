@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【Unity・NGO】マルチプレイFPS開発の泥沼から脱出せよ！アニメーションIK・UIの罠・大量の敵を捌く通信最適化のリアルドキュメント - YamaStudio.net</title>
     <meta name="description" content="UnityのNetcode for GameObjects(NGO)を使用したマルチプレイFPS開発における、MixamoアニメーションのIn-Place化、Animation RiggingのIKウェイト制御、UI表示のバグ、敵のInterest Management最適化を徹底解説。">
-    <style>body{font-family:sans-serif;line-height:1.8;color:#333;max-width:1000px;margin:0 auto;padding:20px}header{border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:20px}.container{display:flex;gap:30px}main{flex:3}aside{flex:1;background:#f4f4f4;padding:15px;border-radius:5px;height:fit-content}.article-content h1{font-size:1.5em}.article-content h2{color:#2c3e50;font-size:1.3em;border-left:5px solid #3498db;padding-left:10px;margin-top:30px}.article-content h3{color:#34495e;font-size:1.1em;margin-top:20px;border-bottom:1px dashed #ccc;padding-bottom:5px}.date{color:#7f8c8d;font-size:0.9em}.back-home{display:inline-block;margin-top:40px;padding:10px 15px;background:#2c3e50;color:#fff;text-decoration:none;border-radius:3px}.back-home:hover{background:#34495e}footer{margin-top:50px;text-align:center;font-size:0.9em;border-top:1px solid #ccc;padding-top:20px}.nav-links{display:flex;gap:15px;list-style:none;padding:0}.nav-links a,aside a{color:#3498db;text-decoration:none}.nav-links a:hover,aside a:hover{text-decoration:underline}code{background:#f8f9fa;padding:2px 5px;border-radius:3px;font-family:monospace;border:1px solid #eaeded}pre{background:#f8f9fa;padding:15px;border-radius:5px;overflow-x:auto;border:1px solid #eaeded;font-family:monospace;line-height:1.5}</style>
+        <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
 <body>
+    
     <header>
-        <h1>YamaStudio.net</h1>
-        <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
-        <nav><ul class="nav-links"><li><a href="/index.html">ホーム</a></li><li><a href="/about.html">運営者情報</a></li><li><a href="/index.html#projects">プロジェクト</a></li><li><a href="/contact.html">お問い合わせ</a></li></ul></nav>
+        <a href="/index.html" class="site-title">YamaStudio.net</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/index.html">home</a></li>
+                <li><a href="/about.html">about</a></li>
+                <li><a href="/index.html#projects">projects</a></li>
+                <li><a href="/contact.html">contact</a></li>
+            </ul>
+        </nav>
     </header>
     <div class="container">
         <main>

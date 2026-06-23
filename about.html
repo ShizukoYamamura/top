@@ -5,81 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>運営者情報 | YamaStudio.net</title>
     <meta name="description" content="YamaStudio.netの運営者情報ページ。FPS・VRゲーム情報を発信しつつ、Unityによるゲーム開発やC#ツール制作を行う個人スタジオ「YamaStudio」のプロフィールと制作実績をご紹介します。">
-    <style>
-        body { font-family: sans-serif; line-height: 1.8; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; }
-        img { max-width: 100%; height: auto; }
-
-        header {
-            background-color: #212529;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 16px 16px;
-            border-bottom: 2px solid #343a40;
-            padding: 50px 20px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-        header p { color: #ced4da; }
-        header .nav-links a { color: #ffffff; }
-        header .nav-links a:hover { color: #3498db; }
-
-        .nav-links { display: flex; gap: 15px; list-style: none; padding: 0; flex-wrap: wrap; }
-        .nav-links a { color: #3498db; text-decoration: none; }
-        .nav-links a:hover { text-decoration: underline; }
-
-        h1 { font-size: 1.8em; margin-bottom: 5px; }
-        h2 { color: #2c3e50; font-size: 1.3em; border-left: 5px solid #3498db; padding-left: 10px; margin-top: 40px; }
-        h3 { color: #2c3e50; font-size: 1.1em; margin-top: 20px; }
-
-        .profile-section { display: flex; gap: 30px; align-items: flex-start; margin: 30px 0; }
-        .profile-img { flex-shrink: 0; }
-        .profile-img img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; }
-        .profile-text { flex: 1; }
-
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
-        .skill-tag {
-            background: #e8f4fd;
-            color: #2c3e50;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            border: 1px solid #3498db;
-        }
-
-        .project-list { list-style: none; padding: 0; }
-        .project-list li { padding: 12px 0; border-bottom: 1px dashed #ccc; }
-        .project-list li:last-child { border-bottom: none; }
-        .project-list a { color: #3498db; text-decoration: none; font-weight: bold; }
-        .project-list a:hover { text-decoration: underline; }
-        .project-desc { color: #555; font-size: 0.95em; margin: 4px 0 0 0; }
-
-        footer { margin-top: 50px; text-align: center; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 20px; }
-        footer a { color: #3498db; text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-
-        @media (max-width: 768px) {
-            .profile-section { flex-direction: column; }
-            header { padding: 30px 15px; }
-            body { padding: 10px; }
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header>
-    <h1>YamaStudio.net</h1>
-    <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
+    <a href="/index.html" class="site-title">YamaStudio.net</a>
     <nav>
         <ul class="nav-links">
-            <li><a href="/index.html">ホーム</a></li>
-            <li><a href="/about.html">運営者情報</a></li>
-            <li><a href="/index.html#projects">プロジェクト</a></li>
-            <li><a href="/contact.html">お問い合わせ</a></li>
+            <li><a href="/index.html">home</a></li>
+            <li><a href="/about.html">about</a></li>
+            <li><a href="/index.html#projects">projects</a></li>
+            <li><a href="/contact.html">contact</a></li>
         </ul>
     </nav>
 </header>
 
-<main>
+<main class="page-container">
     <h1>運営者情報</h1>
 
     <section>
@@ -88,7 +31,7 @@
                 <img src="img/thum.png" alt="YamaStudioのプロフィール画像">
             </div>
             <div class="profile-text">
-                <h2 style="border: none; padding: 0; margin-top: 0;">YamaStudio</h2>
+                <h2>YamaStudio</h2>
                 <p>FPS・VRゲームを愛し、自分の遊ぶゲームを自分で作り、それを攻略する——そんなゲーマー兼インディーゲーム開発者の個人スタジオです。<br>
                 プレイヤーとしての実体験と、開発者としての内部知識の両方を持つ立場から、他のWikiやまとめサイトには書けない視点で情報を発信しています。</p>
             </div>

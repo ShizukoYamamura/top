@@ -4,204 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YamaStudio.net - FPS/VRゲーム攻略・ツール開発ブログ</title>
-    <meta name="description" content="FPS・VRゲーム、レースシム、サバゲー（ガスガン）を中心としたゲーマーのための情報発信と、より快適なゲーム環境を提供するPCツール開発の記録をお届けします。">
-    <style>
-        body { font-family: sans-serif; line-height: 1.8; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; }
-        
-        /* 画像がスマホ画面からはみ出さないようにする設定 */
-        img { max-width: 100%; height: auto; }
-
-        header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
-        .container { display: flex; gap: 30px; }
-        main { flex: 3; }
-        aside { flex: 1; background: #f4f4f4; padding: 15px; border-radius: 5px; height: fit-content; }
-        
-        /* 記事一覧用のスタイル */
-        .post-list-item { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px dashed #ccc; }
-        .post-list-item h3 { margin-bottom: 5px; font-size: 1.4em; line-height: 1.4; }
-        .post-list-item h3 a { color: #2c3e50; text-decoration: none; }
-        .post-list-item h3 a:hover { color: #3498db; text-decoration: underline; }
-        .date { color: #7f8c8d; font-size: 0.9em; margin-top: 0; }
-        .summary { margin-top: 10px; color: #555; }
-        .read-more { display: inline-block; margin-top: 5px; color: #3498db; text-decoration: none; font-weight: bold; }
-        .read-more:hover { text-decoration: underline; }
-
-        footer { margin-top: 50px; text-align: center; font-size: 0.9em; border-top: 1px solid #ccc; padding-top: 20px; }
-        .nav-links { display: flex; gap: 15px; list-style: none; padding: 0; flex-wrap: wrap; }
-        .nav-links a, aside a { color: #3498db; text-decoration: none; }
-        .nav-links a:hover, aside a:hover { text-decoration: underline; }
-
-        /* パターン3のヘッダーデザイン */
-        header {
-            background-color: #212529;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 16px 16px;
-            border-bottom: 2px solid #343a40;
-            padding: 50px 20px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        /* ヘッダー内のナビゲーション文字色調整 */
-        header p { color: #ced4da; }
-        header .nav-links a { color: #ffffff; }
-        header .nav-links a:hover { color: #3498db; }
-
-        /* --- スマホ・タブレット向けのレスポンシブ設定 --- */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column; /* 横並びから縦並びに変更 */
-                gap: 40px;
-            }
-            header {
-                padding: 30px 15px; /* スマホではヘッダーの余白を少し減らす */
-            }
-            header h1 {
-                font-size: 1.8em;
-            }
-            body {
-                padding: 10px; /* 全体の余白もスマホ向けに調整 */
-            }
-        }
-    </style>
+    <meta name="description" content="FPS・VRゲーム、レースシム、サバゲーを中心としたゲーマーのための情報発信と、より快適なゲーム環境を提供するPCツール開発の記録をお届けします。">
+    <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <header>
-        <h1>YamaStudio.net</h1>
-        <p>ゲーム攻略のその先へ。FPS/VR情報＆デスクトップツール開発ブログ</p>
+        <a href="/index.html" class="site-title">YamaStudio.net</a>
         <nav>
             <ul class="nav-links">
-                <li><a href="/index.html">ホーム</a></li>
-                <li><a href="/about.html">運営者情報</a></li>
-                <li><a href="/index.html#projects">プロジェクト</a></li>
-                <li><a href="/contact.html">お問い合わせ</a></li>
+                <li><a href="/index.html">home</a></li>
+                <li><a href="/about.html">about</a></li>
+                <li><a href="/index.html#projects">projects</a></li>
+                <li><a href="/contact.html">contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <section class="hero">
+        <p class="hero-eyebrow">// indie game dev &amp; gamer log</p>
+        <h1>FPS・VR・レースシムを<br><span class="highlight">開発者目線</span>で語る</h1>
+        <p class="hero-desc">ゲームを作り、プレイし、攻略する。インディーゲーム開発者によるゲーム情報＆開発ドキュメントポータル。</p>
+    </section>
+
     <div class="container">
         <main>
-            <h2>最新の記事一覧</h2>
+            <p class="section-heading">// latest posts</p>
+
             <div class="post-list-item">
                 <h3><a href="article-unity-development.html">【Unity・NGO】マルチプレイFPS開発の泥沼から脱出せよ！アニメーションIK・UIの罠・大量の敵を捌く通信最適化のリアルドキュメント</a></h3>
-                <p class="date">公開日: 2026年6月22日 | カテゴリ: ゲーム開発 / Unity / C#</p>
+                <p class="date">2026年6月22日 | ゲーム開発 / Unity / C#</p>
                 <p class="summary">個人で3Dマルチプレイゲーム、それも一瞬の同期ズレが命取りになるインディーズFPSを開発するというのは、文字通り「終わりなき泥沼との戦い」です。現在、スタジオで開発を進めている期待の超新作FPS『VALOPEX STRIKE 2』では、Unityの標準ネットワーク機能である「Netcode for GameObjects（NGO）」をベースに、Cowsins（FPS Engine）を統合した独自のマルチプレイ環境を構築しています。</p>
-                <a href="article-unity-development.html" class="read-more">この記事を読む →</a>
+                <a href="article-unity-development.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-counterstrike2-review.html">【CS2】Valorantキッズに疲れた大人へ。10年越しにハマった「プレミア」のリアルと底なしの奥深さ</a></h3>
-                <p class="date">公開日: 2026年6月8日 | カテゴリ: FPS / レビュー</p>
+                <p class="date">2026年6月8日 | FPS / レビュー</p>
                 <p class="summary">Counter-Strikeシリーズの最新作『CS2』。実は私、前作のCS:GO時代からアカウントは持っていて、歴だけは10年以上になります。しかし、その10年間での総プレイ時間はたったの300時間。たまに起動してはデスマッチを少し回す程度の、筋金入りの「超ライト層」でした。</p>
-                <a href="article-counterstrike2-review.html" class="read-more">この記事を読む →</a>
+                <a href="article-counterstrike2-review.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-forzahorizon6-review.html">【Forza Horizon 6 レビュー】前作トロコン＆実車好きが語る！ハイエンド環境（3画面・DDハンコン）での本音</a></h3>
-                <p class="date">公開日: 2026年6月7日 | カテゴリ: レビュー / レースゲーム</p>
+                <p class="date">2026年6月7日 | レビュー / レースゲーム</p>
                 <p class="summary">待ちに待ったシリーズ最新作『Forza Horizon 6』。前作のFH5は実績コンプリート（トロコン）するまで遊び尽くした身として、早速プレイしてみました。</p>
-                <a href="article-forzahorizon6-review.html" class="read-more">この記事を読む →</a>
+                <a href="article-forzahorizon6-review.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
-                <h3><a href="article-assettocorsa-kizai.html">【Assetto Corsa】実車好きが辿り着いたシム環境！Simagic Alpha Mini + 3画面 & VR機材レビュー</a></h3>
-                <p class="date">公開日: 2026年6月7日 | カテゴリ: 機材レビュー / レースシム</p>
+                <h3><a href="article-assettocorsa-kizai.html">【Assetto Corsa】実車好きが辿り着いたシム環境！Simagic Alpha Mini + 3画面 &amp; VR機材レビュー</a></h3>
+                <p class="date">2026年6月7日 | 機材レビュー / レースシム</p>
                 <p class="summary">Assetto CorsaやiRacingにハマっていくと、誰もがぶつかる壁が「デバイスのアップグレード」です。特にステアリングコントローラーとモニター環境は、タイムだけでなくドライビングの「気持ちよさ」に直結します。</p>
-                <a href="article-assettocorsa-kizai.html" class="read-more">この記事を読む →</a>
+                <a href="article-assettocorsa-kizai.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-taskbarhero-review.html">放置系ハクスラ『タスクバーヒーロー』はなぜ同接14万人を突破できたのか？Web3ゲームと比較して見えた「圧倒的敷居の低さ」</a></h3>
-                <p class="date">公開日: 2026年6月5日 | カテゴリ: レビュー / 考察</p>
-                <p class="summary">究極の「ながら作業」とハクスラの完璧な融合</p>
-                <a href="article-taskbarhero-review.html" class="read-more">この記事を読む →</a>
+                <p class="date">2026年6月5日 | レビュー / 考察</p>
+                <p class="summary">究極の「ながら作業」とハクスラの完璧な融合。同接14万人を叩き出した仕掛けを、開発者視点で分析します。</p>
+                <a href="article-taskbarhero-review.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-tarkov-audio.html">『Escape from Tarkov』で生存率を劇的に上げる！勝敗を分ける「音」の最適化とおすすめデバイス</a></h3>
-                <p class="date">公開日: 2026年5月28日 | カテゴリ: PCゲーム / FPS</p>
+                <p class="date">2026年5月28日 | PCゲーム / FPS</p>
                 <p class="summary">EFTにおいて「視覚」と同じかそれ以上に重要なのが「聴覚」です。生存率を上げるためのオーディオ設定の最適解とおすすめのデバイス環境について解説します。</p>
-                <a href="article-tarkov-audio.html" class="read-more">この記事を読む →</a>
-            </div>
-
-            <div class="post-list-item">
-                <h3><a href="article-assettocorsa-mod.html">PCVRをもっと快適に！『Assetto Corsa』の没入感を極限まで高める必須Modと設定ガイド</a></h3>
-                <p class="date">公開日: 2026年5月25日 | カテゴリ: VR / レースシム</p>
-                <p class="summary">VR酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すこと。没入感を劇的に高める必須Mod「Content Manager」やCSPの設定を解説します。</p>
-                <a href="article-assettocorsa-mod.html" class="read-more">この記事を読む →</a>
-            </div>
-
-            <div class="post-list-item">
-                <h3><a href="article-gbb-maintenance.html">GBBは手入れで化ける：東京マルイ製 M4のメンテナンスと初速の劇的変化</a></h3>
-                <p class="date">公開日: 2026年4月18日 | カテゴリ: サバゲー / エアガン</p>
-                <p class="summary">電動ガンにはない「操作し、育てる喜び」</p>
-                <a href="article-gbb-maintenance.html" class="read-more">この記事を読む →</a>
-            </div>
-
-            <div class="post-list-item">
-                <h3><a href="article-pc-rtx3060ti.html">【自作PC】RTX 3060 Tiで挑む！WQHD環境でのハードコアFPS動作パフォーマンス実測レビュー</a></h3>
-                <p class="date">公開日: 2026年4月10日 | カテゴリ: 自作PC / ハードウェアレビュー</p>
-                <p class="summary">「ミドルハイクラス」がFPSゲーマーの最適解か？</p>
-                <a href="article-pc-rtx3060ti.html" class="read-more">この記事を読む →</a>
-            </div>
-
-            <div class="post-list-item">
-                <h3><a href="article-desktop-sleep-guard.html">【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック</a></h3>
-                <p class="date">公開日: 2026年4月9日 | カテゴリ: ツール開発 / C#</p>
-                <p class="summary">「スリープさせない！デスクトップ警備員」の開発をベースに、ゲームのパフォーマンス（FPS）に影響を与えない軽量な常駐アプリを作るプログラミングのコツをご紹介。</p>
-                <a href="article-desktop-sleep-guard.html" class="read-more">この記事を読む →</a>
+                <a href="article-tarkov-audio.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-csharp-optimization.html">【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック（詳細編）</a></h3>
-                <p class="date">公開日: 2026年5月20日 | カテゴリ: ツール開発 / C#</p>
+                <p class="date">2026年5月20日 | ツール開発 / C#</p>
                 <p class="summary">FPSを落とさないためのC#のガベージコレクション対策とWindows API呼び出しの最適化テクニックを解説します。</p>
-                <a href="article-csharp-optimization.html" class="read-more">この記事を読む →</a>
+                <a href="article-csharp-optimization.html" class="read-more">read_more() →</a>
+            </div>
+
+            <div class="post-list-item">
+                <h3><a href="article-assettocorsa-mod.html">PCVRをもっと快適に！『Assetto Corsa』の没入感を極限まで高める必須Modと設定ガイド</a></h3>
+                <p class="date">2026年5月25日 | VR / レースシム</p>
+                <p class="summary">VR酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すこと。没入感を劇的に高める必須Mod「Content Manager」やCSPの設定を解説します。</p>
+                <a href="article-assettocorsa-mod.html" class="read-more">read_more() →</a>
+            </div>
+
+            <div class="post-list-item">
+                <h3><a href="article-gbb-maintenance.html">GBBは手入れで化ける：東京マルイ製 M4のメンテナンスと初速の劇的変化</a></h3>
+                <p class="date">2026年4月18日 | サバゲー / エアガン</p>
+                <p class="summary">電動ガンにはない「操作し、育てる喜び」。メンテナンスを通じてGBBと向き合い、初速と動作を改善した過程を詳細レポート。</p>
+                <a href="article-gbb-maintenance.html" class="read-more">read_more() →</a>
+            </div>
+
+            <div class="post-list-item">
+                <h3><a href="article-pc-rtx3060ti.html">【自作PC】RTX 3060 Tiで挑む！WQHD環境でのハードコアFPS動作パフォーマンス実測レビュー</a></h3>
+                <p class="date">2026年4月10日 | 自作PC / ハードウェアレビュー</p>
+                <p class="summary">「ミドルハイクラス」がFPSゲーマーの最適解か？実際にWQHD環境でのフレームレートを計測・検証した実測レポートです。</p>
+                <a href="article-pc-rtx3060ti.html" class="read-more">read_more() →</a>
+            </div>
+
+            <div class="post-list-item">
+                <h3><a href="article-desktop-sleep-guard.html">【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック</a></h3>
+                <p class="date">2026年4月9日 | ツール開発 / C#</p>
+                <p class="summary">「スリープさせない！デスクトップ警備員」の開発をベースに、ゲームのパフォーマンス（FPS）に影響を与えない軽量な常駐アプリを作るプログラミングのコツをご紹介。</p>
+                <a href="article-desktop-sleep-guard.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-vr-sickness.html">VRで激変するレースシムの世界：Assetto Corsaにおける強烈なVR酔いと経験による克服法</a></h3>
-                <p class="date">公開日: 2026年3月23日 | カテゴリ: VR / レースシム</p>
+                <p class="date">2026年3月23日 | VR / レースシム</p>
                 <p class="summary">VRヘッドセットを装着してプレイする『Assetto Corsa』の魅力と、誰もが直面する「VR酔い」をひたすらプレイして克服した体験談をお届けします。</p>
-                <a href="article-vr-sickness.html" class="read-more">この記事を読む →</a>
+                <a href="article-vr-sickness.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-web-wiki.html">攻略情報を「届ける」難しさ：『The Midnight Walkers』＆『Highguard』攻略サイト構築の裏側</a></h3>
-                <p class="date">公開日: 2026年2月28日 | カテゴリ: Web制作 / コミュニティ運営</p>
-                <p class="summary">ただのデータ集積所ではなく、プレイヤーの「ハブ」を作る。</p>
-                <a href="article-web-wiki.html" class="read-more">この記事を読む →</a>
+                <p class="date">2026年2月28日 | Web制作 / コミュニティ運営</p>
+                <p class="summary">ただのデータ集積所ではなく、プレイヤーの「ハブ」を作る。自作ゲームの攻略サイトを構築・運営する過程で得た知見を共有します。</p>
+                <a href="article-web-wiki.html" class="read-more">read_more() →</a>
             </div>
 
             <div class="post-list-item">
                 <h3><a href="article-squad-sl.html">言語の壁は超えられる：『Squad』で英語が苦手でも分隊長（SL）ができた理由</a></h3>
-                <p class="date">公開日: 2026年2月18日 | カテゴリ: PCゲーム / FPS</p>
-                <p class="summary">大規模タクティカルFPSにおける「指揮」のハードル</p>
-                <a href="article-squad-sl.html" class="read-more">この記事を読む →</a>
+                <p class="date">2026年2月18日 | PCゲーム / FPS</p>
+                <p class="summary">50vs50の大規模タクティカルFPSで、英語が苦手でも分隊長を務められた理由。ゲーム理解度と定型フレーズで言語の壁を超えた実体験レポート。</p>
+                <a href="article-squad-sl.html" class="read-more">read_more() →</a>
             </div>
 
-            </main>
+        </main>
 
         <aside>
-            <h3 id="projects">Projects & Contents</h3>
+            <h3 id="projects">Projects</h3>
             <ul>
-                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank">The Midnight Walkers 攻略 ↗</a></li>
-                <li><a href="https://highguard.yamastudio.net/" target="_blank">Highguard 公式サイト ↗</a></li>
-                <li><a href="https://the-midnightwalkers-board.yamastudio.net/" target="_blank">マルチプレイ募集掲示板 ↗</a></li>
-                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank">EFT 弾薬＆アーマーシミュレーター ↗</a></li>
-                <li><a href="https://valopex-strike.yamastudio.net/" target="_blank">期待の超新作FPS ↗</a></li>
-                <li><a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank">タスクバーヒーロー攻略wiki ↗</a></li>
-                <li><a href="https://tbh-calculator.yamastudio.net/" target="_blank">タスクバーヒーロー計算機 ↗</a></li>
-                <li><a href="https://valopex-strike-2.yamastudio.net/" target="_blank">期待の超新作FPSの続編が登場!? ↗</a></li>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank" rel="noopener">The Midnight Walkers 攻略</a></li>
+                <li><a href="https://highguard.yamastudio.net/" target="_blank" rel="noopener">Highguard 公式サイト</a></li>
+                <li><a href="https://the-midnightwalkers-board.yamastudio.net/" target="_blank" rel="noopener">マルチプレイ募集掲示板</a></li>
+                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank" rel="noopener">EFT 弾薬＆アーマーシミュレーター</a></li>
+                <li><a href="https://valopex-strike.yamastudio.net/" target="_blank" rel="noopener">VALOPEX STRIKE</a></li>
+                <li><a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー攻略wiki</a></li>
+                <li><a href="https://tbh-calculator.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー計算機</a></li>
+                <li><a href="https://valopex-strike-2.yamastudio.net/" target="_blank" rel="noopener">VALOPEX STRIKE 2（開発中）</a></li>
             </ul>
 
-            <h3 id="about">プロフィール</h3>
-            <p><img src="img/thum.png" alt="YamaStudioのプロフィール画像" width="35%"><br>
-            <strong>YamaStudio</strong><br>
+            <h3 id="about">About</h3>
+            <img src="img/thum.png" alt="YamaStudioのプロフィール画像">
+            <p><strong>YamaStudio</strong><br>
             FPS・VRゲームを愛するインディーゲーム開発者。Unityでマルチプレイゲームを開発しながら、自作ゲームの攻略サイトや計算ツールも手がける。<br>
-            <a href="/about.html">→ 詳しいプロフィールを見る</a></p>
+            <a href="/about.html">→ 詳しいプロフィール</a></p>
         </aside>
     </div>
 
