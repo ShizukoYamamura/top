@@ -6,8 +6,17 @@
     <title>お問い合わせ | YamaStudio.net</title>
     <link rel="stylesheet" href="/style.css">
     <style>
-        .container { max-width: 800px; margin: 0 auto; padding: 0 0 40px; }
-        iframe { min-height: 700px; }
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 0 60px;
+            display: block;
+        }
+        .form-wrapper iframe {
+            width: 100%;
+            min-height: 700px;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -24,13 +33,13 @@
     </nav>
 </header>
 
-<div class="container page-container">
+<div class="page-container">
     <h1>お問い合わせ</h1>
     <p>当サイトや制作物に関するご意見・ご質問は、以下のフォームよりお送りください。<br>
     内容を確認次第、担当者より折り返しご連絡させていただきます。</p>
 
     <div class="form-wrapper">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe6k0uAuvEXHKiGqcHGWmRaWjZF49HULKh4I9NSpJBqyiwOdw/viewform?embedded=true" width="640" height="419" frameborder="0" marginheight="0" marginwidth="0" title="お問い合わせフォーム">読み込んでいます…</iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe6k0uAuvEXHKiGqcHGWmRaWjZF49HULKh4I9NSpJBqyiwOdw/viewform?embedded=true" frameborder="0" title="お問い合わせフォーム">読み込んでいます…</iframe>
     </div>
 </div>
 
