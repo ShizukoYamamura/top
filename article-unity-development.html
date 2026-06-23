@@ -165,31 +165,35 @@ void LateUpdate()
 
                 <h3>手軽で効果絶大！3つのNGO帯域削減設定（対策A）</h3>
                 <p>筆者はCursorのネットワーク最適化提案を採用し、まずはネットワークトランスフォーム（<code>NetworkTransform</code>）のコンポーネント設定を根本から見直す「高価値・低リスク」な設定変更を、プレイヤーおよびすべての敵プレハブ（Wolf, Zombie1, ZombieGirlなど）に一斉適用しました。</p>
-                <table border="1" cellpadding="8" style="border-collapse:collapse; width:100%; margin:20px 0; background:#fff; border:1px solid #ccc;">
-                    <tr style="background:#f4f4f4;">
-                        <th>設定項目（インスペクター）</th>
-                        <th>変更前</th>
-                        <th>変更後</th>
-                        <th>もたらされる最適化効果</th>
-                    </tr>
-                    <tr>
-                        <td><strong>UseHalfFloatPrecision</strong></td>
-                        <td>off</td>
-                        <td><strong style="color:#27ae60;">on</strong></td>
-                        <td>各座標の軸データを32bit浮動小数点から16bitの半精度に丸める。見た目の精度を損なわずに位置データのペイロード（通信量）を<strong>半分（50%カット）</strong>にする。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>UseUnreliableDeltas</strong></td>
-                        <td>off</td>
-                        <td><strong style="color:#27ae60;">on</strong></td>
-                        <td>毎フレームの差分データを「Unreliable（到達保証なし）」パケットとして送信。ネットワークでパケットロスが発生した際、古いデータの再送を待つための「ヘッドオブラインブロッキング（詰まり）」を完全に排除し、常に最新の座標だけで上書きし続ける。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>PositionThreshold</strong></td>
-                        <td>0.001 m</td>
-                        <td><strong style="color:#2980b9;">0.01 m</strong></td>
-                        <td>通信を発生させる移動の閾値を「1ミリ」から「1センチ」へと緩和。キャラクターが静止している際の上半身の微小なブレ（アイドルジッター）による、無駄な通信パケットの発行を完全にシャットアウトする。</td>
-                    </tr>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>設定項目（インスペクター）</th>
+                            <th>変更前</th>
+                            <th>変更後</th>
+                            <th>もたらされる最適化効果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>UseHalfFloatPrecision</strong></td>
+                            <td>off</td>
+                            <td><strong style="color:var(--accent-green);">on</strong></td>
+                            <td>各座標の軸データを32bit浮動小数点から16bitの半精度に丸める。見た目の精度を損なわずに位置データのペイロード（通信量）を<strong>半分（50%カット）</strong>にする。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UseUnreliableDeltas</strong></td>
+                            <td>off</td>
+                            <td><strong style="color:var(--accent-green);">on</strong></td>
+                            <td>毎フレームの差分データを「Unreliable（到達保証なし）」パケットとして送信。ネットワークでパケットロスが発生した際、古いデータの再送を待つための「ヘッドオブラインブロッキング（詰まり）」を完全に排除し、常に最新の座標だけで上書きし続ける。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PositionThreshold</strong></td>
+                            <td>0.001 m</td>
+                            <td><strong style="color:var(--accent-cyan);">0.01 m</strong></td>
+                            <td>通信を発生させる移動の閾値を「1ミリ」から「1センチ」へと緩和。キャラクターが静止している際の上半身の微小なブレ（アイドルジッター）による、無駄な通信パケットの発行を完全にシャットアウトする。</td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <h3>距離ベースの敵通信カット「Interest Management」の実装（対策B）</h3>
