@@ -329,6 +329,7 @@ pre code { background: none; padding: 0; }
 
 /* ----- About / Static Pages ----- */
 .page-container {
+    display: block;
     max-width: 800px;
     margin: 0 auto;
     padding-bottom: 60px;
