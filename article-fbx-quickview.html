@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinUI 3でFBXビューアをMicrosoft Storeへ——FBX QuickView開発の全記録 - YamaStudio.net</title>
+    <meta name="description" content="WinUI 3・Helix Toolkit・AssimpNetでWindows向けFBX 3Dビューア「FBX QuickView」を個人開発し、Microsoft Store提出まで進めた技術選定・実装の壁・MSIXパッケージングを開発者視点でまとめます。">
+    <link rel="stylesheet" href="/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <a href="/index.html" class="site-title">YamaStudio.net</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/index.html">home</a></li>
+                <li><a href="/about.html">about</a></li>
+                <li><a href="/index.html#projects">projects</a></li>
+                <li><a href="/contact.html">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            <article class="article-content">
+                <h1>WinUI 3でFBXビューアをMicrosoft Storeへ——FBX QuickView開発の全記録</h1>
+                <p class="date">2026年6月24日 | ツール開発 / WinUI 3 / C#</p>
+
+                <p>UnityやUnrealにFBXをインポートする前に、<strong>「中身、ちゃんと出てる？」</strong>と確認したくなる瞬間は誰にでもある。Blenderで書き出した直後、Mixamoから落としたキャラ、Mayaの納品データ——毎回DCCを起動するのは重い。そこで作ったのが、Windows向けの軽量FBXビューア<strong>『FBX QuickView』</strong>だ。本記事では、WinUI 3を選んだ理由から、巨大モデルで画面が真っグレーになる地獄、Microsoft Store向けMSIXビルドまで、開発のリアルをまとめる。</p>
+
+                <h2>なぜWinUI 3なのか——「軽く、Storeに載せたい」</h2>
+                <p>3Dプレビューアの選択肢は多い。Electron + three.js、WPF + SharpGL、Unityをビューアとして起動する……。今回の要件はシンプルだった。</p>
+                <ul>
+                    <li><strong>ネイティブに近い起動速度</strong>——常駐ツールとしてサッと開きたい</li>
+                    <li><strong>Microsoft Store配布</strong>——インストールの敷居を下げたい</li>
+                    <li><strong>完全オフライン</strong>——ファイルを外部に送らない</li>
+                    <li><strong>FBXに特化</strong>——汎用DCCビューアほどの機能は不要</li>
+                </ul>
+                <p>この条件だと<strong>WinUI 3 + Windows App SDK</strong>が最もバランスがよかった。WPFよりモダンなUIが組みやすく、UWPほど制約がきつくない。さらにMSIXパッケージングがプロジェクトに直結するため、Store提出までの導線が短い。</p>
+                <p>3D描画は<strong>Helix Toolkit for WinUI</strong>、FBXパースは<strong>AssimpNet</strong>を採用した。どちらも実績があり、C#だけで完結する。ネイティブDLL地獄を避けつつ、DirectXベースの描画パイプラインを借りられるのが大きい。</p>
+
+                <h2>アプリの骨格——ドラッグ＆ドロップで即プレビュー</h2>
+                <p>FBX QuickViewの基本動線は意図的に単純にしている。</p>
+                <ul>
+                    <li><strong>開く</strong>——［Open］ボタン、ドラッグ＆ドロップ、エクスプローラーでの .fbx ダブルクリック（ファイル関連付け）</li>
+                    <li><strong>見る</strong>——右ドラッグで回転、中ドラッグでパン、ホイールでズーム。RMB長押し＋WASDでフライスルー</li>
+                    <li><strong>調べる</strong>——シーンツリーでノード選択、プロパティパネルで位置・回転・スケールを編集</li>
+                    <li><strong>表示切替</strong>——ソリッド / テクスチャ / ワイヤーフレーム（キー 1 / 2 / 3）</li>
+                </ul>
+                <p>MayaやUnityに近いカメラ操作に寄せたのは、ターゲットユーザーが3D制作者であることが多いからだ。<strong>「操作方法を覚え直すビューア」は使われない。</strong>ツールバーには Highlight（選択強調）と Grid（床グリッド、Gキー）、Helpアイコンの Controls（操作説明ダイアログ）を配置。About からオープンソースライセンスも確認できる。</p>
+                <p>UI言語は8種類（日本語・英語・ドイツ語・フランス語・スペイン語・ポルトガル語・中国語・韓国語）に対応。Store向けアプリとして、説明文だけ英語、UIは母国語、というギャップを埋めるための投資だった。</p>
+
+                <h2>開発で一番ハマった壁——「真っグレーになる車モデル」</h2>
+                <p>小さなテスト用FBXでは問題なく動いていた。ところが、CC0のコンセプトカーFBX（<code>FC_03.fbx</code>）を読み込んだ瞬間、<strong>画面が真っグレー、モデルは見えない、カメラがどこを向いているかわからない</strong>——という最悪の組み合わせが起きた。</p>
+                <p>原因を追うと、Assimpが返すシーン境界（バウンディングボックス）の半径が<strong>約60,000</strong>という異常値だった。Blender側で100倍スケールのまま書き出されていたのが根本だ。カメラのクリップ平面やフィット距離がそのスケールに引きずられ、深度バッファが実質破綻していた。</p>
+                <h3>解決策：スキニング後の実頂点から境界を再計算し、巨大シーンを正規化</h3>
+                <p>対策は2段階。</p>
+                <ol>
+                    <li><strong>RecomputeScene Bounds</strong>——Assimpのメタデータではなく、スキニング適用後の実メッシュ頂点から境界を計算し直す</li>
+                    <li><strong>NormalizeOversizedScene</strong>——半径が閾値（80）を超えるシーンを、半径約8相当にスケールダウンする</li>
+                </ol>
+                <p>読み込みフローは <code>UpdateSkinnedMeshes → RecomputeScene Bounds → NormalizeOversizedScene → 再Recompute → FitView</code> とした。これで「書き出しスケールが狂っているFBX」でも、とりあえず画面内に収まる。DCC側の設定ミスをビューア側で一定程度吸収できる——<strong>プレビューツールとしての実用ライン</strong>はここで決まる。</p>
+
+                <h2>UIの細部——アイコン、グリッド、Store掲載文の整合</h2>
+                <p>WinUI 3の <code>CommandBar</code> でラベル位置をいじろうとしたら、存在しない列挙値でXAMLコンパイルが落ちた。最終的には<strong>Highlight / Grid / Controls すべてアイコン＋短いラベル</strong>に統一。見た目のずれも解消された。</p>
+                <p>ViewCubeの「F」ヒントやキーボードアクセラレータのオーバーレイは、画面を汚すので非表示に。Fキー（全体フィット）とGキー（グリッド切替）自体は、ビューポートの KeyDown とルートGridの KeyDown の両方で拾うようにして、フォーカスがどこにあっても効くようにした。</p>
+                <p>Microsoft Storeの掲載文も、アプリの実態と揃えた。例えば<strong>アニメーション再生は現バージョンでは提供していない</strong>ため、Product features から該当行は外した。審査で「説明と動作が違う」と突っ込まれるのを避けるため、Store文案は機能リストと1対1で対応させている。</p>
+
+                <h2>Microsoft Store提出——MSIX、runFullTrust、デバイスファミリー</h2>
+                <p>Release構成では <code>WindowsPackageType=MSIX</code>、<code>WindowsAppSDK SelfContained=true</code> で Windows App Runtime を同梱。審査端末で「ランタイムがないから起動しない」を防ぐためだ。</p>
+                <p>アーキテクチャは x86 / x64 / ARM64 の3本。ビルドスクリプト <code>Build-StoreUpload.ps1</code> で各Platformを順に <code>dotnet build</code> し、<code>AppPackages</code> 直下のMSIXを拾う。以前は <code>win-x64\AppPackages</code> の古い成果物を参照してしまい、<code>PublisherDisplayName</code> 不一致でPartner Centerが怒る——という初歩的な罠も踏んだ。<strong>パスを固定し、マニフェストの PublisherDisplayName を YamamuraFactory に揃えた</strong>ところで解消。</p>
+                <p>認定の注意書きには最低限これを書いた。</p>
+                <ul>
+                    <li><strong>runFullTrust の理由</strong>——Assimp / DirectX / ユーザー操作によるローカルFBXアクセス</li>
+                    <li><strong>ネットワーク不使用</strong>——オフライン完結、診断ログは %LocalAppData%\FbxQuickView\Logs\ のみ</li>
+                    <li><strong>テスト手順</strong>——FBXをドラッグ、カメラ操作、シーンツリー選択、Controlsダイアログ確認</li>
+                </ul>
+                <p>デバイスファミリーは<strong>Windows 10/11 Desktop のみ</strong>に絞った。Mobile / Xbox / Mixed Reality にチェックを入れると、非対応端末に表示されて低評価を招く。マニフェストに <code>Windows.Universal</code> が含まれていても、Store側の提供設定はDesktop一本に寄せるのが安全だ。</p>
+
+                <h2>技術スタックまとめ</h2>
+                <ul>
+                    <li><strong>UI</strong>——WinUI 3 / Windows App SDK 1.7</li>
+                    <li><strong>3D</strong>——Helix Toolkit WinUI 2.27</li>
+                    <li><strong>FBX読込</strong>——AssimpNet 4.1</li>
+                    <li><strong>ターゲット</strong>——.NET 8 / Windows 10 1809+</li>
+                    <li><strong>配布</strong>——MSIX（x86 / x64 / ARM64）</li>
+                    <li><strong>プライバシー</strong>——完全ローカル処理、ネットワーク capability なし</li>
+                </ul>
+
+                <h2>こんな人に使ってほしい</h2>
+                <ul>
+                    <li>Blender / Maya / 3ds Max / Mixamo から書き出したFBXを、エンジンに入れる前にサッと確認したい人</li>
+                    <li>UnityやUnrealを起動せず、メッシュ・マテリアル・階層だけ見たい人</li>
+                    <li>オフラインで完結する軽量3DビューアをWindows Storeから入れたい人</li>
+                </ul>
+
+                <h2>まとめ——「プレビュー専用」だからこそ速い</h2>
+                <p>FBX QuickViewは、DCCでもゲームエンジンでもない。<strong>「FBXを開いて、形と構造を確認して、閉じる」</strong>——その一点に機能を絞った結果、起動が軽く、操作が直感的で、Store配布も現実的になった。</p>
+                <p>個人開発でWinUI 3アプリをStoreまで持っていくなら、機能追加より先に<strong>MSIXのパス検証・掲載文と実機能の一致・runFullTrustの説明</strong>を固める方が、リリース速度に効く。3Dの中身は、巨大FBXのスケール問題のように、実データを当てないと絶対に見つからない。テスト用の「普通のモデル」だけでは足りない。</p>
+                <p>FBX QuickViewは Microsoft Store（YamamuraFactory）での公開を進めている。同じように「軽量ビューアをWindowsネイティブで作りたい」人の参考になれば幸いだ。</p>
+            </article>
+            <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
+        </main>
+
+        <aside>
+            <h3 id="projects">Projects</h3>
+            <ul>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank" rel="noopener">The Midnight Walkers 攻略</a></li>
+                <li><a href="https://highguard.yamastudio.net/" target="_blank" rel="noopener">Highguard 公式サイト</a></li>
+                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank" rel="noopener">EFT 弾薬＆アーマーシミュレーター</a></li>
+                <li><a href="https://valopex-strike-2.yamastudio.net/" target="_blank" rel="noopener">VALOPEX STRIKE 2（開発中）</a></li>
+                <li><a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー攻略wiki</a></li>
+            </ul>
+
+            <h3 id="about">About</h3>
+            <img src="img/thum.png" alt="YamaStudioのプロフィール画像">
+            <p><strong>YamaStudio</strong><br>
+            FPS・VRゲームを愛するインディーゲーム開発者。<br>
+            <a href="/about.html">→ 詳しいプロフィール</a></p>
+        </aside>
+    </div>
+
+    <footer>
+        <p>
+            <a href="/privacy.html">プライバシーポリシー</a> ｜
+            <a href="/about.html">運営者情報</a> ｜
+            <a href="/contact.html">お問い合わせ</a>
+        </p>
+        <p>&copy; 2026 YamaStudio.net All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
