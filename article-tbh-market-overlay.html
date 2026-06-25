@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【TBH】タスクバーヒーロー向け「TBH Market Overlay」開発記——インベントリ上でSteam最安値を即表示する価格オーバーレイ - YamaStudio.net</title>
+    <meta name="description" content="放置系ハクスラRPG『タスクバーヒーロー（TBH）』のSteamマーケット取引を効率化する非公式オーバーレイツール「TBH Market Overlay」の開発背景・仕組み・使い方を解説。OCRでアイテム名を読み取り、最安値と在庫数を画面上に重ねて表示します。">
+    <link rel="stylesheet" href="/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <a href="/index.html" class="site-title">YamaStudio.net</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/index.html">home</a></li>
+                <li><a href="/about.html">about</a></li>
+                <li><a href="/index.html#projects">projects</a></li>
+                <li><a href="/contact.html">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            <article class="article-content">
+                <h1>【TBH】タスクバーヒーロー向け「TBH Market Overlay」開発記——インベントリ上でSteam最安値を即表示する価格オーバーレイ</h1>
+                <p class="date">公開日: 2026年6月24日 | カテゴリ: ツール開発 / タスクバーヒーロー / C#</p>
+
+                <h2>「この装備、売る？ 錬金する？」——マーケット再開後に浮上した"価格確認地獄"</h2>
+                <p>放置系ハクスラRPG『TBH: Task Bar Hero（タスクバーヒーロー）』。タスクバーの極小ウィンドウで回し続けるだけでレア装備が雪だるま式に溜まっていく快感は、一度味わうとやめられません。2026年6月25日、約2週間停止していた<strong>Steamコミュニティマーケットへの新規出品が再開</strong>され、取引需要は再び一気に活性化しました。</p>
+                <p>しかし、実際にプレイしていると毎回こんな判断が発生します。「このアルカナ武器、マーケットに出した方がいい？ それとも錬金素材に回す？」「似た装備が何個もあるけど、どれを残すべき？」——答えを出すには<strong>Steamマーケットの最安値と在庫数</strong>を知る必要があります。ところがゲーム本体には相場表示機能がなく、ブラウザでマーケットを開き、アイテム名を検索し、価格を確認し、またゲームに戻る……。この往復を1アイテムごとに繰り返すのは、インベントリ整理のたびに地味なストレスになります。</p>
+                <p>攻略Wikiを運営しながら毎日TBHを回していた筆者も、まさにこの"価格確認地獄"にハマっていました。だから作ったのが、非公式の価格表示オーバーレイツール<strong>「TBH Market Overlay」</strong>です。</p>
+
+                <figure>
+                    <img src="img/tbh-market-overlay.png" alt="TBH Market Overlayの表示例——リミットレスボウに最安353円・在庫692件が重ね表示されている">
+                    <figcaption>// アルカナ等級「リミットレスボウ」にカーソルを合わせると、最安 ¥353 / 在庫 692 が画面上にオーバーレイ表示される</figcaption>
+                </figure>
+
+                <h2>TBH Market Overlayとは——マウスオーバーだけで相場が見える</h2>
+                <p>TBH Market Overlayは、Task Bar Heroのプレイ中に<strong>インベントリのアイテムへカーソルを合わせるだけ</strong>で、その装備のSteamマーケット最安値と出品在庫数を、ゲーム画面の上に重ねて表示するWindows向け常駐ツールです。</p>
+                <p>上のスクリーンショットの例では、アルカナ等級の弓「リミットレスボウ」のツールチップ横に<strong>「最安 ¥353 / 在庫 692」</strong>と表示されています。ゲーム内の詳細パネルでステータスを確認しながら、同時に"売却したらいくらになるか"がその場でわかる——これが本ツールの核心です。</p>
+
+                <h3>主な機能</h3>
+                <ul>
+                    <li><strong>マウスオーバー即表示：</strong> アイテム名を認識し、最安値・在庫数をリアルタイムにオーバーレイ</li>
+                    <li><strong>レアリティ対応：</strong> レジェンダリー、アルカナ、イモータルなど等級ごとに正しいマーケット価格を判定</li>
+                    <li><strong>多言語対応：</strong> 日本語 / 英語UI切り替え（価格は円・USD表示）</li>
+                    <li><strong>インストール不要：</strong> exeをダブルクリックするだけ。Python等の追加セットアップは不要</li>
+                    <li><strong>軽量・非侵襲：</strong> ゲームプロセスへのメモリ書き込みや描画介入は一切行わない</li>
+                </ul>
+
+                <h2>開発の裏側——「画面を読む」だけの安全な設計</h2>
+                <p>TBHには厳格なアンチチートが存在し、RTSSやAutoHotkeyなど一般的なオーバーレイ・自動化ツールまで誤検知される事例が報告されています。ツール開発にあたって最優先したのは、<strong>「ゲームに一切触れない」</strong>という設計原則でした。</p>
+
+                <h3>アイテム名の認識——Windows OCR</h3>
+                <p>ゲームは外部APIを公開していないため、アイテムの特定には<strong>Windows標準のOCR（光学文字認識）</strong>を採用しています。プレイヤーがアイテムにカーソルを合わせると表示されるツールチップの名称テキストを画面から読み取り、内部データベースと照合してマーケット価格を引き当てます。</p>
+                <p>OCRの性質上、ゲーム内言語設定によって認識精度が変わります。うまく動作しない場合は、<strong>ゲーム内言語を英語に設定</strong>すると改善するケースが多いです（アイテム名のフォント・文字列長の都合）。</p>
+
+                <h3>価格データ——Steamマーケットの公開情報</h3>
+                <p>表示される最安値・在庫数は、Steamコミュニティマーケットが公開している価格情報をもとに取得しています。初回起動時にデータの準備（数分程度）が走り、その後は<strong>「価格を更新」ボタン</strong>でいつでも最新の相場に追随できます。</p>
+                <p>なお、表示価格はあくまで参考値です。マーケットの出品制限（2026年6月再開後は<strong>出品枠4・8時間間隔・上位3グレード制限</strong>など）により、実際の取引価格は変動します。出品前には必ずSteamマーケット画面でも最終確認してください。</p>
+
+                <h3>チートではない理由</h3>
+                <p>本ツールが行うのは以下の2点のみです。</p>
+                <ul>
+                    <li>自分の画面を読み取る（OCR）</li>
+                    <li>Steamの公開データを参照して価格を表示する</li>
+                </ul>
+                <p>メモリ読み取り、ゲームファイルの改変、ゲーム内描画への注入、自動操作——これらは<strong>一切行いません</strong>。DiscordやOBSのオーバーレイと同じ"画面の上に情報を重ねる"仕組みであり、ゲームの公平性やプレイデータには影響しません。</p>
+
+                <h2>使い方（3ステップ）</h2>
+                <p>ダウンロードは<a href="https://www.patreon.com/ShizukoYamamura/posts/tbh-market-task-162086879" target="_blank" rel="noopener">Patreonの配布ページ（TBH Market Overlay）</a>から無料で取得できます。</p>
+                <ol>
+                    <li><strong>exeをダブルクリックして起動</strong>——TBH Market Overlayを立ち上げます</li>
+                    <li><strong>初回のみデータ準備を待つ</strong>——価格データベースの構築に数分かかります</li>
+                    <li><strong>ゲームでアイテムにカーソルを合わせる</strong>——最安値と在庫数がオーバーレイ表示されます</li>
+                </ol>
+                <p>動作要件は Windows 10 / 11（64bit）、Task Bar Hero インストール済み、インターネット接続、および使用言語の<strong>Windows OCR言語パック</strong>です。</p>
+
+                <h2>マーケット再開後の"売買判断"を、その場で完結させる</h2>
+                <p>TBHのSteamマーケット連携は、放置ゲームの枠を超えた経済体験です。CosmicやDivine、そして再開後に再び活況を見せるアルカナ・イモータル装備——どれを倉庫に残し、どれを交易船経由でSteamインベントリへ送るか。1個1個の判断が積み重なって、長期的な収益に直結します。</p>
+                <p>TBH Market Overlayは、その判断に必要な<strong>「今、このアイテムはいくらで売れるか」</strong>という情報を、ブラウザを開かずにゲーム画面の上で即座に届けるためのツールです。攻略Wiki運営者として日々TBHコミュニティの声を見ているからこそ、「相場確認の手間を1クリック削りたい」というニーズに応える形で生まれました。</p>
+                <p>ダウンロードは<strong>完全無料</strong>です。<a href="https://www.patreon.com/ShizukoYamamura/posts/tbh-market-task-162086879" target="_blank" rel="noopener">Patreonの配布ページ</a>から「TBH Market Overlay.zip」を取得できます。使い方・注意事項は<a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー攻略Wiki</a>のマーケット章もあわせてご覧ください。ツールが役に立った場合は、<a href="https://www.patreon.com/c/ShizukoYamamura" target="_blank" rel="noopener">Patreonメンバーシップ</a>での開発支援も歓迎しています。</p>
+
+                <h2>まとめ</h2>
+                <p>タスクバーヒーローのSteamマーケット取引は、2026年6月の再開以降、再びゲーム体験の大きな柱になっています。しかし相場確認の手間は依然としてプレイヤーの負担です。TBH Market Overlayは、OCRとSteam公開データだけを使った非侵襲的なオーバーレイとして、その摩擦を取り除くことを目指しました。</p>
+                <p>「売るべきか、錬金すべきか」——次にインベントリがパンパンになったとき、ブラウザを開く前にカーソルを乗せるだけで答えが見える体験を、ぜひ試してみてください。</p>
+            </article>
+            <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
+        </main>
+        <aside>
+            <h3 id="projects">Projects</h3>
+            <ul>
+                <li><a href="https://the-midnight-walkers.yamastudio.net/" target="_blank" rel="noopener">The Midnight Walkers 攻略</a></li>
+                <li><a href="https://highguard.yamastudio.net/" target="_blank" rel="noopener">Highguard 公式サイト</a></li>
+                <li><a href="https://the-midnightwalkers-board.yamastudio.net/" target="_blank" rel="noopener">マルチプレイ募集掲示板</a></li>
+                <li><a href="https://eft-calculator.yamastudio.net/" target="_blank" rel="noopener">EFT アーマーシミュレーター</a></li>
+                <li><a href="https://valopex-strike.yamastudio.net/" target="_blank" rel="noopener">VALOPEX STRIKE</a></li>
+                <li><a href="https://taskbar-hero-wiki.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー攻略wiki</a></li>
+                <li><a href="https://tbh-calculator.yamastudio.net/" target="_blank" rel="noopener">タスクバーヒーロー計算機</a></li>
+                <li><a href="https://www.patreon.com/c/ShizukoYamamura" target="_blank" rel="noopener">Patreon（ツール配布）</a></li>
+                <li><a href="https://valopex-strike-2.yamastudio.net/" target="_blank" rel="noopener">VALOPEX STRIKE 2（開発中）</a></li>
+            </ul>
+
+            <h3 id="about">プロフィール</h3>
+            <p><strong>YamaStudio</strong><br>FPS・VRゲームを中心としたゲーマーのための情報を発信し、より快適なゲーム環境を提供するツール開発を行っている個人スタジオです。</p>
+        </aside>
+    </div>
+
+    <footer>
+        <p><a href="/privacy.html">プライバシーポリシー</a> ｜ <a href="/about.html">運営者情報</a> ｜ <a href="/contact.html">お問い合わせ</a></p>
+        <p>&copy; 2026 YamaStudio.net All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
