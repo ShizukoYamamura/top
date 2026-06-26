@@ -30,6 +30,11 @@
 
                 <p>UnityやUnrealにFBXをインポートする前に、<strong>「中身、ちゃんと出てる？」</strong>と確認したくなる瞬間は誰にでもある。Blenderで書き出した直後、Mixamoから落としたキャラ、Mayaの納品データ——毎回DCCを起動するのは重い。そこで作ったのが、Windows向けの軽量FBXビューア<strong>『FBX QuickView』</strong>だ。本記事では、WinUI 3を選んだ理由から、巨大モデルで画面が真っグレーになる地獄、Microsoft Store向けMSIXビルドまで、開発のリアルをまとめる。</p>
 
+                <figure>
+                    <img src="img/fbx-quickview-screenshot.png" alt="FBX QuickViewの画面——Mixamoの Hip Hop Dancing キャラを読み込み、アニメーション再生タイムラインとシーンツリー・プロパティパネルを表示">
+                    <figcaption>// Mixamoキャラ「Hip Hop Dancing」を読み込んだ FBX QuickView。シーンツリー・プロパティパネル・アニメーションタイムライン付き</figcaption>
+                </figure>
+
                 <h2>なぜWinUI 3なのか——「軽く、Storeに載せたい」</h2>
                 <p>3Dプレビューアの選択肢は多い。Electron + three.js、WPF + SharpGL、Unityをビューアとして起動する……。今回の要件はシンプルだった。</p>
                 <ul>
@@ -66,7 +71,7 @@
                 <h2>UIの細部——アイコン、グリッド、Store掲載文の整合</h2>
                 <p>WinUI 3の <code>CommandBar</code> でラベル位置をいじろうとしたら、存在しない列挙値でXAMLコンパイルが落ちた。最終的には<strong>Highlight / Grid / Controls すべてアイコン＋短いラベル</strong>に統一。見た目のずれも解消された。</p>
                 <p>ViewCubeの「F」ヒントやキーボードアクセラレータのオーバーレイは、画面を汚すので非表示に。Fキー（全体フィット）とGキー（グリッド切替）自体は、ビューポートの KeyDown とルートGridの KeyDown の両方で拾うようにして、フォーカスがどこにあっても効くようにした。</p>
-                <p>Microsoft Storeの掲載文も、アプリの実態と揃えた。例えば<strong>アニメーション再生は現バージョンでは提供していない</strong>ため、Product features から該当行は外した。審査で「説明と動作が違う」と突っ込まれるのを避けるため、Store文案は機能リストと1対1で対応させている。</p>
+                <p>Microsoft Storeの掲載文も、アプリの実態と揃えた。Store版では審査要件に合わせて機能説明を調整している一方、Patreon公開のポータブル版では<strong>アニメーション再生タイムライン</strong>も利用できる（上のスクリーンショット参照）。Product features から実装していない機能の記載は外し、審査で「説明と動作が違う」と突っ込まれるのを避けるため、Store文案は機能リストと1対1で対応させている。</p>
 
                 <h2>Microsoft Store提出——MSIX、runFullTrust、デバイスファミリー</h2>
                 <p>Release構成では <code>WindowsPackageType=MSIX</code>、<code>WindowsAppSDK SelfContained=true</code> で Windows App Runtime を同梱。審査端末で「ランタイムがないから起動しない」を防ぐためだ。</p>
@@ -96,10 +101,20 @@
                     <li>オフラインで完結する軽量3DビューアをWindows Storeから入れたい人</li>
                 </ul>
 
+                <h2>Patreon公開——FBX QuickView Portable</h2>
+                <p>Microsoft Store版の審査を進めつつ、先に使ってもらいフィードバックを集めるため、インストール不要のポータブル版<strong>「FBX QuickView Portable」</strong>を <a href="https://www.patreon.com/ShizukoYamamura/posts/fbx-quickview-162129412" target="_blank" rel="noopener">Patreon</a> で公開した。</p>
+                <ul>
+                    <li><strong>ドラッグ＆ドロップで即プレビュー</strong>——.fbx を放り込むだけで3Dビューが開く</li>
+                    <li><strong>アニメーション再生</strong>——Mixamoなどのモーション付きFBXをタイムラインで再生・スクラブ可能</li>
+                    <li><strong>シーンツリー＆プロパティ</strong>——ノード選択、位置・回転・スケールの確認・編集</li>
+                    <li><strong>Portable配布</strong>——zipを展開して exe を実行するだけ。Python等の追加インストールは不要</li>
+                </ul>
+                <p>ダウンロードは <a href="https://www.patreon.com/ShizukoYamamura/posts/fbx-quickview-162129412" target="_blank" rel="noopener">Patreonの配布ページ（FBX QuickView Portable）</a> から「FBXQuickView-Portable-x64.zip」を取得できる（Patreonメンバーシップ、または投稿の単体購入でアンロック）。Store版の公開を待たずに試したい人向けの先行配布だ。ツールが役に立った場合は、<a href="https://www.patreon.com/c/ShizukoYamamura" target="_blank" rel="noopener">Patreonメンバーシップ</a>での開発支援も歓迎している。</p>
+
                 <h2>まとめ——「プレビュー専用」だからこそ速い</h2>
                 <p>FBX QuickViewは、DCCでもゲームエンジンでもない。<strong>「FBXを開いて、形と構造を確認して、閉じる」</strong>——その一点に機能を絞った結果、起動が軽く、操作が直感的で、Store配布も現実的になった。</p>
                 <p>個人開発でWinUI 3アプリをStoreまで持っていくなら、機能追加より先に<strong>MSIXのパス検証・掲載文と実機能の一致・runFullTrustの説明</strong>を固める方が、リリース速度に効く。3Dの中身は、巨大FBXのスケール問題のように、実データを当てないと絶対に見つからない。テスト用の「普通のモデル」だけでは足りない。</p>
-                <p>FBX QuickViewは Microsoft Store（YamamuraFactory）での公開を進めている。同じように「軽量ビューアをWindowsネイティブで作りたい」人の参考になれば幸いだ。</p>
+                <p>FBX QuickViewは Microsoft Store（YamamuraFactory）での公開を進めている。待たずに試したい場合は、<a href="https://www.patreon.com/ShizukoYamamura/posts/fbx-quickview-162129412" target="_blank" rel="noopener">Patreonの FBX QuickView Portable</a> から入手できる。同じように「軽量ビューアをWindowsネイティブで作りたい」人の参考になれば幸いだ。</p>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>
