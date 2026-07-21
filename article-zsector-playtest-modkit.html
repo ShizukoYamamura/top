@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Z-Sector Playtest — Mod Kit Early Access / MOD Kit 先行配布</title>
+  <style>
+    :root {
+      --wa-bg: #ffffff;
+      --wa-text: #24292f;
+      --wa-muted: #57606a;
+      --wa-border: #d0d7de;
+      --wa-accent: #2563eb;
+      --wa-info: #0969da;
+      --wa-tip: #1a7f37;
+      --wa-warning: #9a6700;
+      --wa-danger: #cf222e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f0f2f5;
+      color: var(--wa-text);
+    }
+
+    .page-shell {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+
+    .lang-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-nav__link {
+      display: inline-block;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--wa-border);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--wa-accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-family: system-ui, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    .lang-nav__link:hover {
+      border-color: var(--wa-accent);
+      background: #eff6ff;
+    }
+
+    .wiki-article {
+      max-width: 820px;
+      margin: 0 auto 2rem;
+      padding: 1.5rem;
+      color: var(--wa-text);
+      background: var(--wa-bg);
+      font-family: system-ui, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      line-height: 1.8;
+      border: 1px solid var(--wa-border);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .wiki-article__header {
+      border-bottom: 3px solid var(--wa-accent);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .wiki-article__title { font-size: 1.75rem; margin: 0 0 0.5rem; line-height: 1.35; }
+    .wiki-article__lead { color: var(--wa-muted); margin: 0; }
+
+    .wiki-article__section { margin-bottom: 2rem; }
+    .wiki-article__heading {
+      font-size: 1.35rem;
+      border-left: 6px solid var(--wa-accent);
+      padding-left: 0.6rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+    .wiki-article__subheading {
+      font-size: 1.1rem;
+      color: var(--wa-accent);
+      margin: 1rem 0 0.5rem;
+    }
+    .wiki-article__text { margin: 0.5rem 0; }
+
+    .feature-list { margin: 0.75rem 0; padding-left: 1.25rem; }
+    .feature-list__item { margin: 0.35rem 0; }
+    .feature-list__item--highlight { font-weight: 700; color: var(--wa-danger); }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .data-table__head {
+      background: var(--wa-accent);
+      color: #fff;
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--wa-border);
+    }
+    .data-table__cell {
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--wa-border);
+      vertical-align: top;
+    }
+    .data-table__row--alt { background: #f6f8fa; }
+
+    .callout {
+      border-left: 5px solid var(--wa-info);
+      background: #f6f8fa;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+    .callout__title { font-weight: 700; margin: 0 0 0.25rem; }
+    .callout__text { margin: 0; }
+    .callout--info { border-left-color: var(--wa-info); }
+    .callout--tip { border-left-color: var(--wa-tip); background: #eaf6ee; }
+    .callout--warning { border-left-color: var(--wa-warning); background: #fff8e6; }
+    .callout--danger { border-left-color: var(--wa-danger); background: #fff0f0; }
+
+    .download-box {
+      display: block;
+      margin: 1rem 0;
+      padding: 1rem 1.25rem;
+      background: #eff6ff;
+      border: 2px solid var(--wa-accent);
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--wa-accent);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .download-box:hover { background: #dbeafe; }
+
+    .page-footer {
+      text-align: center;
+      color: var(--wa-muted);
+      font-size: 0.85rem;
+      font-family: system-ui, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      padding: 0 1rem 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .wiki-article { padding: 1.1rem; }
+      .wiki-article__title { font-size: 1.4rem; }
+      .data-table { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="lang-nav" aria-label="Language">
+      <a class="lang-nav__link" href="#ja">日本語</a>
+      <a class="lang-nav__link" href="#en">English</a>
+    </nav>
+
+    <!-- ========== 日本語 ========== -->
+    <article class="wiki-article" id="ja" lang="ja">
+      <header class="wiki-article__header">
+        <h1 class="wiki-article__title">Z-Sector Playtest — MOD Kit 先行配布</h1>
+        <p class="wiki-article__lead">
+          Playtest参加者向けに、カスタムマップ制作ツール「Z-Sector Mod Kit」を先行公開しています。
+          本ページはSteamガイドからの直リンク専用（非公開）です。
+        </p>
+      </header>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">概要</h2>
+        <p class="wiki-article__text">
+          Z-Sector用のカスタムマップ制作ツール<strong>Mod Kit</strong>を作成しました。
+          本編リリース時には、ゲーム付属の無料SteamツールとしてMOD Kitを配布予定です。
+          Playtest期間中は、その前倒しとして本ページからダウンロードできます。
+        </p>
+
+        <h3 class="wiki-article__subheading">できること</h3>
+        <ul class="feature-list">
+          <li class="feature-list__item">Unity上でカスタムマップを作成</li>
+          <li class="feature-list__item">マップの検証・パッケージ化</li>
+          <li class="feature-list__item">Steam Workshopへのアップロード</li>
+          <li class="feature-list__item feature-list__item--highlight">Playtestで作ったMODは本編でも利用可能（再アップロードが必要）</li>
+        </ul>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">ダウンロード</h2>
+        <p class="wiki-article__text">以下のリンクからMod Kitをダウンロードしてください。</p>
+        <a class="download-box"
+           href="https://drive.google.com/file/d/1YlAuXk7s6yhH3BNT8z9UXvnYEN5oZuR6/view?usp=sharing"
+           target="_blank"
+           rel="noopener noreferrer">
+          Mod Kit をダウンロード（Google Drive）
+        </a>
+        <aside class="callout callout--info">
+          <p class="callout__title">配布について</p>
+          <p class="callout__text">
+            本編リリース後はSteamから正式版MOD Kitをインストールしてください。
+            Playtest用のDrive配布は一時的なものです。
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">必要な環境</h2>
+        <ul class="feature-list">
+          <li class="feature-list__item">Steamで<strong>Z-Sector Playtest</strong>を所有していること</li>
+          <li class="feature-list__item"><a href="https://unity.com/download" target="_blank" rel="noopener noreferrer">Unity Hub</a>と Unity Editor <strong>6000.4.11f1</strong></li>
+          <li class="feature-list__item">アップロード時はSteamクライアントを起動していること</li>
+          <li class="feature-list__item">十分なディスク空き容量（Unityプロジェクトキャッシュ用）</li>
+        </ul>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">セットアップ手順</h2>
+        <ol class="feature-list">
+          <li class="feature-list__item">上記リンクからZIPをダウンロードし、任意のフォルダへ展開</li>
+          <li class="feature-list__item">Unity Hubに Editor <code>6000.4.11f1</code> をインストール</li>
+          <li class="feature-list__item"><code>LaunchModKit.bat</code> を実行してMod Kitを起動（推奨）</li>
+          <li class="feature-list__item">または Unity Hub の <strong>Add</strong> から展開フォルダを追加して開く</li>
+        </ol>
+        <aside class="callout callout--tip">
+          <p class="callout__title">ヒント</p>
+          <p class="callout__text">
+            初回起動時はテンプレートシーン <code>Assets/Maps/CustomMap.unity</code> が自動で開きます。
+            詳しい作り方は同梱の <code>docs/USER_GUIDE.md</code> および <code>README.md</code> を参照してください。
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Playtest版と本編の関係</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="data-table__head">項目</th>
+              <th class="data-table__head">Playtest（現在）</th>
+              <th class="data-table__head">本編リリース後</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="data-table__cell">MOD Kitの入手</td>
+              <td class="data-table__cell">本ページ（Google Drive）</td>
+              <td class="data-table__cell">Steam無料ツールとして付属配布</td>
+            </tr>
+            <tr class="data-table__row--alt">
+              <td class="data-table__cell">マップデータの互換性</td>
+              <td class="data-table__cell">作成したマップはそのまま本編でも使える</td>
+              <td class="data-table__cell">同じマップ資産を利用可能</td>
+            </tr>
+            <tr>
+              <td class="data-table__cell">Workshopへの投稿</td>
+              <td class="data-table__cell">Playtest用Mod Kitからアップロード</td>
+              <td class="data-table__cell">本編用MOD Kitから<strong>再度アップロードが必要</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <aside class="callout callout--warning">
+          <p class="callout__title">重要 — 本編移行時</p>
+          <p class="callout__text">
+            Playtest期間中に作ったマップデータ（シーン・パッケージ）は本編でもそのまま使えます。
+            ただし、本編のWorkshopへ公開するには、本編付属の正式版MOD Kitから<strong>再度アップロード</strong>してください。
+            Playtest用の投稿をそのまま本編Workshopに引き継ぐことはできません。
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">禁止事項（マップ内容）</h2>
+        <p class="wiki-article__text">検証時に以下が含まれるマップは拒否されます。</p>
+        <ul class="feature-list">
+          <li class="feature-list__item">カスタムスクリプトやDLL</li>
+          <li class="feature-list__item"><code>NetworkObject</code> などのネットワーキングコンポーネント</li>
+          <li class="feature-list__item"><code>Camera</code> / <code>AudioListener</code> / <code>EventSystem</code></li>
+          <li class="feature-list__item">実行ファイルやネイティブプラグイン</li>
+        </ul>
+        <p class="wiki-article__text">
+          静的な地形・装飾・スポーン地点・ベイク済みNavMeshのみを投稿してください。
+        </p>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">注意事項</h2>
+        <aside class="callout callout--danger">
+          <p class="callout__title">非公開ページ</p>
+          <p class="callout__text">
+            本ページは検索エンジンに登録されません。Steamガイド等からの直リンクでのみアクセスしてください。
+            URLの無断転載・公開はご遠慮ください。
+          </p>
+        </aside>
+        <aside class="callout callout--info">
+          <p class="callout__title">リーダーボード</p>
+          <p class="callout__text">
+            Workshopマップのプレイ中は、Steamリーダーボードへの送信・表示が無効になります。
+          </p>
+        </aside>
+      </section>
+    </article>
+
+    <!-- ========== English ========== -->
+    <article class="wiki-article" id="en" lang="en">
+      <header class="wiki-article__header">
+        <h1 class="wiki-article__title">Z-Sector Playtest — Mod Kit Early Access</h1>
+        <p class="wiki-article__lead">
+          Early access to the Z-Sector Mod Kit for Playtest participants.
+          This page is unlisted and intended for direct links from Steam Guides only.
+        </p>
+      </header>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Overview</h2>
+        <p class="wiki-article__text">
+          We have prepared the <strong>Z-Sector Mod Kit</strong>, a custom map authoring tool for Z-Sector.
+          At full release, the Mod Kit will ship with the game as a free Steam tool.
+          During Playtest, you can download it early from this page.
+        </p>
+
+        <h3 class="wiki-article__subheading">What you can do</h3>
+        <ul class="feature-list">
+          <li class="feature-list__item">Create custom maps in Unity</li>
+          <li class="feature-list__item">Validate and package maps</li>
+          <li class="feature-list__item">Upload maps to the Steam Workshop</li>
+          <li class="feature-list__item feature-list__item--highlight">Playtest mods can be used in the full game (re-upload required)</li>
+        </ul>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Download</h2>
+        <p class="wiki-article__text">Download the Mod Kit from the link below.</p>
+        <a class="download-box"
+           href="https://drive.google.com/file/d/1YlAuXk7s6yhH3BNT8z9UXvnYEN5oZuR6/view?usp=sharing"
+           target="_blank"
+           rel="noopener noreferrer">
+          Download Mod Kit (Google Drive)
+        </a>
+        <aside class="callout callout--info">
+          <p class="callout__title">Distribution note</p>
+          <p class="callout__text">
+            After the full release, install the official Mod Kit from Steam.
+            This Google Drive build is temporary for Playtest only.
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Requirements</h2>
+        <ul class="feature-list">
+          <li class="feature-list__item">Own <strong>Z-Sector Playtest</strong> on Steam</li>
+          <li class="feature-list__item"><a href="https://unity.com/download" target="_blank" rel="noopener noreferrer">Unity Hub</a> and Unity Editor <strong>6000.4.11f1</strong></li>
+          <li class="feature-list__item">Steam client running while uploading</li>
+          <li class="feature-list__item">Enough free disk space for the Unity project cache</li>
+        </ul>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Setup</h2>
+        <ol class="feature-list">
+          <li class="feature-list__item">Download the ZIP from the link above and extract it to any folder</li>
+          <li class="feature-list__item">Install Unity Editor <code>6000.4.11f1</code> through Unity Hub</li>
+          <li class="feature-list__item">Run <code>LaunchModKit.bat</code> to launch the Mod Kit (recommended)</li>
+          <li class="feature-list__item">Or add the extracted folder in Unity Hub via <strong>Add</strong> and open it</li>
+        </ol>
+        <aside class="callout callout--tip">
+          <p class="callout__title">Tip</p>
+          <p class="callout__text">
+            On first launch, the template scene <code>Assets/Maps/CustomMap.unity</code> opens automatically.
+            For full instructions, see the bundled <code>docs/USER_GUIDE.md</code> and <code>README.md</code>.
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Playtest vs. Full Release</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="data-table__head">Item</th>
+              <th class="data-table__head">Playtest (now)</th>
+              <th class="data-table__head">After full release</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="data-table__cell">How to get the Mod Kit</td>
+              <td class="data-table__cell">This page (Google Drive)</td>
+              <td class="data-table__cell">Free Steam tool included with the game</td>
+            </tr>
+            <tr class="data-table__row--alt">
+              <td class="data-table__cell">Map data compatibility</td>
+              <td class="data-table__cell">Maps you create can be used in the full game</td>
+              <td class="data-table__cell">Same map assets remain usable</td>
+            </tr>
+            <tr>
+              <td class="data-table__cell">Workshop publishing</td>
+              <td class="data-table__cell">Upload with the Playtest Mod Kit</td>
+              <td class="data-table__cell"><strong>Re-upload required</strong> with the full-release Mod Kit</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <aside class="callout callout--warning">
+          <p class="callout__title">Important — migrating to the full game</p>
+          <p class="callout__text">
+            Map data (scenes and packages) created during Playtest can be used in the full release as-is.
+            To publish on the full-game Workshop, you must <strong>upload again</strong> using the official Mod Kit that ships with the release.
+            Playtest Workshop items are not automatically carried over.
+          </p>
+        </aside>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Prohibited Map Content</h2>
+        <p class="wiki-article__text">The validator rejects maps that contain:</p>
+        <ul class="feature-list">
+          <li class="feature-list__item">Custom scripts or DLLs</li>
+          <li class="feature-list__item">Networking components such as <code>NetworkObject</code></li>
+          <li class="feature-list__item"><code>Camera</code>, <code>AudioListener</code>, or <code>EventSystem</code></li>
+          <li class="feature-list__item">Executables or native plugins</li>
+        </ul>
+        <p class="wiki-article__text">
+          Submit only static terrain, decorations, spawn markers, and baked NavMesh data.
+        </p>
+      </section>
+
+      <section class="wiki-article__section">
+        <h2 class="wiki-article__heading">Notes</h2>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Unlisted page</p>
+          <p class="callout__text">
+            This page is not indexed by search engines. Access it only via direct links from Steam Guides.
+            Please do not republish or share the URL publicly without permission.
+          </p>
+        </aside>
+        <aside class="callout callout--info">
+          <p class="callout__title">Leaderboards</p>
+          <p class="callout__text">
+            Steam leaderboard submission and display are disabled while playing Workshop maps.
+          </p>
+        </aside>
+      </section>
+    </article>
+  </div>
+
+  <p class="page-footer">
+    Z-Sector Mod Kit — Playtest Early Access · Unlisted / Direct link only
+  </p>
+</body>
+</html>

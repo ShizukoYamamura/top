@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /article-zsector-playtest-modkit.html
 
 Sitemap: https://yamastudio.net/sitemap.xml
