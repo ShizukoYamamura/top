@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-unity-development.html">
+
     <title>【Unity・NGO】マルチプレイFPS開発の泥沼から脱出せよ！アニメーションIK・UIの罠・大量の敵を捌く通信最適化のリアルドキュメント - YamaStudio.net</title>
     <meta name="description" content="UnityのNetcode for GameObjects(NGO)を使用したマルチプレイFPS開発における、MixamoアニメーションのIn-Place化、Animation RiggingのIKウェイト制御、UI表示のバグ、敵のInterest Management最適化を徹底解説。">
         <link rel="stylesheet" href="/style.css">
@@ -209,6 +211,20 @@ void LateUpdate()
                 <h2>総括：シンプルさへの回帰とこれからの『VALOPEX STRIKE 2』</h2>
                 <p>今回の一連の開発プロセスを通じて得た最大の教訓は、<strong>「バグを直すためにさらに複雑なコードを重ねるな。構造をシンプルにし、エンジン本来の機能に語りかけろ」</strong>ということです。ラバーバンディングを直そうと <code>CoopVisualFollower</code> のような難解な補正計算を書いていた時は泥沼にはまる一方でしたが、アニメーションをBlenderでIn-Place化し、IKターゲットを右手の子階層にし、NGO標準の補間機能や最適化設定を正しくONにしただけで、すべての問題が嘘のように、かつ極めて軽量に解決しました。</p>
                 <p>マルチプレイFPS開発という険しい道のりにおいて、Animation Riggingの動的ウェイト制御やUGUIのCanvas仕様、そしてNGOのパケット削減とInterest Managementの導入は、ゲームのクオリティをインディーズレベルから商業プロ品質へと引き上げるための必須のステップです。足元が完璧に固まった『VALOPEX STRIKE 2』は、これからさらに新しい武器の実装、より大規模なゾンビウェーブの構築へと開発を加速させていきます。ゲーム攻略のその先へ。快適なゲーム環境と最高のゲーム体験を届けるためのYamaStudioの挑戦は、これからも続きます。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-fbx-quickview.html">FBX QuickView</a></li>
+                    <li><a href="article-desktop-sleep-guard.html">デスクトップ警備員</a></li>
+                    <li><a href="article-web-wiki.html">攻略サイト構築</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

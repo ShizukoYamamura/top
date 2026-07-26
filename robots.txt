@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /article-zsector-playtest-modkit.html
+Disallow: /article-csharp-optimization.html
 
-Sitemap: https://yamastudio.net/sitemap.xml
+Sitemap: https://www.yamastudio.net/sitemap.xml

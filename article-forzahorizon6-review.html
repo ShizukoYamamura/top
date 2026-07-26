@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-forzahorizon6-review.html">
+
     <title>【Forza Horizon 6 レビュー】前作トロコン＆実車好きが語る！ハイエンド環境（3画面・DDハンコン）での本音 - YamaStudio.net</title>
     <meta name="description" content="Forza Horizon 6のレビュー。SimagicやFanatecなどハイエンド機材での設定の苦労、トリプルモニターやVR非対応への不満など、実車経験者＆シムレーサーの視点でお届けします。">
         <link rel="stylesheet" href="/style.css">
@@ -36,9 +38,32 @@
                 <p>本格的なレースシムのように、繋げばある程度自然に走れるというわけにはいきません。私が愛用している<strong>Simagic Alpha Mini</strong>のようなハイエンド帯のホイールベースは、ゲーム側のネイティブサポートが弱く、フォースフィードバック（FFB）の調整にかなりの時間を溶かしました。<br>
                 実車のステアリングインフォメーションに近づけようと数値をいじっても、どこか「ゲーム的な不自然な重さ」や振動が抜けず、シムレベルの自然なセルフアライニングトルクを得るには、有志のフォーラムを漁って専用の数値を細かく打ち込むなど、かなりの根気が必要です。</p>
 
+                <h3>Simagic向けFFB調整メモ（FH6）</h3>
+                <table>
+                    <thead>
+                        <tr><th>項目</th><th>目安</th><th>コメント</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Force Feedback</td><td>50〜70%</td><td>100%はSimagicで振動が強すぎる</td></tr>
+                        <tr><td>Steering</td><td>900°</td><td>シム側と一致させる</td></tr>
+                        <tr><td>Damper</td><td>0〜10</td><td>上げると「ベタベタ」感が増す</td></tr>
+                        <tr><td>Mechanical Trail</td><td>低め</td><td>ARCADE寄りの挙動を抑える</td></tr>
+                        <tr><td>Vibration</td><td>Off〜Low</td><td>エンジン振動がノイズになる</td></tr>
+                    </tbody>
+                </table>
+                <p>iRacingやAssetto Corsaで慣れた感覚をそのまま持ち込むと必ずズレます。FH6は「アーケードの楽しさ」優先のFFB設計なので、シム側のゲインを下げて受け入れるのが現実的です。</p>
+
                 <h2>3画面設定の苦労と、相変わらずの「VR非対応」</h2>
                 <h3>ネイティブ非対応なトリプルモニター</h3>
-                <p>私の環境は32インチモニターの3画面構成ですが、FH6でも相変わらず3画面へのネイティブ対応（各画面の角度やベゼル幅を個別に設定し、歪みを補正する機能）は不十分でした。NVIDIA Surround等で無理やり広げたようなFOV（視野角）になりがちで、サイドウィンドウの景色がどうしても歪んでしまいます。実車のような自然な空間把握をするには、PCゲーマー特有の「面倒な設定の儀式」が必須になります。</p>
+                <p>私の環境は32インチモニターの3画面構成ですが、FH6でも相変わらず3画面へのネイティブ対応（各画面の角度やベゼル幅を個別に設定し、歪みを補正する機能）は不十分でした。NVIDIA Surround等で無理やり広げたようなFOV（視野角）になりがちで、サイドウィンドウの景色がどうしても歪んでしまいます。</p>
+                <h3>Surround FOVの現実的な妥協点</h3>
+                <ul>
+                    <li><strong>FOV：</strong> 単画面110°前後。広げすぎると端が引き伸ばされる</li>
+                    <li><strong>Bezel Correction：</strong> 物理ベゼル幅（mm）を正確に入力</li>
+                    <li><strong>カメラ：</strong> フード内視点より、やや後ろの位置の方が歪みが少ない</li>
+                    <li><strong>期待値：</strong> iRacing級の没入感は期待しない。「広い画面で流す」が正解</li>
+                </ul>
+                <p>実車のような自然な空間把握をするには、PCゲーマー特有の「面倒な設定の儀式」が必須になります。</p>
 
                 <h3>PCVRユーザーの悲願はまたも叶わず</h3>
                 <p>個人的に最も残念だったのが、<strong>今回もVR非対応</strong>だったことです。これだけ広大で美しいオープンワールドを、Oculus Rift Sを被ってオープンカーで流せたらどんなに最高か…。没入感という点では、やはりMOD等でVR化できる他のタイトルに一歩譲る形になってしまっています。</p>
@@ -47,13 +72,70 @@
 
                 <h2>「シム」ではなく、最高峰の「カーライフ・ゲーム」</h2>
                 <p>ネガティブな点が多くなってしまいましたが、それはあくまで「ゴリゴリのシム機材で動かそうとした場合」の話です。</p>
+                <h3>パッドの方が向いている場面</h3>
+                <ul>
+                    <li><strong>ストーリー・イベント：</strong> 細かいFFB不要。ソファでリラックス</li>
+                    <li><strong>ドリフト・スタント：</strong> 素早いカウンターステアはパッドが楽</li>
+                    <li><strong>設定にうんざりした時：</strong> Xboxコントローラーに戻るのが最善策</li>
+                    <li><strong>初見プレイ：</strong> DDの振動に集中力を奪われない</li>
+                </ul>
                 <p>前作以上に磨きがかかった車のモデリングや、エンジン音のこだわりは本当に素晴らしく、実車で足回りを交換したりアライメントを取ったりするあのワクワク感を、手軽にゲーム内で味わえるのはForza Horizonシリーズならではの絶対的な魅力です。シビアな挙動を求めるのではなく、「最高の車で、最高の景色を流す」という本来の楽しみ方に立ち返れば、間違いなく神ゲーと言えます。</p>
 
                 <h2>まとめ</h2>
-                <p>Forza Horizon 6は、パッドやエントリーモデルのハンコンで遊ぶ分には文句なしのエンターテイメントです。しかし、ハイエンドなシム機材や3画面環境でプレイしようと考えている方は、<strong>「気持ちよく走れるようになるまでの設定にかなり時間がかかる」</strong>ことを覚悟しておいた方が良いでしょう。<br>
-                機材の設定が面倒だと感じる時は、おとなしくXboxコントローラーに持ち替えて、ソファでくつろぎながらプレイするのが一番の正解かもしれません。</p>
+                <p>Forza Horizon 6は、パッドやエントリーモデルのハンコンで遊ぶ分には文句なしのエンターテイメントです。しかし、ハイエンドなシム機材や3画面環境でプレイしようと考えている方は、<strong>「気持ちよく走れるようになるまでの設定にかなり時間がかかる」</strong>ことを覚悟しておいた方が良いでしょう。</p>
+                <p>Simagic Alpha MiniのFFBは、Assetto Corsaでは10Nmフル活用できますが、FH6では5Nm以下に抑えるのが現実的です。設定にうんざりした日は、おとなしくXboxコントローラーに持ち替えて、ソファでくつろぎながらプレイするのが一番の正解かもしれません。</p>
+
+                <h2>FH5トロコン勢の視点</h2>
+                <p>FH5でトロコンまで完走した身として、FH6のコンテンツ量は間違いなく増えています。Seasonalイベント、カスタムルート、Photo Mode——シム設定に悩む前に、パッドでこれらを楽しむ価値は十分あります。DDハンコンは「ストーリーを追いながら、たまに本気で走る」用途に割り切ると、ストレスが激減します。</p>
+                <p>3画面の歪みは、Single Screen Mode（中央1画面のみ）に戻す選択肢もあります。Surroundの没入感と引き換えに、UIやミニマップの視認性が上がるため、レース中はSingle、フリーランはSurround——と使い分けているプレイヤーも多いです。</p>
+
+                <h2>総合評価</h2>
+                <p>FH6は「カーライフ・エンタメ」として10点、「シム環境での本気走行」として6点——私の評価です。Simagic + 3画面ユーザーは、設定に半日〜数日を覚悟するか、最初からパッド推奨。VR非対応は残念ですが、Oculus Rift SでAssetto Corsaや首都高MODが楽しめる今、FH6は「景色を流す週末用」として割り切ると、ストレスなく楽しめます。</p>
                 <img src="img/20260522110602_1.jpg" alt="80スープラ" width="60%" height="60%">
 
+                <h2>Photo Modeと車コレクションの所感</h2>
+                <p>シム設定に悩む前に、FH6の真骨頂であるPhoto Modeと車両コレクションを楽しむ価値は十分にあります。FH5トロコン勢として、まず触ったのがこの2つでした。</p>
+                <h3>Photo Mode</h3>
+                <ul>
+                    <li><strong>被写界深度・シャッタースピード：</strong> 実写に近いボケ感。夕方の光と相性が抜群</li>
+                    <li><strong>カメラ自由度：</strong> 走行中スナップより、イベント後の静止ポーズの方が構図を作りやすい</li>
+                    <li><strong>3画面ユーザー：</strong> Surroundの歪みはPhoto Modeには影響しない。Single Screen推奨</li>
+                </ul>
+                <p>80スープラやJZX100など、実車で触れたことのあるモデルがPhoto Modeで蘇る瞬間は、FFB設定のストレスを一瞬で吹き飛ばしてくれます。SNS用の1枚を撮るだけでも、FH6のグラフィック投資の価値は回収できます。</p>
+                <h3>車コレクション</h3>
+                <p>FH5比で車種数・バリエーションは増加。クラシックJDMから最新EVまで、オートサロン気分で並べられるのはForzaならではです。ただし「全車コンプ」はFH5以上に時間がかかる覚悟が必要。SeasonalイベントとForzathonを並行しないと、限定車の取りこぼしが発生します。DDハンコンで全車試乗するより、パッドでイベント消化→気に入った車だけシム設定で本気走行、がストレスフリーな進め方です。</p>
+
+                <h2>誰が買うべきか：購入判断ガイド</h2>
+                <table>
+                    <thead>
+                        <tr><th>プレイヤータイプ</th><th>おすすめ度</th><th>理由</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>パッド/Xbox勢</td><td>◎ 強推奨</td><td>設定不要で即楽しめる。FH5経験者なら迷わず</td></tr>
+                        <tr><td>車好き・Photo Mode派</td><td>◎ 強推奨</td><td>車種数・描写力はシリーズ最高クラス</td></tr>
+                        <tr><td>エントリー〜中級ハンコン</td><td>○ 推奨</td><td>G923等ならFFB調整は比較的楽</td></tr>
+                        <tr><td>Simagic等ハイエンドDD</td><td>△ 条件付き</td><td>設定に半日〜数日。パッド併用前提</td></tr>
+                        <tr><td>3画面シムユーザー</td><td>△ 条件付き</td><td>Surround歪みを許容できるなら可</td></tr>
+                        <tr><td>VRメイン勢</td><td>× 非推奨</td><td>VR非対応。AC/首都高MODの方が没入感</td></tr>
+                        <tr><td>本格シム・iRacingメイン</td><td>△ サブタイトル向き</td><td>週末の「景色を流す」用として割り切り</td></tr>
+                    </tbody>
+                </table>
+                <p>結論：FH6は「カーライフ・エンタメ」として買うべき作品です。Assetto Corsaで本気のタイムを追う人には物足りませんが、FH5を100時間以上遊んだ人、実車いじり経験者、Photo Mode好きには刺さります。Simagic＋3画面環境の人は、最初から「パッドでストーリー＋イベント、DDはたまに本気走行」と割り切れば、FH5以上に長く楽しめる1本になるでしょう。</p>
+
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-assettocorsa-kizai.html">シム機材レビュー</a></li>
+                    <li><a href="article-assettocorsa-mod.html">Assetto Corsa Mod設定</a></li>
+                    <li><a href="article-pc-rtx3060ti.html">RTX 3060 Ti 実測</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

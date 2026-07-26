@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-web-wiki.html">
+
     <title>『The Midnight Walkers』＆『Highguard』攻略サイト構築の裏側 - YamaStudio.net</title>
-    <meta name="description" content="ハードコアFPSの攻略サイト構築と、プレイヤー同士が繋がる「ハブ拠点」を作るYamaStudioのWeb制作の取り組みについて。">
+    <meta name="description" content="The Midnight Walkers・Highguard攻略サイトの静的HTML構築、パッチ後の更新フロー、掲示板運営、失敗と学び、Angular構想を解説。">
         <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
@@ -28,12 +30,112 @@
                 <p class="date">公開日: 2026年3月5日 | カテゴリ: Web制作 / コミュニティ運営</p>
 
                 <h2>ただのデータ集積所ではなく、プレイヤーの「ハブ」を作る</h2>
-                <p>現在、YamaStudioではダンジョン探索型FPS『The Midnight Walkers』や、開発中の『Highguard』の攻略サイト・マルチプレイ募集掲示板の運営を行っています。<br>
-                サイトの構築にあたっては、単なるWikiシステムの流用ではなく、HTMLを一から組んで見やすさと軽量さを両立させることにこだわりました。特にハードコアFPSはパッチごとに武器の威力やアイテムの湧き位置が激しく変動するため、「いかに早く、正確な最新情報をプレイヤーに届けるか」がサイトの価値に直結します。</p>
+                <p>現在、YamaStudioではダンジョン探索型FPS『The Midnight Walkers』や、開発中の『Highguard』の攻略サイト・マルチプレイ募集掲示板の運営を行っています。サイトの構築にあたっては、単なるWikiシステムの流用ではなく、HTMLを一から組んで見やすさと軽量さを両立させることにこだわりました。特にハードコアFPSはパッチごとに武器の威力やアイテムの湧き位置が激しく変動するため、「いかに早く、正確な最新情報をプレイヤーに届けるか」がサイトの価値に直結します。</p>
+
+                <h2>静的HTML vs CMS：なぜHTMLを選んだか</h2>
+                <table>
+                    <thead>
+                        <tr><th>方式</th><th>メリット</th><th>デメリット</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>静的HTML</td><td>表示が速い、サーバー不要、Git管理しやすい</td><td>ページ数増で手更新が大変</td></tr>
+                        <tr><td>WordPress等CMS</td><td>非エンジニアでも更新可</td><td>プラグイン脆弱性、表示遅延</td></tr>
+                        <tr><td>Wiki SaaS</td><td>共同編集が容易</td><td>デザイン自由度低、ゲーム特化しにくい</td></tr>
+                    </tbody>
+                </table>
+                <p>個人スタジオ規模では、GitHub Pages + 手書きHTMLが最もコストパフォーマンスが良いと判断しました。攻略データは表とリストが多く、CMSのWYSIWYGより素のHTMLの方が構造を保てます。</p>
+
+                <h2>パッチ後の更新ワークフロー</h2>
+                <ol>
+                    <li><strong>パッチノート確認：</strong> Steam/Discord公式から変更点を抽出</li>
+                    <li><strong>実プレイ検証：</strong> 変更された武器・マップを1セッション以上テスト</li>
+                    <li><strong>HTML差分更新：</strong> 該当ページのみ修正。sitemap.xmlのlastmodも更新</li>
+                    <li><strong>掲示板告知：</strong> 大きな変更はTMW Boardにスレッド作成</li>
+                    <li><strong>計算機連動：</strong> EFT以外にも、TMW/TBH系ツールがあれば数値を同期</li>
+                </ol>
+                <p>目標は「パッチ翌日以内に主要ページ反映」。全ページ完璧より、プレイヤーが最初に見る3ページ（武器・マップ・初心者ガイド）を優先します。</p>
+
+                <h2>掲示板コミュニティ運営のTips</h2>
+                <ul>
+                    <li><strong>募集テンプレ：</strong> 時間帯・VC有無・目的（攻略/カジュアル）をフォーマット化</li>
+                    <li><strong>荒らし対策：</strong> 初回投稿承認より、通報用の固定スレの方が効く</li>
+                    <li><strong>Discord連携：</strong> サイトは索引、リアルタイム募集はDiscord——役割分担</li>
+                    <li><strong>開発者フィードバック：</strong> 掲示板の不満はバグ報告より再現手順付きで集約</li>
+                </ul>
+
+                <h2>失敗したこと</h2>
+                <ul>
+                    <li><strong>最初はWikiエンジン：</strong> 見た目が整わず、3週間で静的HTMLに作り直し</li>
+                    <li><strong>更新頻度の過剰約束：</strong> 「毎日更新」を掲げて燃え尽きた。週2〜3回が現実的</li>
+                    <li><strong>古い情報の放置：</strong> パッチ前の数値が残ると信頼を一気に失う</li>
+                    <li><strong>スマホ未最適化：</strong> 初期はPC前提。後からmeta viewportとCSS調整</li>
+                </ul>
+
+                <h2>プレイヤー視点で重要な指標</h2>
+                <p>アクセス数より「滞在時間」と「掲示板の返信数」を見ています。1ページ平均2分以上なら、読まれている。募集スレに返信が付くなら、ハブとして機能している。Google Analyticsの直帰率より、Discordに「サイト見た」と言われる回数の方がリアルです。</p>
+
+                <h2>将来構想：Angular化</h2>
+                <p>ページ数が100を超えた段階で、Angular（または同等のSPA）による検索・フィルタ・多言語対応を検討しています。現状は「速さと正確さ」、将来は「横断検索とユーザー投稿」——段階的に拡張する方針です。Highguard正式版に合わせて、武器DBをJSON化し、フロントから読み込む構成を試作中です。</p>
 
                 <h2>開発とプレイの両立が生み出すシナジー</h2>
-                <p>攻略サイトを運営していると、ただゲームをプレイしている時とは全く違う視点を持つようになります。マップの構造を頭に叩き込み、クラスの相性を分析し、それをどうすれば初心者にも分かりやすくWeb上で表現できるかを常に考えるようになりました。<br>
-                Angularなどを使ったより高度なWebアプリ化も視野に入れつつ、まずは「プレイヤー同士が繋がり、一緒にゲームを楽しむためのハブ拠点」として、マルチプレイ募集掲示板の活性化などに注力しています。自分でコードを書き、自分でプレイして検証する。この泥臭いプロセスこそが、YamaStudioのサイトの最大の強みだと自負しています。</p>
+                <p>攻略サイトを運営していると、ただゲームをプレイしている時とは全く違う視点を持つようになります。マップの構造を頭に叩き込み、クラスの相性を分析し、それをどうすれば初心者にも分かりやすくWeb上で表現できるかを常に考えるようになりました。自分でコードを書き、自分でプレイして検証する。この泥臭いプロセスこそが、YamaStudioのサイトの最大の強みだと自負しています。</p>
+
+                <h2>インディーゲームサイトに求める教訓</h2>
+                <p>公式サイトが弱いインディータイトルほど、第三者攻略サイトの価値が出ます。ただし「全データ網羅」より「今週プレイする人の疑問に答える」方が続けやすい。小さく始めて、プレイヤーの声でページを増やす——Midnight Walkersの掲示板がそれを証明してくれました。</p>
+
+                <h2>具体的なサイト構成</h2>
+                <ul>
+                    <li><strong>the-midnight-walkers.yamastudio.net：</strong> 武器・マップ・クラス攻略</li>
+                    <li><strong>highguard.yamastudio.net：</strong> 開発中タイトルのランディング</li>
+                    <li><strong>the-midnight-walkers-board.yamastudio.net：</strong> マルチ募集掲示板</li>
+                    <li><strong>eft-calculator.yamastudio.net：</strong> 派生ツール。相互リンクで回遊</li>
+                </ul>
+                <p>静的ホスティング中心でサーバー維持費を抑え、掲示板のみPHPホストを使い分けています。</p>
+
+                <h2>SEOとプレイヤー導線</h2>
+                <p>インディー攻略サイトは、Google検索より「Discord・Steamコミュニティからの直リンク」が初期流入の大半です。sitemap.xmlの更新、各ページのtitle/descriptionの統一、内部リンク（武器ページ→マップページ→掲示板）で回遊率を上げています。Angular化後はクライアントサイド検索で「武器名で全文検索」を実現したい——現状の静的HTMLではgrepと目視が更新フローの一部になっています。</p>
+                <p>失敗から学んだ最大の教訓は「完璧なWikiより、今週のパッチに答える1ページ」です。プレイヤーが本当に欲しいのは全データではなく、「昨日の更新で何が変わったか」です。YamaStudioのサイトは、その一点に振り切る方向へ進化させています。</p>
+                <h2>まとめ</h2>
+                <p>インディー攻略サイトは、技術選定（静的HTML）より「更新速度」と「コミュニティのハブ性」が命です。Midnight WalkersとHighguardの経験から、小さく始めてプレイヤーの声で育てる、パッチ翌日更新を目標にする、失敗（Wikiエンジン、過剰約束）から学んで現実的な頻度に落とす——この3点が、続けられるサイトの条件だと感じています。</p>
+
+                <h2>ゲーム攻略WikiのSEO基本</h2>
+                <p>インディータイトルの攻略サイトは、大手Wikiと正面から戦えません。狙うべきは「ニッチ×最新×具体的」です。</p>
+                <ul>
+                    <li><strong>title / description：</strong> 「ゲーム名 + 具体的キーワード + 更新日」の形式。例：「The Midnight Walkers 武器ダメージ一覧【2026年3月パッチ対応】」</li>
+                    <li><strong>canonical：</strong> 各ページに1本。重複URLはSearch Consoleで統合</li>
+                    <li><strong>sitemap.xml：</strong> 更新したページのlastmodを必ず書き換える。Git commitとセットで運用</li>
+                    <li><strong>内部リンク：</strong> 武器→マップ→掲示板→計算機の回遊導線。孤立ページを作らない</li>
+                    <li><strong>構造化データ：</strong> 余裕があればFAQPageやBreadcrumbList。CTR改善に効く</li>
+                </ul>
+                <p>Google流入よりDiscord/Steam直リンクが初期の大半ですが、SEOは「半年後の保険」です。パッチ名や武器名を含む見出し（h2/h3）を自然に入れると、長尾キーワードで拾われやすくなります。過剰なキーワード詰め込みは読みにくさだけ増すので、プレイヤーが検索しそうな言い回しを1ページ1テーマで狙うのが現実的です。</p>
+
+                <h2>パッチ後の更新頻度：現実的なカデンス</h2>
+                <p>「パッチ翌日更新」を目標にしつつ、燃え尽きない頻度設計が必要でした。現在のYamaStudioの運用は以下の3段階です。</p>
+                <table>
+                    <thead>
+                        <tr><th>優先度</th><th>期限</th><th>対象ページ</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S（最優先）</td><td>24時間以内</td><td>変更された武器数値・マップ・クラス</td></tr>
+                        <tr><td>A</td><td>72時間以内</td><td>初心者ガイド・おすすめ構成・FAQ</td></tr>
+                        <tr><td>B</td><td>1〜2週間</td><td>細部データ・サブページ・過去パッチのアーカイブ</td></tr>
+                    </tbody>
+                </table>
+                <p>大パッチ（メジャーアップデート）の場合はSページを3つに絞り、まず「何が変わったか」の差分表だけ公開します。完璧な全データ更新を待つと、競合や公式Wikiに先を越されます。小パッチ（ホットフィックス）ではSページ1つ＋掲示板告知で十分。週2〜3回の更新ペースを守る方が、毎日更新を1週間だけ続けて止まるより、Googleにもプレイヤーにも「生きているサイト」と認識されます。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-taskbarhero-review.html">タスクバーヒーロー考察</a></li>
+                    <li><a href="article-tbh-market-overlay.html">TBH Market Overlay</a></li>
+                    <li><a href="article-unity-development.html">Unity開発ドキュメント</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

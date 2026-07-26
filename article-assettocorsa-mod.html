@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-assettocorsa-mod.html">
+
     <title>【Assetto Corsa】VR没入感を極限まで高める必須Modと設定 - YamaStudio.net</title>
-    <meta name="description" content="PCVRでAssetto Corsaをプレイする際のContent ManagerやCustom Shaders Patch (CSP)の導入手順と設定を解説します。">
+    <meta name="description" content="Content Manager・CSP・Sol/Pureの導入手順と、RTX 3060 Ti VR環境向けの推奨設定表。FPS安定化のコツも解説。">
         <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
@@ -28,16 +30,131 @@
                 <p class="date">公開日: 2026年5月25日 | カテゴリ: VR / レースシム</p>
 
                 <h2>すべてはここから：「Content Manager」の導入</h2>
-                <p>前回の記事で、VRレースシムにおける「VR酔い」の克服について触れました。酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すことです。『Assetto Corsa』をバニラのまま遊ぶのは非常にもったいないです。PCVRユーザーにとって必須なのが「Content Manager（CM）」です。軽量で動作が速く、VR起動モードの切り替えもワンクリックで行えます。</p>
+                <p>前回の記事（<a href="article-vr-sickness.html">VR酔い克服法</a>）で、慣らしの重要性を書きました。酔いを克服した次に行うべきは、ゲーム自体のポテンシャルを引き出すことです。『Assetto Corsa』をバニラのまま遊ぶのは非常にもったいないです。PCVRユーザーにとって必須なのが「Content Manager（CM）」です。</p>
+                <h3>CM導入手順</h3>
+                <ol>
+                    <li><a href="https://acstuff.club/app/" target="_blank" rel="noopener">acstuff.club</a>からCMの最新版をダウンロード</li>
+                    <li>Steam版ACのインストールフォルダ（例: <code>Steam\steamapps\common\assettocorsa</code>）に展開</li>
+                    <li><code>Content Manager.exe</code> を起動し、ゲームパスを自動検出</li>
+                    <li>Settings → Assetto Corsa → Custom Shaders Patch を有効化</li>
+                    <li>右上の「Drive」→ VRモードで起動できることを確認</li>
+                </ol>
+                <p>CMは軽量で動作が速く、Mod管理・サーバー参加・VR起動モードの切り替えもワンクリック。バニラランチャーに戻る理由がなくなります。</p>
 
                 <img src="img/20260405062042_1.jpg" alt="drifting" width="60%" height="60%">
+
                 <h2>グラフィックを次世代機レベルに：「Custom Shaders Patch (CSP)」</h2>
-                <p>CMを導入したら、次に入れるべきなのがCSPです。これを導入することで、昼夜の概念、天候の変化、そして何よりも「光の反射」が信じられないほどリアルになります。<br>
-                10Nmクラスの強力なトルクを発揮するダイレクトドライブのホイールベースから伝わる路面情報と、VRヘッドセット越しに見るリアルな光の反射が合わさることで、現実のドライブそのものの体験が得られます。</p>
+                <p>CMを導入したら、次に入れるべきなのがCSPです。これを導入することで、昼夜の概念、天候の変化、そして何よりも「光の反射」が信じられないほどリアルになります。10Nmクラスの強力なトルクを発揮するダイレクトドライブのホイールベースから伝わる路面情報と、VRヘッドセット越しに見るリアルな光の反射が合わさることで、現実のドライブそのものの体験が得られます。</p>
+                <h3>CSP + 天候Modの組み合わせ</h3>
+                <ul>
+                    <li><strong>CSP（Custom Shaders Patch）：</strong> 反射、ライティング、レインFX、VR最適化の基盤</li>
+                    <li><strong>Sol：</strong> 無料の動的天候。朝焼けから夕暮れまで自然な遷移</li>
+                    <li><strong>Pure：</strong> Sol後継。有料だが、雨粒の描写とVR内の視認性が向上</li>
+                </ul>
+                <p>私はRTX 3060 Ti環境ではSolをベースに、負荷の高いレインセッションだけPureに切り替えています。CSPの「Weather FX」でSol/Pureを選び、CMのQuick Driveから天候プリセットを呼び出すのが定番です。</p>
 
                 <img src="img/20260405063548_1.jpg" alt="jzx100" width="60%" height="60%">
+
+                <h2>RTX 3060 Ti向け VR推奨設定表</h2>
+                <p>VRにおいてフレームレートの低下は「VR酔い」に直結します（<a href="article-vr-sickness.html">酔い克服記事</a>参照）。以下が私がOculus Rift S + 3060 Tiで90fps付近を維持する設定です。</p>
+                <table>
+                    <thead>
+                        <tr><th>設定項目</th><th>推奨値</th><th>備考</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>MSAA</td><td>4x</td><td>2xだとジャギー、8xはGPU負荷過多</td></tr>
+                        <tr><td>Shadows</td><td>Medium</td><td>VR酔い対策でも最重要項目</td></tr>
+                        <tr><td>Smoke / Particles</td><td>Low または Off</td><td>ドリフト時の煙がfpsを落とす</td></tr>
+                        <tr><td>Motion Blur</td><td>Off</td><td>必須。オンにする理由はない</td></tr>
+                        <tr><td>VSync</td><td>Off</td><td>VRではリプロジェクションに任せる</td></tr>
+                        <tr><td>Single Pass Stereo</td><td>ON（利用可なら）</td><td>左右目の描画を1パスに。大幅軽量化</td></tr>
+                        <tr><td>Post-Process</td><td>Low</td><td>被写界深度・グレアを抑制</td></tr>
+                        <tr><td>World Detail</td><td>Medium</td><td>観客・オブジェクト数を削減</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>FPS安定化の実践Tips</h2>
+                <ul>
+                    <li><strong>車両数を絞る：</strong> AI 10台以下。オンラインは相手の描画負荷も増える</li>
+                    <li><strong>Mod車は軽量版を選ぶ：</strong> 高ポリのボディはVR fpsを10〜15落とす</li>
+                    <li><strong>CSPのReflections：</strong> Single/Multiバランス。Full HD mirrorはOff</li>
+                    <li><strong>Oculus設定：</strong> レンダリング解像度100%。120%以上は3060 Tiでは厳しい</li>
+                    <li><strong>背景アプリを閉じる：</strong> ブラウザの動画再生はGPU奪い合いになる</li>
+                </ul>
+                <p>実測では、Spa-Francorchamps + GT3 Mod + Sol晴れで平均85〜92fps。首都高MODの夜は75fps前後まで落ちるため、ShadowsをLowに一段下げています。</p>
+
                 <h2>VR環境でフレームレート(FPS)を安定させる設定のコツ</h2>
-                <p>VRにおいてフレームレートの低下は「VR酔い」に直結します。最もGPUリソースを消費する「影の設定（Shadows）」は一段階下げ、不自然に見えがちな過度なPost-Processing（ポストプロセス）は最低限に抑えましょう。これにより、高画質と安定したFPSの両立が十分に可能です。</p>
+                <p>最もGPUリソースを消費する「影の設定（Shadows）」は一段階下げ、不自然に見えがちな過度なPost-Processing（ポストプロセス）は最低限に抑えましょう。これにより、高画質と安定したFPSの両立が十分に可能です。機材構成は<a href="article-assettocorsa-kizai.html">シム機材レビュー</a>も合わせてどうぞ。</p>
+
+                <h2>トラブルシューティング</h2>
+                <h3>CMがゲームを認識しない</h3>
+                <p>Steam版とDLC版のパスがずれているケースが多いです。Settings → Assetto Corsa → Main Directory を手動指定してください。</p>
+                <h3>CSP導入後にVR起動できない</h3>
+                <p>CSPのバージョンとAC本体の互換性を確認。CMからCSPを再インストールし、Oculusランタイムの切り替えも試してください。</p>
+                <h3>fpsが90を下回る</h3>
+                <p>MSAA 4x→2x、Shadows Medium→Low、AI台数削減の順で効果が大きいです。VR酔い対策は<a href="article-vr-sickness.html">別記事</a>を参照。</p>
+
+                <h2>Sol vs Pure：3060 Tiでの選び方</h2>
+                <p>Solは無料で十分美しいです。特に夕方〜夜のトランジションは、VR内で写真を撮りたくなるレベル。Pureは雨の粒子描写と路面の濡れ反射が段違いですが、GPU負荷も上がります。私の基準は「fpsが85を下回ったらSolに戻す」です。Quick Driveで天候を切り替えてベンチマークする習慣をつけると、自分の環境に最適なプリセットが見つかります。</p>
+                <p>Content ManagerはModの導入・更新・サーバー参加まで一手に担います。RaceDepartmentやアセットコルサModderのForumから落とした車両Modも、CMにドラッグ＆ドロップするだけでインストール完了。VRユーザーほど、起動ランチャーをCMに統一した方がトラブルが減ります。</p>
+
+                <h2>初めてVR MOD環境を組む人へのチェックリスト</h2>
+                <ol>
+                    <li>VR酔い克服の習慣を先に（<a href="article-vr-sickness.html">7日スケジュール</a>）</li>
+                    <li>CM + CSP + Sol を最小構成で導入</li>
+                    <li>推奨設定表をコピーし、1コースでfps計測</li>
+                    <li>慣れてからPure・高ポリMod・AI増加</li>
+                </ol>
+                <p>「最初から最高画質」はVR酔いとfps低下の両方を招きます。段階的に上げるのが、RTX 3060 Ti環境では鉄則です。</p>
+
+                <h2>Sol vs Pure：3060 Ti向け比較表</h2>
+                <p>記事内でも触れましたが、VR環境では「見た目」と「fps」のトレードオフがSol/Pure選びの核心です。私の環境での実測感覚を表にまとめます。</p>
+                <table>
+                    <thead>
+                        <tr><th>項目</th><th>Sol</th><th>Pure</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>価格</td><td>無料</td><td>有料（Patreon等）</td></tr>
+                        <tr><td>GPU負荷</td><td>低〜中</td><td>中〜高</td></tr>
+                        <tr><td>VR fps（Spa晴れ）</td><td>88〜92</td><td>80〜86</td></tr>
+                        <tr><td>雨の描写</td><td>十分</td><td>路面反射・粒子が段違い</td></tr>
+                        <tr><td>夕方トランジション</td><td>自然</td><td>より滑らか</td></tr>
+                        <tr><td>3060 Ti推奨</td><td>デフォルト</td><td>晴れ＋軽量Modのみ</td></tr>
+                    </tbody>
+                </table>
+                <p>結論：3060 Ti + Rift SならSolをメインに、スクリーンショット用や雨セッションだけPure——この使い分けが最もバランスが良いです。Pure導入後にfpsが85を下回るなら、Solに戻す勇気を持ってください。VR酔い対策上、fpsは画質より優先です。</p>
+
+                <h2>CMからVR起動が失敗する典型パターン</h2>
+                <p>Content Manager経由のVR起動でつまずくケースは、だいたい以下の5つに集約されます。</p>
+                <ul>
+                    <li><strong>SteamVR/Oculusランタイムの競合：</strong> CM Settings → VR → RuntimeをRift SならOculus、IndexならOpenVRに明示</li>
+                    <li><strong>CSPバージョン不一致：</strong> AC本体パッチ後、CMからCSPを再インストール。古いCSPはVRモードで黒画面</li>
+                    <li><strong>acstuff.clubのパス検出失敗：</strong> Main Directoryを手動指定。SteamLibrary移動後に多発</li>
+                    <li><strong>Mod車のシェーダーエラー：</strong> 特定Mod車でVR起動クラッシュ。Quick Driveでバニラ車に切り替えて切り分け</li>
+                    <li><strong>Oculus Link/USB帯域不足：</strong> USB3ポート直結。HUB経由だとヘッドセット認識後に落ちる</li>
+                </ul>
+                <h3>私が実際に踏んだ復旧手順</h3>
+                <ol>
+                    <li>CM → Settings → Assetto Corsa → Verify files（Steam整合性チェックも併用）</li>
+                    <li>CSPを最新版に更新 → ACを一度バニラランチャーで通常起動</li>
+                    <li>CM → Drive → VR Mode → バニラ車＋Sol晴れ＋Tsukubaでテスト</li>
+                    <li>成功したらMod車・天候を1つずつ追加</li>
+                </ol>
+                <p>「VRボタンを押しても平面画面になる」場合は、Oculusアプリ側でAC.exeのVRモード許可を確認してください。CMのログ（Documents/Assetto Corsa/logs）にエラー行が残るので、クラッシュ時はそこを最初に見る習慣をつけると原因特定が早いです。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-vr-sickness.html">Assetto CorsaのVR酔い克服法</a></li>
+                    <li><a href="article-assettocorsa-kizai.html">シム機材レビュー</a></li>
+                    <li><a href="article-forzahorizon6-review.html">Forza Horizon 6 レビュー</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

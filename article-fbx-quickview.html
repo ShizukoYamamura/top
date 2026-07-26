@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-fbx-quickview.html">
+
     <title>WinUI 3でFBXビューアをMicrosoft Storeへ——FBX QuickView開発の全記録 - YamaStudio.net</title>
     <meta name="description" content="WinUI 3・Helix Toolkit・AssimpNetでWindows向けFBX 3Dビューア「FBX QuickView」を個人開発し、Microsoft Store提出まで進めた技術選定・実装の壁・MSIXパッケージングを開発者視点でまとめます。">
     <link rel="stylesheet" href="/style.css">
@@ -115,6 +117,20 @@
                 <p>FBX QuickViewは、DCCでもゲームエンジンでもない。<strong>「FBXを開いて、形と構造を確認して、閉じる」</strong>——その一点に機能を絞った結果、起動が軽く、操作が直感的で、Store配布も現実的になった。</p>
                 <p>個人開発でWinUI 3アプリをStoreまで持っていくなら、機能追加より先に<strong>MSIXのパス検証・掲載文と実機能の一致・runFullTrustの説明</strong>を固める方が、リリース速度に効く。3Dの中身は、巨大FBXのスケール問題のように、実データを当てないと絶対に見つからない。テスト用の「普通のモデル」だけでは足りない。</p>
                 <p>FBX QuickViewは Microsoft Store（YamamuraFactory）での公開を進めている。待たずに試したい場合は、<a href="https://www.patreon.com/ShizukoYamamura/posts/fbx-quickview-162129412" target="_blank" rel="noopener">Patreonの FBX QuickView Portable</a> から入手できる。同じように「軽量ビューアをWindowsネイティブで作りたい」人の参考になれば幸いだ。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-desktop-sleep-guard.html">デスクトップ警備員開発記</a></li>
+                    <li><a href="article-unity-development.html">Unity NGO開発</a></li>
+                    <li><a href="article-tbh-market-overlay.html">TBH Market Overlay</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

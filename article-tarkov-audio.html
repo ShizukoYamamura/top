@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://www.yamastudio.net/article-tarkov-audio.html">
+
     <title>【EFT】勝敗を分ける「音」の最適化とおすすめデバイス - YamaStudio.net</title>
-    <meta name="description" content="Escape from TarkovにおけるBinaural Audioの設定と、生存率を劇的に上げるおすすめオーディオデバイスについて解説します。">
+    <meta name="description" content="Escape from TarkovのBinaural設定、Windowsオーディオ、ComTac/Sordin比較、足音読みのコツを3060 Ti環境の実体験で解説。">
         <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
@@ -28,15 +30,135 @@
                 <p class="date">公開日: 2026年5月28日 | カテゴリ: PCゲーム / FPS</p>
 
                 <h2>タルコフにおける「音」の絶対的な重要性</h2>
-                <p>ハードコアFPSにおいて「視覚」と同じかそれ以上に重要なのが「聴覚」です。特に『Escape from Tarkov（EFT）』では、足音ひとつ、草の擦れる音ひとつが命取りになります。例えば、新しく追加されたエリアでブラックキーカードが使える部屋を漁っている時など、かすかな接近音を正確に聞き分けることが撃ち合いの勝率を直接的に引き上げます。</p>
+                <p>ハードコアFPSにおいて「視覚」と同じかそれ以上に重要なのが「聴覚」です。特に『Escape from Tarkov（EFT）』では、足音ひとつ、草の擦れる音ひとつが命取りになります。例えば、新しく追加されたエリアでブラックキーカードが使える部屋を漁っている時など、かすかな接近音を正確に聞き分けることが撃ち合いの勝率を直接的に引き上げます。240Hzモニターで視界を広げても、音が遅れていたり定位が曖昧だと、先に撃たれます。</p>
 
                 <h2>ゲーム内オーディオ設定の最適解</h2>
-                <p>現在のEFTで絶対にオンにしておくべき設定が「Binaural Audio（バイノーラルオーディオ）」です。<br>
-                上下左右の音の定位が圧倒的に分かりやすくなります。また、ゲーム内で装備するヘッドセット（ComTac 4やSordinなど）によっても高音・低音の聞こえ方が変わるため、自分のリアルなオーディオ環境に合わせて選ぶのがコツです。</p>
+                <p>現在のEFTで絶対にオンにしておくべき設定が「Binaural Audio（バイノーラルオーディオ）」です。上下左右の音の定位が圧倒的に分かりやすくなります。</p>
+                <table>
+                    <thead>
+                        <tr><th>設定項目</th><th>推奨値</th><th>理由</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Binaural Audio</td><td>ON</td><td>立体音響。これが全ての土台</td></tr>
+                        <tr><td>Music Volume</td><td>0</td><td>戦闘中のノイズになる</td></tr>
+                        <tr><td>Interface Volume</td><td>低め（10〜20%）</td><td>UI音が足音をかき消す</td></tr>
+                        <tr><td>Headphones Mode</td><td>ON</td><td>ヘッドホン/イヤホン使用時は必須</td></tr>
+                        <tr><td>Overall Volume</td><td>70〜80%</td><td>Windows側と合わせて調整</td></tr>
+                    </tbody>
+                </table>
 
-                <h2>リアル環境でのヘッドセット・イヤホンの選び方</h2>
-                <p>FPSゲーマーによくある悩みが「ヘッドセットか、イヤホンか」という問題です。密閉型ヘッドセットは没入感が高く、ゲーミングイヤホン（IEM）は軽量で疲れにくいという特徴があります。<br>
-                Ryzen 7 5700XとRTX 3060 Tiの構成で240Hzモニターへ出力するような、高リフレッシュレートで視覚情報を極限まで高めた環境であっても、「音の解像度」が低ければ宝の持ち腐れになってしまいます。まずはオーディオデバイスへの投資を検討してみてください。</p>
+                <h2>Windows側のオーディオ設定</h2>
+                <p>ゲーム内だけ整えても、OS側が劣化させているケースが多いです。私の環境（Ryzen 7 5700X + RTX 3060 Ti、240Hz WQHD）では以下を固定しています。</p>
+                <ul>
+                    <li><strong>サンプリングレート：</strong> 48kHz / 24bit（プロパティ → 詳細設定）</li>
+                    <li><strong>Spatial Sound（空間サウンド）：</strong> Off。Windows SonicやDolby Atmosは定位が変わる</li>
+                    <li><strong>音声の改善（Enhancements）：</strong> すべてOff</li>
+                    <li><strong>通信デバイス：</strong> 使用デバイスと一致させる。Discordと競合しないよう確認</li>
+                </ul>
+
+                <h2>ゲーム内ヘッドセットアイテム：ComTac vs Sordin</h2>
+                <p>EFT内のヘッドセットは「リアルなヘッドセット」ではなく、ゲーム内のEQフィルターです。よく使われるのが以下の2種です。</p>
+                <table>
+                    <thead>
+                        <tr><th>ヘッドセット</th><th>特徴</th><th>向いているプレイ</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ComTac 4 / 2</td><td>足音の高音が強調。遠距離の足音が聞こえやすい</td><td>屋外・広域マップ</td></tr>
+                        <tr><td>Sordin / MSA</td><td>全体的にフラット。銃声の爆音が抑えられる</td><td>室内CQB・連続戦闘</td></tr>
+                    </tbody>
+                </table>
+                <p>私はInterchangeやStreetsではComTac、FactoryではSordinと使い分けています。フリーマーケットで試して耳慣れするのが近道です。</p>
+
+                <h2>リアル環境：ヘッドセット vs IEM（ゲーミングイヤホン）</h2>
+                <p>FPSゲーマーによくある悩みが「ヘッドセットか、イヤホンか」という問題です。</p>
+                <ul>
+                    <li><strong>密閉型ヘッドセット：</strong> 没入感が高い。長時間の装着疲れ。夏場は暑い</li>
+                    <li><strong>IEM（ゲーミングイヤホン）：</strong> 軽量で定位がシャープ。ケーブルノイズに注意</li>
+                </ul>
+                <p>私は冬場はヘッドセット、夏場はIEMに切り替えています。どちらも「定位の正確さ」が最優先で、低音を盛るゲーミング向けチューニングは逆効果になりがちです。</p>
+
+                <h2>3060 Ti / 240Hz環境での個人的所感</h2>
+                <p>グラフィック設定を下げて240fps近くを維持しても、音の解像度が低ければ宝の持ち腐れです。逆に、60fps台でも音が正確なら先制撃ちは可能——これがEFTの残酷さでもあり面白さでもあります。DLSS Qualityで70〜90fpsを維持しつつ、オーディオにリソースを割く（他の常駐ソフトを減らす）方が、体感の生存率は上がりました。</p>
+
+                <h2>足音読みの実践Tips</h2>
+                <ol>
+                    <li><strong>静止して聞く：</strong> 移動中は自分の足音で敵音を消す</li>
+                    <li><strong>素材で判断：</strong> 金属＝通路、草＝野外、タイル＝屋内</li>
+                    <li><strong>上下階の区別：</strong> Binaural ONなら足音の「高さ」が分かる</li>
+                    <li><strong>雨・雷のマスク：</strong> 悪天候時こそ耳を頼る。視界が落ちる</li>
+                    <li><strong>スパイクのタイミング：</strong> 音が途切れた瞬間＝止まったか、歩行モード変更</li>
+                </ol>
+                <p>まずはオーディオデバイスへの投資を検討してみてください。安価なUSBサウンドカードより、定位の良いイヤホン/ヘッドセットの方がEFTでは効果が大きいです。</p>
+
+                <h2>マップ別の音の使い方</h2>
+                <ul>
+                    <li><strong>Customs / Factory：</strong> 近距離CQB。Sordinで銃声を抑え足音に集中</li>
+                    <li><strong>Woods / Shoreline：</strong> 広域。ComTacで遠距離の枝折れ音を拾う</li>
+                    <li><strong>Streets：</strong> 垂直方向の音が複雑。Binaural必須</li>
+                </ul>
+                <h2>Discord・VCとの両立</h2>
+                <p>VC中は相手の声が定位を乱します。Push-to-Talk必須。EFTのOverall Volumeを下げ、Discord AttenuationをOffにしてバランスを取ってください。</p>
+
+                <h2>オーディオデバイスの具体例</h2>
+                <p>高価な機材が必須ではありませんが、「定位がはっきりする」ことが条件です。密閉型のHyperX Cloud系、IEMのFinal E5000クラスなど、低音を強調しない機種が向きます。EQソフトで低音を下げ、中高音（1〜4kHz付近）をフラットに近づけると、足音帯域が聞き取りやすくなります。</p>
+                <p>ハードウェア構成（<a href="article-pc-rtx3060ti.html">3060 Ti PC記事</a>）とセットで考えると、240Hzの視界と定位の良い音を両立した環境が、EFTでは最もROIが高い投資になります。視界で見えた敵を、音で先に知る——この二刀流が生存率を押し上げます。</p>
+
+                <h2>まとめ</h2>
+                <p>EFTの音設定は、Binaural ON・Music 0・Windows Spatial Offが三種の神器です。ゲーム内ヘッドセット（ComTac/Sordin）はマップとプレイスタイルで使い分け、リアルデバイスは定位優先で選んでください。3060 Ti + 240Hzの視界が整っていても、耳が整っていなければ半分も力を発揮できません。次のレイドの前に、5分だけ設定を見直してみてください。</p>
+
+                <h2>音設定でよくある失敗</h2>
+                <p>設定を「だいたい合ってる」と思っていても、生存率を静かに下げる落とし穴がいくつかあります。私も最初は全部踏みました。</p>
+                <ul>
+                    <li><strong>Windows SonicをONのまま：</strong> Binauralと二重処理され、左右が逆転したように感じる</li>
+                    <li><strong>Discord Attenuation ON：</strong> 相手の声でEFTの足音帯域がduckingされる</li>
+                    <li><strong>低音ブーストEQ：</strong> 足音の中高音（2〜4kHz）が埋もれ、遠距離音が聞こえない</li>
+                    <li><strong>ゲーム内Music 10%：</strong> 「少しだけ」でもレイド中のBGMが定位を乱す。0が正解</li>
+                    <li><strong>ヘッドセットMod未装備：</strong> 初期装備のままだと遠距離音が半減。最低でもPeltorを買う</li>
+                </ul>
+                <p>チェックリスト：Binaural ON → Music 0 → Spatial Off → Enhancements Off → ゲーム内ヘッドセット装着。この5点をレイド前に毎回確認する習慣をつけると、設定ミスによる「なぜ聞こえなかった？」が激減します。</p>
+
+                <h2>Factory vs Streets：聞き方の使い分け</h2>
+                <p>同じBinaural設定でも、マップの構造によって「耳の使い方」は変わります。特に対照的なのがFactoryとStreetsです。</p>
+                <h3>Factory（CQB・近距離）</h3>
+                <ul>
+                    <li><strong>ヘッドセット：</strong> Sordin推奨。連続銃声で耳が疲れない</li>
+                    <li><strong>聞く位置：</strong> 3階シャワールーム前など、自分の足音が反響しない場所で静止</li>
+                    <li><strong>重点音：</strong> 金属床の足音、扉開閉、グレネードピン——すべて10m以内</li>
+                    <li><strong>注意：</strong> 雨音が室内で反響し、方向判断が難しくなる。雨FactoryはSordin＋慎重なピーク</li>
+                </ul>
+                <h3>Streets（垂直・中距離）</h3>
+                <ul>
+                    <li><strong>ヘッドセット：</strong> ComTac推奨。コンクリート上の遠距離足音が拾いやすい</li>
+                    <li><strong>聞く位置：</strong> 交差点の角。上下階の音源を三角測量しやすい</li>
+                    <li><strong>重点音：</strong> 階段の上下、ガラス割れ、エレベーター——高さ情報が鍵</li>
+                    <li><strong>注意：</strong> カフェテリア等の開放空間は反響で定位が曖昧になる。壁際に寄る</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr><th>項目</th><th>Factory</th><th>Streets</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>平均交戦距離</td><td>5〜20m</td><td>20〜80m</td></tr>
+                        <tr><td>推奨ヘッドセット</td><td>Sordin</td><td>ComTac</td></tr>
+                        <tr><td>最優先する音</td><td>扉・足音の接近</td><td>上下階・遠距離歩行</td></tr>
+                        <tr><td>静止して聞く頻度</td><td>毎交戦前</td><td>交差点・階段前</td></tr>
+                    </tbody>
+                </table>
+                <p>Factoryは「次の角に誰がいるか」、Streetsは「今いる階と、上か下か」——この問いを頭に置いたまま耳を澄ますと、音情報の優先度が自然と整理されます。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-pc-rtx3060ti.html">WQHDハードコアFPS実測</a></li>
+                    <li><a href="article-counterstrike2-review.html">CS2プレミアの奥深さ</a></li>
+                    <li><a href="article-squad-sl.html">Squadで分隊長をする方法</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>

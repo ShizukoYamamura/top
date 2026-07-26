@@ -1,0 +1,140 @@
+[h1]Z-Sector Playtest — Mod Kit カスタムマップ簡易ガイド[/h1]
+
+Playtest期間中に、Z-Sectorのカスタムマップを作成・公開する基本手順を説明します。
+
+[b]重要:[/b] Playtest中のMod Kitは、Steamツールではなく先行ダウンロードで配布しています。本編リリース時には、ゲーム付属の無料Steamツールとして正式版MOD Kitを配布予定です。
+
+[h2]Playtest用 Mod Kit の入手[/h2]
+
+ダウンロード・必要環境・Playtest特有の注意事項は、次のページを参照してください。
+
+[url=https://yamastudio.net/article-zsector-playtest-modkit.html]Z-Sector Playtest — MOD Kit 先行配布[/url]
+
+このページは非公開（直リンク専用）です。本ガイドからアクセスしてください。
+
+Playtestで作ったマップデータは本編でも使えますが、本編リリース後は正式版MOD Kitから[b]再度アップロード[/b]する必要があります。
+
+[b]詳しい手順・トラブルシュートは、Mod Kitを展開したあと次のファイルを開いてください。[/b]
+
+[code]docs\USER_GUIDE.md[/code]
+
+完全版ガイドはMod Kitに同梱されています。テキストエディタやMarkdownビューアで開けます。
+
+[h2]1. 必要なソフトを用意する[/h2]
+
+[list]
+[*][url=https://yamastudio.net/article-zsector-playtest-modkit.html]先行配布ページ[/url]からPlaytest用Mod Kitをダウンロードして展開
+[*]Unity Hubをインストール
+[*]Unity Hubから Unity Editor [b]6000.4.11f1[/b] をインストール
+[*]Unity Hubにサインインし、Steamを起動したままにする
+[*]Steamで [b]Z-Sector Playtest[/b] を所有していること
+[/list]
+
+[h2]2. Mod Kit を起動する[/h2]
+
+展開したMod Kitフォルダ内の [b]LaunchModKit.bat[/b] を実行します。
+
+ランチャーが正しいMod KitプロジェクトをUnity Editorで開きます。
+初回起動時は、同梱のカスタムマップテンプレートが自動で開きます。
+
+別のプロジェクトが開いた場合は、Unity Editorをすべて閉じてから [b]LaunchModKit.bat[/b] を再実行してください。
+
+[h2]3. マップを作る[/h2]
+
+地形、静的モデル、マテリアル、コライダー、ライト、装飾を配置します。
+
+テンプレートにはあらかじめ次が含まれています。
+
+[list]
+[*]プレイヤー用スポーン 4箇所
+[*]敵用スポーン 5箇所
+[*]ボス用スポーン 1箇所
+[*]武器用スポーン 7箇所
+[*]Directional Light
+[*]NavMeshSurface
+[/list]
+
+Main Cameraは追加しないでください。ゲームプレイ用カメラはZ-Sector側が用意します。
+
+[h2]4. ウェーブを設定する[/h2]
+
+Hierarchyで [b]MapRoot[/b] を選択し、次を設定します。
+
+[list]
+[*][b]Initial Zombie Count[/b] — ラウンド1の基本ゾンビ数
+[*][b]Zombies Added Per Round[/b] — 以降のラウンドで増える数
+[*][b]Scale Zombie Count By Player Count[/b] — マルチプレイ時の人数倍率
+[/list]
+
+[h2]5. スポーン配置とNavMeshベイク[/h2]
+
+プレイヤー・敵・ボス・武器のマーカーを有効な位置へ移動します。
+
+[b]MapRoot[/b] を選択し、NavMeshSurfaceを設定してNavMeshをベイクします。プレイ可能エリアと敵スポーン周辺がつながっていることを確認してください。
+
+[h2]6. 検証とビルド[/h2]
+
+Unityで次を開きます。
+
+[code]Z-Sector > Mod Kit > Map Builder[/code]
+
+シーンを選び、恒久的な一意のMap ID、タイトル、作者、バージョン、説明、プレビュー画像を入力します。
+
+[b]Validate Open / Selected Scene[/b] をクリックし、表示されたエラーをすべて修正してから [b]Build Windows Map Package[/b] をクリックします。
+
+[h2]7. Steam Workshopへ公開[/h2]
+
+次を開きます。
+
+[code]Z-Sector > Mod Kit > Workshop Uploader[/code]
+
+Map Builderが作成したパッケージフォルダを選び、検証してアップロードします。
+
+新規投稿時は [b]Existing PublishedFileId[/b] を 0 のままにします。公開後にIDを控えてください。更新時も同じIDを入力しないと、Steam上に重複アイテムが作られます。
+
+初回投稿前に [url=https://steamcommunity.com/sharedfiles/workshoplegalagreement]Steam Workshop利用規約[/url] への同意が必要です。
+
+[h2]8. マップをテストする[/h2]
+
+公開したマップを購読し、Z-Sector Playtestを起動して次から選択します。
+
+[list]
+[*]Soloのマップ選択画面
+[*]マルチプレイ待機室の [b]マップを選択・変更[/b]
+[/list]
+
+スポーン、ゾンビの経路、武器ピックアップ、ライティング、ウェーブバランス、人数倍率を確認してください。
+
+[h2]Playtest → 本編について[/h2]
+
+[list]
+[*]Playtestで作ったマップデータ（シーン／パッケージ）は本編でも再利用できます。
+[*]Playtest中に公開したWorkshopアイテムは、本編へ自動では引き継がれません。
+[*]本編リリース後は、Steamの正式版MOD Kitをインストールし、[b]再度アップロード[/b]してください。
+[/list]
+
+詳細: [url=https://yamastudio.net/article-zsector-playtest-modkit.html]MOD Kit 先行配布ページ[/url]
+
+[h2]重要な制限[/h2]
+
+Workshopマップは静的コンテンツのみ対応です。
+
+検証で拒否されるもの:
+
+[list]
+[*]カスタムスクリプトおよびDLL
+[*]NetworkObjectなどのネットワーキングコンポーネント
+[*]Camera / AudioListener / EventSystem
+[*]実行ファイルやネイティブプラグイン
+[/list]
+
+Workshopマップのプレイ中は、Steamリーダーボードへの送信・表示が無効になります。
+
+[h2]さらに詳しく[/h2]
+
+[list]
+[*]ダウンロード／Playtest注意事項: [url=https://yamastudio.net/article-zsector-playtest-modkit.html]MOD Kit 先行配布[/url]
+[*]インストール後の完全ガイド: [code]docs\USER_GUIDE.md[/code]
+[/list]
+
+ローカルガイドには、アセット取り込みルール、スポーン推奨、NavMesh手順、公開・更新手順、よくあるエラーの対処が含まれています。

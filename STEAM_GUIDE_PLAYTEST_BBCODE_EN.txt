@@ -1,0 +1,140 @@
+[h1]Z-Sector Playtest — Mod Kit Quick Custom Map Guide[/h1]
+
+This guide explains the basic process for creating and publishing a custom Z-Sector map during [b]Playtest[/b].
+
+[b]Important:[/b] During Playtest, the Mod Kit is distributed early via direct download (not yet as a Steam tool). At full release, the official Mod Kit will ship with the game on Steam.
+
+[h2]Download the Playtest Mod Kit[/h2]
+
+Get the Mod Kit, requirements, and Playtest-specific notes from this page:
+
+[url=https://yamastudio.net/article-zsector-playtest-modkit.html]Z-Sector Playtest — Mod Kit Early Access[/url]
+
+That page is unlisted (direct link only). Bookmark it from this guide.
+
+Maps you create during Playtest can be used in the full game, but you must [b]re-upload[/b] them with the official full-release Mod Kit when the game launches.
+
+[b]For complete instructions and troubleshooting, open the following file after extracting the Mod Kit:[/b]
+
+[code]docs\USER_GUIDE.md[/code]
+
+The full guide is included with every Mod Kit package and can be opened with any text editor or Markdown viewer.
+
+[h2]1. Install the Required Software[/h2]
+
+[list]
+[*]Download and extract the Playtest Mod Kit from the [url=https://yamastudio.net/article-zsector-playtest-modkit.html]early access page[/url].
+[*]Install Unity Hub.
+[*]Install Unity Editor [b]6000.4.11f1[/b] through Unity Hub.
+[*]Sign in to Unity Hub and keep Steam running.
+[*]Own [b]Z-Sector Playtest[/b] on Steam.
+[/list]
+
+[h2]2. Launch the Mod Kit[/h2]
+
+Open the extracted Mod Kit folder and run [b]LaunchModKit.bat[/b].
+
+The launcher opens the correct Mod Kit project in the Unity Editor.
+On first launch, the included custom map template opens automatically.
+
+If the wrong project opens, close every Unity Editor window and run [b]LaunchModKit.bat[/b] again.
+
+[h2]3. Build Your Map[/h2]
+
+Add terrain, static models, materials, colliders, lights, and decorations.
+
+The template already contains:
+
+[list]
+[*]4 player spawn points
+[*]5 enemy spawn points
+[*]1 boss spawn point
+[*]7 weapon spawn points
+[*]A Directional Light
+[*]A NavMeshSurface
+[/list]
+
+Do not add a Main Camera. Z-Sector supplies the gameplay camera.
+
+[h2]4. Configure Waves[/h2]
+
+Select [b]MapRoot[/b] in the Hierarchy and configure:
+
+[list]
+[*][b]Initial Zombie Count[/b] — base zombie count for round 1
+[*][b]Zombies Added Per Round[/b] — additional zombies in later rounds
+[*][b]Scale Zombie Count By Player Count[/b] — applies multiplayer player-count scaling
+[/list]
+
+[h2]5. Position Spawns and Bake Navigation[/h2]
+
+Move all player, enemy, boss, and weapon markers to valid locations.
+
+Select [b]MapRoot[/b], configure its NavMeshSurface, and bake the NavMesh. Confirm that all playable paths and enemy spawn areas are connected.
+
+[h2]6. Validate and Build[/h2]
+
+In Unity, open:
+
+[code]Z-Sector > Mod Kit > Map Builder[/code]
+
+Select your scene, enter a permanent unique Map ID, title, author, version, description, and preview image.
+
+Click [b]Validate Open / Selected Scene[/b]. Fix every reported error, then click [b]Build Windows Map Package[/b].
+
+[h2]7. Publish to Steam Workshop[/h2]
+
+Open:
+
+[code]Z-Sector > Mod Kit > Workshop Uploader[/code]
+
+Select the package folder created by Map Builder, validate it, and upload it.
+
+For a new item, leave [b]Existing PublishedFileId[/b] at 0. Record the ID after publishing. Enter that same ID when uploading future updates, or Steam will create a duplicate item.
+
+You must accept the [url=https://steamcommunity.com/sharedfiles/workshoplegalagreement]Steam Workshop Legal Agreement[/url] before your first publication.
+
+[h2]8. Test the Map[/h2]
+
+Subscribe to the published map, launch Z-Sector Playtest, and select it from:
+
+[list]
+[*]The Solo map selection screen
+[*][b]Select / Change Map[/b] in the multiplayer waiting room
+[/list]
+
+Test spawning, zombie navigation, weapon pickups, lighting, wave balance, and multiplayer scaling.
+
+[h2]Playtest → Full Release[/h2]
+
+[list]
+[*]Map data (scenes / packages) created in Playtest can be reused in the full game.
+[*]Workshop items published during Playtest are [b]not[/b] automatically carried over.
+[*]After full release, install the official Mod Kit from Steam and [b]upload again[/b].
+[/list]
+
+Details: [url=https://yamastudio.net/article-zsector-playtest-modkit.html]Mod Kit Early Access page[/url]
+
+[h2]Important Limitations[/h2]
+
+Workshop maps support static content only.
+
+The validator rejects:
+
+[list]
+[*]Custom scripts and DLLs
+[*]NetworkObject and other networking components
+[*]Camera, AudioListener, and EventSystem components
+[*]Executable or native plugin files
+[/list]
+
+Steam leaderboard submission and display are disabled while playing Workshop maps.
+
+[h2]Need More Help?[/h2]
+
+[list]
+[*]Download / Playtest notes: [url=https://yamastudio.net/article-zsector-playtest-modkit.html]Mod Kit Early Access[/url]
+[*]Full local guide after install: [code]docs\USER_GUIDE.md[/code]
+[/list]
+
+The local guide includes detailed asset-import rules, spawn recommendations, NavMesh instructions, publishing steps, update instructions, and solutions for common errors.

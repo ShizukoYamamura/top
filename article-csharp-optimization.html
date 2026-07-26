@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化 - YamaStudio.net</title>
-    <meta name="description" content="FPSを落とさないためのC#のガベージコレクション対策とWindows API呼び出しの最適化テクニックを解説します。">
+    <link rel="canonical" href="https://www.yamastudio.net/article-desktop-sleep-guard.html">
+    <meta name="robots" content="noindex, follow">
+
+    <title>【移行済】ゲーマー向け常駐アプリの軽量化記事 → デスクトップ警備員開発記へ統合 - YamaStudio.net</title>
+    <meta name="description" content="本記事は article-desktop-sleep-guard.html に統合されました。C#軽量化・SetThreadExecutionState解説は統合先をご覧ください。">
+    <meta http-equiv="refresh" content="5;url=article-desktop-sleep-guard.html">
         <link rel="stylesheet" href="/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9908835148006630" crossorigin="anonymous"></script>
 </head>
@@ -24,17 +28,31 @@
     <div class="container">
         <main>
             <article class="article-content">
-                <h1>【C#開発】ゲームのFPSを落とさない！ゲーマー向け常駐アプリの軽量化テクニック</h1>
+                <h1>【移行済】本記事は統合されました</h1>
                 <p class="date">公開日: 2026年5月20日 | カテゴリ: ツール開発 / C#</p>
 
-                <h2>バックグラウンド処理がゲームに与える影響を考える</h2>
-                <p>以前Microsoft Storeに公開した「スリープさせない！デスクトップ警備員」。このPCゲーマー向け常駐アプリの開発時に最も気を配ったのが「ゲームのパフォーマンスに一切の悪影響を与えないこと」でした。FPSゲームはCPUとメモリのリソースを極限まで消費するため、常駐アプリが重い処理を行うとマイクロスタッター（カクつき）の原因になります。</p>
+                <p>「ゲーマー向け常駐アプリの軽量化テクニック」（GC対策、プーリング、<code>SetThreadExecutionState</code> の最適化など）の内容は、開発記事本体に統合しました。</p>
 
-                <h2>C#でのメモリ消費を抑える工夫</h2>
-                <p>C#には不要なメモリを自動で解放するガベージコレクション（GC）がありますが、ゲーム中に発生すると処理落ちの原因になります。ループ処理の中で毎回 <code>new</code> でインスタンスを生成するのを避け、一度作ったものを再利用（プーリング）する設計にしました。また、システムトレイ常駐時はUIの描画処理を完全に停止させ、リソース消費をカットしています。</p>
+                <h2>統合先記事</h2>
+                <p><strong><a href="article-desktop-sleep-guard.html">【C#開発】「スリープさせない！デスクトップ警備員」開発記——FPSを落とさない常駐アプリの作り方とMicrosoft Store公開</a></strong></p>
+                <p>5秒後に自動的に移動します。移動しない場合は上のリンクをクリックしてください。</p>
 
-                <h2>Windows APIの効率的な呼び出し</h2>
-                <p>スリープを阻害するためには、<code>SetThreadExecutionState</code> などのネイティブAPIをC#から呼び出す（P/Invoke）必要があります。過剰な頻度で呼び出さないようタイマーのインターバルを最適化し、「処理していることをOSに気づかせない」レベルの軽量さを目指しました。他人のPC環境でも邪魔にならないように最適化するプロセスこそが、開発の醍醐味です。</p>
+                <h2>統合した理由</h2>
+                <p>軽量化の話題は「デスクトップ警備員」の開発文脈と不可分でした。SetThreadExecutionStateの解説、Microsoft Store公開の苦労、GC/トレイUI最適化を1本の記事にまとめることで、読者が全体像を把握しやすくなります。</p>
+            
+                <aside class="article-author">
+                    <p><strong>著者：</strong><a href="/about.html">YamaStudio</a> — FPS・VR・レースシムをプレイし、Unity / C# でゲームとツールを開発する個人スタジオ。</p>
+                    <p><a href="/about.html">運営者情報を見る →</a> ｜ <a href="/contact.html">お問い合わせ →</a></p>
+                </aside>
+
+                <section class="related-articles">
+                    <h2>関連記事</h2>
+                    <ul>
+                    <li><a href="article-desktop-sleep-guard.html">デスクトップ警備員開発記（統合先）</a></li>
+                    <li><a href="article-fbx-quickview.html">FBX QuickView</a></li>
+                    <li><a href="article-unity-development.html">Unity NGO開発</a></li>
+                    </ul>
+                </section>
             </article>
             <a href="index.html" class="back-home">← 記事一覧へ戻る</a>
         </main>
